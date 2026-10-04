@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chemistry 11 — Interactive Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7fb;--card:rgba(255,255,255,.7);--tx:#0f1b2d;--mu:#5b6b82;--ac:#0ea5a4;--ac2:#6366f1;--bd:rgba(15,27,45,.12);--ok:#16a34a;--bad:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}}
+:root[data-theme="dark"]{--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;line-height:1.5}
+[dir=rtl] body{font-family:Vazirmatn,Inter,sans-serif}
+bdi,.f{direction:ltr;unicode-bidi:isolate;display:inline-block}
+#bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 18px;backdrop-filter:blur(14px);background:var(--card);border-bottom:1px solid var(--bd)}
+nav b{font-size:18px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;color:transparent;margin-inline-end:auto}
+nav a{color:var(--tx);text-decoration:none;font-size:14px;opacity:.8}nav a:hover{opacity:1;color:var(--ac)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:8px 14px;transition:transform .15s,box-shadow .15s}
+button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(14,165,164,.25)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0;padding:14px 26px;font-weight:600;font-size:16px}
+input{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;min-width:0}
+section{max-width:1100px;margin:auto;padding:56px 18px}
+.hero{text-align:center;padding-top:90px}
+h1{font-size:clamp(38px,8vw,72px);margin:0;line-height:1.05;font-weight:800}
+h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;color:transparent}
+h2{font-size:28px;margin:0 0 6px}
+p.s{color:var(--mu);max-width:640px;margin:14px auto 26px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.12)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.rev{opacity:0;transform:translateY(26px);transition:.7s}.rev.in{opacity:1;transform:none}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}.stats .card{padding:12px 22px}.stats b{font-size:26px;display:block;color:var(--ac)}
+.ctr{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}.ctr label{width:92px}.ctr span{min-width:30px;text-align:center;font-weight:700}
+.big{font-size:44px;font-weight:800}
+.pt{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:4px;direction:ltr}
+.el{aspect-ratio:1;border-radius:8px;padding:2px;font-size:clamp(9px,1.6vw,15px);font-weight:700;text-align:center;border:1px solid var(--bd);display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.1;transition:transform .15s}
+.el small{font-size:.6em;font-weight:400;opacity:.8}.el:hover{transform:scale(1.25);z-index:2}.el[aria-pressed=true]{outline:3px solid var(--tx)}
+.ak{background:#ef444455}.ae{background:#f9731655}.tm{background:#eab30855}.md{background:#84cc1655}.nm{background:#22c55e55}.ha{background:#06b6d455}.ng{background:#8b5cf655}.pt2{background:#3b82f655}
+.lg{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0;font-size:12px}.lg i{padding:2px 8px;border-radius:99px;font-style:normal}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;border-bottom:1px solid var(--bd);text-align:center}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.opt{display:block;width:100%;text-align:start;margin:6px 0}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline-end:20px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;padding:10px 18px;border-radius:14px;opacity:0;transform:translateY(20px);transition:.4s;pointer-events:none}#toast.on{opacity:1;transform:none}
+#res{position:absolute;top:100%;inset-inline-end:10px;width:260px;max-width:90vw;display:none}#res button{display:block;width:100%;text-align:start;border-radius:0}
+.sh{transform-origin:150px 150px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pop{animation:pop .35s}@keyframes pop{from{transform:scale(.7);opacity:.3}}
+.tb th,.tb td{text-align:start;vertical-align:top}svg .pop{transform-box:fill-box;transform-origin:center}#ws g[data-a]:hover circle{filter:drop-shadow(0 0 6px #0ea5a4)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<nav>
+<b>⚛ Chem11</b>
+<a href="#atom" data-i="n_atom"></a><a href="#build" data-i="n_build"></a><a href="#table" data-i="n_table"></a><a href="#bal" data-i="n_bal"></a><a href="#mm" data-i="n_mm"></a><a href="#quiz" data-i="n_quiz"></a>
+<input id="q" type="search" data-p="search" style="width:130px" aria-label="Search" autocomplete="off">
+<span id="xp" title="XP">⭐ 0 · Lv 1</span>
+<button id="lang" aria-label="Language">فارسی</button><button id="th" aria-label="Theme">◐</button>
+<div id="res" class="card" style="padding:4px"></div>
+</nav>
+
+<section class="hero">
+<h1 data-h="hero"></h1>
+<p class="s" data-i="sub"></p>
+<a href="#atom"><button class="pri" data-i="cta1"></button></a> <a href="#bal"><button class="pri" data-i="cta2" style="background:var(--card);color:var(--tx);border:1px solid var(--bd)"></button></a>
+<div class="stats"><div class="card"><b data-n="36">0</b><span data-i="st1"></span></div><div class="card"><b data-n="5">0</b><span data-i="st2"></span></div><div class="card"><b data-n="100">0</b><span data-i="st3"></span></div></div>
+</section>
+
+<section id="atom" class="rev">
+<h2 data-i="n_atom"></h2><p class="s" style="margin-inline:0" data-i="atom_d"></p>
+<div class="grid">
+<div class="card"><svg id="svg" viewBox="0 0 300 300" width="100%" role="img" aria-label="Atom model"></svg><small style="color:var(--mu)" data-i="simp"></small></div>
+<div class="card">
+<div class="big"><bdi id="sym"></bdi> <small id="nm" style="font-size:18px"></small></div>
+<div class="ctr"><label data-i="pro"></label><button data-a="p-1">−</button><span id="vp"></span><button data-a="p1">+</button></div>
+<div class="ctr"><label data-i="neu"></label><button data-a="n-1">−</button><span id="vn"></span><button data-a="n1">+</button></div>
+<div class="ctr"><label data-i="ele"></label><button data-a="e-1">−</button><span id="ve"></span><button data-a="e1">+</button></div>
+<table><tr><th data-i="Z"></th><th data-i="A"></th><th data-i="chg"></th></tr><tr><td id="oz"></td><td id="oa"></td><td id="oc"></td></tr></table>
+<p><b data-i="cfg"></b>: <bdi id="cf" class="f"></bdi></p><p id="atype" style="color:var(--mu)"></p><div id="stab"></div>
+</div></div>
+</section>
+
+<section id="build" class="rev">
+<h2 data-i="n_build"></h2><p class="s" style="margin-inline:0" data-i="build_d"></p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+<div class="card"><div id="pal" class="ctr"></div>
+<svg id="ws" viewBox="0 0 640 400" width="100%" style="touch-action:none;background:var(--card);border-radius:16px;border:1px solid var(--bd)" role="application" aria-label="Structure workspace"></svg>
+<div id="bt" class="ctr" style="margin-top:10px"><button data-k="tool"></button><button data-k="o+">Order +</button><button data-k="o-">Order −</button><button data-k="l+">Lone pair +</button><button data-k="l-">Lone pair −</button><button data-k="auto">Auto lone pairs</button><button data-k="dup">Duplicate</button><button data-k="del">Delete</button><button data-k="clear">Clear</button></div>
+<div id="pr" class="ctr"><small style="color:var(--mu)">Examples:</small></div><small id="hint" style="color:var(--mu)"></small></div>
+<div class="card" id="ana" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="table" class="rev">
+<h2 data-i="n_table"></h2>
+<div class="lg"><i class="ak">Alkali</i><i class="ae">Alkaline earth</i><i class="tm">Transition</i><i class="pt2">Post-transition</i><i class="md">Metalloid</i><i class="nm">Nonmetal</i><i class="ha">Halogen</i><i class="ng">Noble gas</i></div>
+<div class="pt" id="pt" role="group" aria-label="Periodic table"></div>
+<div class="card" id="det" style="margin-top:16px" aria-live="polite"></div>
+</section>
+
+<section id="bal" class="rev">
+<h2 data-i="n_bal"></h2><p class="s" style="margin-inline:0" data-i="bal_d"></p>
+<div class="card">
+<div class="ctr"><input id="eq" value="C3H8 + O2 -> CO2 + H2O" style="flex:1;direction:ltr" aria-label="Equation"><button class="pri" id="bb" style="padding:8px 20px" data-i="bal_b"></button></div>
+<div id="bo"></div>
+</div>
+</section>
+
+<section id="mm" class="rev">
+<h2 data-i="n_mm"></h2>
+<div class="card"><div class="ctr"><input id="mf" value="Ca(OH)2" style="direction:ltr" aria-label="Formula"><button class="pri" id="mb" style="padding:8px 20px" data-i="calc"></button></div><div id="mo"></div></div>
+</section>
+
+<section id="quiz" class="rev">
+<h2 data-i="n_quiz"></h2><div class="card" id="qc"></div>
+</section>
+<div id="toast" role="status"></div>
+
+<script>
+const L={en:{n_atom:"Atom Builder",n_build:"Structure Builder",build_d:"Drag atoms in (or click them), connect them with the Bond tool, then set bond order and lone pairs. The analysis updates live. Geometry and polarity use a simplified VSEPR model.",n_table:"Periodic Table",n_bal:"Equation Balancer",n_mm:"Molar Mass",n_quiz:"Practice",sub:"Explore atoms, bonds, molecules, reactions, and more through interactive simulations.",cta1:"Start Learning",cta2:"Open Chemistry Lab",st1:"elements",st2:"tools",st3:"% rule-based chemistry",atom_d:"Add or remove particles. Charge, mass number, shells and configuration update live.",simp:"Simplified Bohr-style visualization of shells.",pro:"Protons",neu:"Neutrons",ele:"Electrons",Z:"Atomic no. (Z)",A:"Mass no. (A)",chg:"Charge",cfg:"Electron configuration",bal_d:"Type reactants → products. Use + between compounds. Parentheses allowed.",bal_b:"Balance",calc:"Calculate",search:"Search…",ion_c:"Cation (lost electrons)",ion_a:"Anion (gained electrons)",neutral:"Neutral atom",iso:"Isotope of the element (neutron number differs from the common isotope)",hero:"Chemistry, <span>But Interactive.</span>"},
+fa:{n_atom:"سازنده اتم",n_build:"سازنده ساختار",build_d:"اتم‌ها را بکشید (یا کلیک کنید)، با ابزار پیوند به هم وصل کنید، سپس مرتبهٔ پیوند و جفت‌های ناپیوندی را تنظیم کنید. تحلیل به‌صورت زنده به‌روز می‌شود . هندسه و قطبیت از مدل ساده‌شدهٔ VSEPR استفاده می‌کنند.",n_table:"جدول تناوبی",n_bal:"موازنه معادله",n_mm:"جرم مولی",n_quiz:"تمرین",sub:"اتم‌ها، پیوندها، مولکول‌ها و واکنش‌ها را با شبیه‌سازی‌های تعاملی کاوش کنید.",cta1:"شروع یادگیری",cta2:"ورود به آزمایشگاه",st1:"عنصر",st2:"ابزار",st3:"٪ شیمی مبتنی بر قاعده",atom_d:"ذره اضافه یا کم کنید؛ بار، عدد جرمی، لایه‌ها و آرایش الکترونی به‌صورت زنده تغییر می‌کنند.",simp:"نمایش ساده‌شدهٔ لایه‌ها به سبک بور.",pro:"پروتون",neu:"نوترون",ele:"الکترون",Z:"عدد اتمی",A:"عدد جرمی",chg:"بار",cfg:"آرایش الکترونی",bal_d:"واکنش‌دهنده‌ها → فراورده‌ها را بنویسید؛ بین ترکیب‌ها + بگذارید.",bal_b:"موازنه کن",calc:"محاسبه",search:"جستجو…",ion_c:"کاتیون (الکترون از دست داده)",ion_a:"آنیون (الکترون گرفته)",neutral:"اتم خنثی",iso:"ایزوتوپ عنصر (تعداد نوترون با ایزوتوپ رایج فرق دارد)",hero:"شیمی، <span>اما تعاملی.</span>"}};
+let lang="en",xp=0;const $=s=>document.querySelector(s),T=k=>L[lang][k]||k;
+const E="H,Hydrogen,1.008,nm,2.20;He,Helium,4.0026,ng,;Li,Lithium,6.94,ak,0.98;Be,Beryllium,9.0122,ae,1.57;B,Boron,10.81,md,2.04;C,Carbon,12.011,nm,2.55;N,Nitrogen,14.007,nm,3.04;O,Oxygen,15.999,nm,3.44;F,Fluorine,18.998,ha,3.98;Ne,Neon,20.180,ng,;Na,Sodium,22.990,ak,0.93;Mg,Magnesium,24.305,ae,1.31;Al,Aluminium,26.982,pt2,1.61;Si,Silicon,28.085,md,1.90;P,Phosphorus,30.974,nm,2.19;S,Sulfur,32.06,nm,2.58;Cl,Chlorine,35.45,ha,3.16;Ar,Argon,39.948,ng,;K,Potassium,39.098,ak,0.82;Ca,Calcium,40.078,ae,1.00;Sc,Scandium,44.956,tm,1.36;Ti,Titanium,47.867,tm,1.54;V,Vanadium,50.942,tm,1.63;Cr,Chromium,51.996,tm,1.66;Mn,Manganese,54.938,tm,1.55;Fe,Iron,55.845,tm,1.83;Co,Cobalt,58.933,tm,1.88;Ni,Nickel,58.693,tm,1.91;Cu,Copper,63.546,tm,1.90;Zn,Zinc,65.38,tm,1.65;Ga,Gallium,69.723,pt2,1.81;Ge,Germanium,72.630,md,2.01;As,Arsenic,74.922,md,2.18;Se,Selenium,78.971,nm,2.55;Br,Bromine,79.904,ha,2.96;Kr,Krypton,83.798,ng,3.00".split(";").map((s,i)=>{const a=s.split(",");return{z:i+1,s:a[0],n:a[1],m:+a[2],c:a[3],en:a[4]}});
+const XM={Ag:107.87,Sn:118.71,I:126.90,Ba:137.33,Au:196.97,Pb:207.2,Hg:200.59,Cs:132.91,Rb:85.468,Sr:87.62,Li:6.94};
+const MASS={};E.forEach(e=>MASS[e.s]=e.m);Object.assign(MASS,XM);
+const grp=z=>z==1?1:z==2?18:z<=4?z-2:z<=10?z+8:z<=12?z-10:z<=18?z:z-18;
+const per=z=>z<=2?1:z<=10?2:z<=18?3:4;
+const CAT={ak:"Alkali metal",ae:"Alkaline earth metal",tm:"Transition metal",md:"Metalloid",nm:"Nonmetal",ha:"Halogen",ng:"Noble gas",pt2:"Post-transition metal"};
+const GAS=[1,2,7,8,9,10,17,18,36],OX={1:"+1, −1",2:"0",3:"+1",4:"+2",5:"+3",6:"+4, −4, +2",7:"−3, +5, +3",8:"−2",9:"−1",10:"0",11:"+1",12:"+2",13:"+3",14:"+4, −4",15:"−3, +5, +3",16:"−2, +4, +6",17:"−1, +1, +5, +7",18:"0",19:"+1",20:"+2",21:"+3",22:"+4",23:"+5, +4, +3, +2",24:"+3, +6, +2",25:"+2, +4, +7",26:"+2, +3",27:"+2, +3",28:"+2",29:"+2, +1",30:"+2",31:"+3",32:"+4",33:"−3, +3, +5",34:"−2, +4, +6",35:"−1, +1, +5",36:"0"};
+const sup=n=>String(n).replace(/\d/g,d=>"⁰¹²³⁴⁵⁶⁷⁸⁹"[d]);
+const fm=s=>s.replace(/(\d+)/g,"<sub>$1</sub>");
+function cfg(e,z){const O=[[1,0],[2,0],[2,1],[3,0],[3,1],[4,0],[3,2],[4,1]];let r=e,L=[];for(const[n,l]of O){const k=Math.min(r,4*l+2);if(k)L.push([n,l,k]);r-=k}
+if(e==z&&(z==24||z==29)){const d=L.find(x=>x[0]==3&&x[1]==2),s=L.find(x=>x[0]==4&&x[1]==0);if(z==24){s[2]=1;d[2]=5}else{s[2]=1;d[2]=10}}
+L.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const sh={};L.forEach(x=>sh[x[0]]=(sh[x[0]]||0)+x[2]);return{str:L.map(x=>x[0]+"spdf"[x[1]]+sup(x[2])).join(" ")||"—",sh:Object.values(sh)}}
+// toast / xp
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+function addXP(n,m){xp+=n;$("#xp").textContent=xpT();toast(`+${n} ${X("XP","امتیاز")} — ${m}`);try{localStorage.setItem("c11xp",xp)}catch(e){}}
+try{xp=+localStorage.getItem("c11xp")||0;$("#xp").textContent=xpT()}catch(e){}
+// i18n
+function applyL(){document.documentElement.lang=lang;document.documentElement.dir=lang=="fa"?"rtl":"ltr";$("#lang").textContent=lang=="fa"?"English":"فارسی";
+document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));document.querySelectorAll("[data-p]").forEach(e=>e.placeholder=T(e.dataset.p));document.querySelectorAll("[data-h]").forEach(e=>e.innerHTML=T(e.dataset.h));atom();walk();sel(cz);draw();balance();mm();rq()}
+$("#lang").onclick=()=>{lang=lang=="en"?"fa":"en";applyL()};
+$("#th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark"};
+function X(e,f){return lang=="fa"?f:e}
+function xpT(){return `⭐ ${xp} · ${X("Lv","سطح")} ${Math.floor(xp/50)+1}`}
+const FN="هیدروژن,هلیوم,لیتیم,بریلیم,بور,کربن,نیتروژن,اکسیژن,فلوئور,نئون,سدیم,منیزیم,آلومینیم,سیلیسیم,فسفر,گوگرد,کلر,آرگون,پتاسیم,کلسیم,اسکاندیم,تیتانیم,وانادیم,کروم,منگنز,آهن,کبالت,نیکل,مس,روی,گالیم,ژرمانیم,آرسنیک,سلنیم,برم,کریپتون".split(","),nmE=e=>lang=="fa"?FN[e.z-1]:e.n,NG=[2,10,18,36];
+const FA={"Alkali":"فلز قلیایی","Alkaline earth":"قلیایی خاکی","Transition":"واسطه","Post-transition":"پس‌واسطه","Metalloid":"شبه‌فلز","Nonmetal":"نافلز","Halogen":"هالوژن","Noble gas":"گاز نجیب","Order +":"مرتبه +","Order −":"مرتبه −","Lone pair +":"جفت ناپیوندی +","Lone pair −":"جفت ناپیوندی −","Auto lone pairs":"جفت‌های ناپیوندی خودکار","Duplicate":"تکثیر","Delete":"حذف","Clear":"پاک کردن","Examples:":"نمونه‌ها:"};
+function walk(){const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.parentNode.closest("script,#ws"))continue;const k=n.__o||n.nodeValue.trim();if(FA[k]){n.__o=k;n.nodeValue=lang=="fa"?FA[k]:k}}}
+const SI="1,2;3,4;6,7;9;10,11;12,13;14,15;16,17,18;19;20,21,22;23;24,25,26;27;28,29,30;31;32,33,34,36;35,37;36,38,40;39,41;40,42,43,44,46,48;45;46,47,48,49,50;51;50,52,53,54;55;54,56,57,58;59;58,60,61,62,64;63,65;64,66,67,68,70;69,71;70,72,73,74,76;75;74,76,77,78,80,82;79,81;78,80,82,83,84,86".split(";").map(x=>x.split(",").map(Number));
+const meter=p=>`<div style="height:8px;border-radius:99px;background:var(--bd);min-width:120px;margin:4px 0"><div style="width:${p}%;height:100%;border-radius:99px;background:${p>=100?"#16a34a":p>=75?"#84cc16":p>=50?"#f59e0b":p>=25?"#f97316":"#dc2626"};transition:width .4s"></div></div><small>${p}%</small>`;
+function stab(){const{p,n,e}=A,el=E[p-1],q=p-e,a=p+n,ns=SI[p-1].includes(a);let d=99,tg=2;NG.forEach(g=>{if(Math.abs(g-e)<d){d=Math.abs(g-e);tg=g}});
+const sc=d==0?100:Math.max(0,100-25*d),gain=tg>e,
+lab=d==0?X("✓ Stable electron shell (noble-gas configuration)","✓ لایهٔ الکترونی پایدار (آرایش گاز نجیب)"):X(`Reactive: ${d} electron${d>1?"s":""} away from a noble-gas configuration, so it tends to ${gain?"gain":"lose"} them`,`واکنش‌پذیر: ${d} الکترون تا آرایش گاز نجیب فاصله دارد، پس تمایل دارد آن‌ها را ${gain?"بگیرد":"از دست بدهد"}`);
+$("#stab").innerHTML=`<p><b>${X("Nucleus","هسته")}:</b> <span class="${ns?"ok":"bad"}">${ns?X(`✓ stable isotope (${el.s}-${a})`,`✓ ایزوتوپ پایدار (${el.s}-${a})`):X(`✗ radioactive: ${el.s}-${a} has no stable form and decays`,`✗ پرتوزا: ${el.s}-${a} پایدار نیست و واپاشی می‌کند`)}</span> · n/p = ${(n/p).toFixed(2)}<br><small style="color:var(--mu)">${X("Stable isotopes of","ایزوتوپ‌های پایدار")} ${nmE(el)}: ${SI[p-1].join(", ")}</small></p><p><b>${X("Electrons","الکترون‌ها")}:</b> ${lab}${meter(sc)}</p>${Math.abs(q)>3?`<p class="bad">${X("Very highly charged: practically never found in nature.","بار بسیار زیاد: در طبیعت تقریباً یافت نمی‌شود.")}</p>`:""}`}
+// atom builder
+let A={p:6,n:6,e:6},touched=0;
+function atom(){const{p,n,e}=A,el=E[p-1],c=cfg(e,p),q=p-e;
+$("#vp").textContent=p;$("#vn").textContent=n;$("#ve").textContent=e;$("#sym").textContent=el.s+(q?(Math.abs(q)>1?Math.abs(q):"")+(q>0?"⁺":"⁻"):"");$("#nm").textContent=nmE(el);
+$("#oz").textContent=p;$("#oa").textContent=p+n;$("#oc").textContent=(q>0?"+":"")+q;$("#cf").innerHTML=c.str;
+const common=Math.round(el.m)-p;$("#atype").textContent=(q>0?T("ion_c"):q<0?T("ion_a"):T("neutral"))+(n!=common?" · "+T("iso"):"");
+let s=`<circle cx="150" cy="150" r="${22+Math.min(10,(p+n)/6)}" fill="url(#g)" class="pop"/><defs><radialGradient id="g"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#6366f1"/></radialGradient></defs><text x="150" y="154" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">${p}p ${n}n</text>`;
+c.sh.forEach((k,i)=>{const r=48+i*28;s+=`<circle cx="150" cy="150" r="${r}" fill="none" stroke="currentColor" opacity=".25" stroke-dasharray="3 4"/><g class="sh" style="animation-duration:${8+i*5}s;animation-direction:${i%2?"reverse":"normal"}">`;for(let j=0;j<k;j++){const a=2*Math.PI*j/k;s+=`<circle cx="${150+r*Math.cos(a)}" cy="${150+r*Math.sin(a)}" r="5" fill="#0ea5a4" class="pop"/>`}s+="</g>"});
+$("#svg").innerHTML=s;stab()}
+document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{const[k,d]=[b.dataset.a[0],+b.dataset.a.slice(1)];const v=A[k]+d;if(k=="p"){if(v<1||v>36)return;A.p=v;if(d>0)A.e=Math.min(A.e+0,A.e)}else if(v<0||(k=="e"&&v>40))return;A[k]=v;if(++touched==8)addXP(10,X("Atom Builder","سازنده اتم"));atom()});
+// periodic table
+const pt=$("#pt");pt.innerHTML=E.map(e=>`<button class="el ${e.c}" style="grid-column:${grp(e.z)};grid-row:${per(e.z)};padding:2px" data-z="${e.z}" aria-pressed="false" aria-label="${e.n}"><small>${e.z}</small>${e.s}</button>`).join("");
+const seen=new Set();
+let cz=8;const CATF={ak:"فلز قلیایی",ae:"فلز قلیایی خاکی",tm:"فلز واسطه",md:"شبه‌فلز",nm:"نافلز",ha:"هالوژن",ng:"گاز نجیب",pt2:"فلز پس‌واسطه"};
+function sel(z){cz=z;const e=E[z-1];pt.querySelectorAll(".el").forEach(b=>b.setAttribute("aria-pressed",b.dataset.z==z));const nn=Math.round(e.m)-z,stt=GAS.includes(z)?X("gas","گاز"):z==35?X("liquid","مایع"):X("solid","جامد");
+$("#det").innerHTML=`<div class="pop"><div class="big"><bdi>${e.s}</bdi> <small style="font-size:18px">${nmE(e)}</small></div><table><tr><th>Z</th><th>${X("Mass","جرم اتمی")}</th><th>${X("p / n / e⁻","پروتون / نوترون / الکترون")}</th><th>${X("Group","گروه")}</th><th>${X("Period","دوره")}</th></tr><tr><td>${z}</td><td>${e.m}</td><td>${z} / ${nn} / ${z}</td><td>${grp(z)}</td><td>${per(z)}</td></tr></table><p><b>${X("Config","آرایش")}:</b> <bdi class="f">${cfg(z,z).str}</bdi> · <b>${X("Category","دسته")}:</b> ${lang=="fa"?CATF[e.c]:CAT[e.c]} · <b>${X("State (25 °C)","حالت (۲۵ درجه)")}:</b> ${stt} · <b>${X("Electronegativity","الکترونگاتیوی")}:</b> ${e.en||"—"} · <b>${X("Oxidation states","اعداد اکسایش")}:</b> <bdi class="f">${OX[z]}</bdi></p><small style="color:var(--mu)">${X("Neutrons shown for the most common isotope (rounded mass − Z).","نوترون‌ها برای رایج‌ترین ایزوتوپ نشان داده شده‌اند (جرم گردشده − Z).")}</small></div>`;
+if(!seen.has(z)){seen.add(z);if(seen.size==10)addXP(15,X("Periodic Table Explorer","کاوشگر جدول تناوبی"))}}
+pt.onclick=e=>{const b=e.target.closest(".el");if(b)sel(+b.dataset.z)};sel(8);
+// search
+const R=$("#res");$("#q").oninput=e=>{const v=e.target.value.trim().toLowerCase();if(!v){R.style.display="none";return}
+const hits=E.filter(x=>x.n.toLowerCase().includes(v)||FN[x.z-1].includes(v)||x.s.toLowerCase()==v||String(x.z)==v).slice(0,6);const extra=[[T("n_bal"),"#bal"],[T("n_mm"),"#mm"],[T("n_atom"),"#atom"],[T("n_build"),"#build"],[T("n_quiz"),"#quiz"]].filter(x=>x[0].toLowerCase().includes(v));
+R.innerHTML=hits.map(x=>`<button data-z="${x.z}">${x.s} — ${nmE(x)}</button>`).join("")+extra.map(x=>`<button data-h="${x[1]}">${x[0]}</button>`).join("")||"…";R.style.display="block"};
+R.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.z){sel(+b.dataset.z);location.hash="#table"}else location.hash=b.dataset.h;R.style.display="none"};
+// balancer
+function parse(f){f=f.replace(/[₀-₉]/g,c=>c.charCodeAt(0)-8320);let i=0;const num=()=>{let s="";while(/\d/.test(f[i]||""))s+=f[i++];return s?+s:1};
+function g(){const m={};while(i<f.length){const c=f[i];if(c=="("){i++;const s=g();i++;const n=num();for(const k in s)m[k]=(m[k]||0)+s[k]*n}else if(c==")")return m;else if(/[A-Z]/.test(c)){let s=c;i++;while(/[a-z]/.test(f[i]||""))s+=f[i++];if(!(s in MASS))throw Error(X("Unknown element: ","عنصر ناشناخته: ")+s);m[s]=(m[s]||0)+num()}else i++}return m}return g()}
+function solve(sp,nl){const els=[...new Set(sp.flatMap(Object.keys))],n=sp.length,M=els.map(e=>sp.map((s,j)=>(s[e]||0)*(j<nl?1:-1)));let r=0;const pv=[];
+for(let c=0;c<n&&r<M.length;c++){let p=r;for(let k=r;k<M.length;k++)if(Math.abs(M[k][c])>Math.abs(M[p][c]))p=k;if(Math.abs(M[p][c])<1e-9)continue;[M[r],M[p]]=[M[p],M[r]];const d=M[r][c];M[r]=M[r].map(v=>v/d);for(let k=0;k<M.length;k++)if(k!=r){const f=M[k][c];M[k]=M[k].map((v,j)=>v-f*M[r][j])}pv.push(c);r++}
+const fr=[...Array(n).keys()].filter(c=>!pv.includes(c));if(fr.length!=1)return null;const x=Array(n).fill(0);x[fr[0]]=1;pv.forEach((c,i)=>x[c]=-M[i][fr[0]]);if(x.every(v=>v<=1e-9))x.forEach((v,i)=>x[i]=-v);
+for(let k=1;k<=200;k++){const y=x.map(v=>v*k);if(y.every(v=>Math.abs(v-Math.round(v))<1e-6&&Math.round(v)>0))return{co:y.map(Math.round),els}}return null}
+let balanced=new Set();
+function balance(){const o=$("#bo");try{const [l,r]=$("#eq").value.replace(/→|=>|=/g,"->").split("->");if(!r)throw Error(X("Use '->' between reactants and products.","بین واکنش‌دهنده‌ها و فراورده‌ها از '->' استفاده کنید."));
+const cl=s=>s.split("+").map(x=>x.trim().replace(/^\d+\s*/,"")).filter(Boolean),L1=cl(l),R1=cl(r),all=[...L1,...R1],sp=all.map(parse),res=solve(sp,L1.length);if(!res)throw Error(X("Could not balance this equation (check formulas — every element must appear on both sides).","این معادله موازنه نشد (فرمول‌ها را بررسی کنید؛ هر عنصر باید در هر دو طرف باشد)."));
+const co=res.co,show=(a,off)=>a.map((f,i)=>(co[i+off]>1?co[i+off]+" ":"")+`<bdi class="f">${fm(f)}</bdi>`).join(" + ");
+const cnt=(idx,e,w)=>idx.reduce((t,i)=>t+(sp[i][e]||0)*(w?co[i]:1),0),li=L1.map((_,i)=>i),ri=R1.map((_,i)=>i+L1.length);
+o.innerHTML=`<h3 class="ok pop">${show(L1,0)} → ${show(R1,L1.length)}</h3><table><tr><th></th><th colspan=2>${X("Before","قبل")}</th><th colspan=2>${X("After","بعد")}</th></tr><tr><th>${X("Atom","اتم")}</th><th>${X("Left","چپ")}</th><th>${X("Right","راست")}</th><th>${X("Left","چپ")}</th><th>${X("Right","راست")}</th></tr>${res.els.map(e=>{const a=cnt(li,e,0),b=cnt(ri,e,0),c=cnt(li,e,1),d=cnt(ri,e,1);return`<tr><td>${e}</td><td>${a}</td><td class="${a==b?"ok":"bad"}">${b}</td><td class="ok">${c}</td><td class="ok">${d}</td></tr>`}).join("")}</table>
+<ol><li>${X("Count each element on both sides (the “Before” columns).","تعداد هر عنصر را در دو طرف بشمارید (ستون‌های «قبل»).")}</li><li>${X("Where counts differ, adjust coefficients, never subscripts, which would change the substance.","جایی که تعدادها فرق دارد، ضریب‌ها را تغییر دهید نه زیروندها را؛ زیروند ماهیت ماده را عوض می‌کند.")}</li><li>${X("Solving the atom-conservation equations gives the smallest whole-number set:","حل معادلات پایستگی اتم‌ها کوچک‌ترین مجموعهٔ اعداد صحیح را می‌دهد:")} <b>${co.join(", ")}</b>.</li><li>${X("Check: every element now has equal atoms on both sides, so mass is conserved.","بررسی: اکنون هر عنصر در دو طرف تعداد برابر دارد، پس جرم پایسته است.")}</li></ol>`;
+if(!balanced.has(l+r)){balanced.add(l+r);addXP(15,X("Reaction Expert","متخصص واکنش"))}}catch(e){o.innerHTML=`<p class="bad">${e.message}</p>`}}
+$("#bb").onclick=balance;$("#eq").onkeydown=e=>{if(e.key=="Enter")balance()};balance();
+// molar mass
+function mm(){const o=$("#mo");try{const p=parse($("#mf").value.trim().replace(/^\d+/,""));let tot=0;const rows=Object.entries(p).map(([e,n])=>{const s=MASS[e]*n;tot+=s;return`<tr><td>${e}</td><td>${n}</td><td>${MASS[e]}</td><td>${s.toFixed(3)}</td></tr>`});if(!rows.length)throw Error(X("Enter a formula such as H2O or Ca(OH)2.","فرمولی مانند H2O یا Ca(OH)2 وارد کنید."));
+o.innerHTML=`<table class="pop"><tr><th>${X("Element","عنصر")}</th><th>${X("Atoms","تعداد اتم")}</th><th>${X("Atomic mass","جرم اتمی")}</th><th>${X("Subtotal (g/mol)","جزء (g/mol)")}</th></tr>${rows.join("")}<tr><th colspan=3>${X("Molar mass of ","جرم مولی ")}<bdi class="f">${fm($("#mf").value)}</bdi></th><th class="ok">${tot.toFixed(3)} ${X("g/mol","گرم بر مول")}</th></tr></table>`}catch(e){o.innerHTML=`<p class="bad">${e.message}</p>`}}
+$("#mb").onclick=mm;$("#mf").onkeydown=e=>{if(e.key=="Enter")mm()};mm();
+// quiz
+const Q=[{q:"How many electrons does a Cl⁻ ion have?",o:["16","17","18","19"],a:2,x:"Cl has Z = 17. Gaining one electron gives 18 electrons and charge −1."},{q:"Electron configuration of oxygen (Z = 8)?",o:["1s² 2s² 2p⁴","1s² 2s² 2p⁶","1s² 2s⁴ 2p²","1s² 2p⁶"],a:0,x:"Fill 1s (2), 2s (2), then 4 electrons remain for 2p."},{q:"Which pair has a triple bond?",o:["O₂","N₂","H₂","Cl₂"],a:1,x:"N₂: each N has 5 valence electrons and shares 3 pairs to reach an octet."},{q:"Molar mass of H₂O (H = 1.008, O = 15.999)?",o:["17.007","18.015","19.023","16.007"],a:1,x:"2 × 1.008 + 15.999 = 18.015 g/mol."},{q:"Mass number = ?",o:["protons","protons + electrons","protons + neutrons","neutrons"],a:2,x:"Mass number A counts nucleons: protons + neutrons."}];
+let qi=0,sc=0;
+const QF=[["یون Cl⁻ چند الکترون دارد؟",0,"Cl عدد اتمی ۱۷ دارد. با گرفتن یک الکترون، ۱۸ الکترون و بار ۱− پیدا می‌کند."],["آرایش الکترونی اکسیژن (Z = 8) کدام است؟",0,"ابتدا 1s (۲)، سپس 2s (۲)؛ ۴ الکترون باقی‌مانده در 2p قرار می‌گیرد."],["کدام جفت پیوند سه‌گانه دارد؟",0,"N₂: هر اتم نیتروژن ۵ الکترون ظرفیت دارد و برای رسیدن به هشتایی ۳ جفت الکترون به اشتراک می‌گذارد."],["جرم مولی H₂O چقدر است؟ (H = 1.008، O = 15.999)",0,"2 × 1.008 + 15.999 = 18.015 گرم بر مول."],["عدد جرمی = ؟",["پروتون‌ها","پروتون + الکترون","پروتون + نوترون","نوترون‌ها"],"عدد جرمی تعداد نوکلئون‌ها است: پروتون + نوترون."]];
+function rq(){const c=$("#qc");if(qi>=Q.length){c.innerHTML=`<h3>${X("Score","امتیاز")}: ${sc}/${Q.length}</h3><button id="rs" class="pri">${X("Restart","شروع دوباره")}</button>`;$("#rs").onclick=()=>{qi=sc=0;rq()};return}
+const fa=lang=="fa",q=Q[qi],qq=fa?QF[qi][0]:q.q,oo=(fa&&QF[qi][1])||q.o,xx=fa?QF[qi][2]:q.x;
+c.innerHTML=`<small>${X("Easy","آسان")} · ${qi+1}/${Q.length}</small><h3>${qq}</h3>${oo.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}<div id="fb"></div>`;
+c.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=+b.dataset.i==q.a;c.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.i==q.a)x.classList.add("ok")});b.classList.add(ok?"ok":"bad");if(ok){sc++;addXP(10,X("Correct!","درست!"))}
+$("#fb").innerHTML=`<p class="${ok?"ok":"bad"}"><b>${ok?X("Correct","درست"):X("Not quite","کامل نیست")}.</b> ${xx}</p><button id="nx" class="pri">${X("Next","بعدی")}</button>`;$("#nx").onclick=()=>{qi++;rq()}})}rq();
+// structure builder
+const ES={};E.forEach(e=>ES[e.s]=e);
+const PS="H C N O F Cl Br S P Si B Se".split(" "),COL={H:["#e5e7eb","#111"],C:["#4b5563","#fff"],N:["#3b82f6","#fff"],O:["#ef4444","#fff"],F:["#22c55e","#fff"],Cl:["#16a34a","#fff"],Br:["#9a3412","#fff"],S:["#eab308","#111"],P:["#f97316","#fff"],Si:["#b8a07e","#111"],B:["#f9a8a4","#111"],Se:["#ca8a04","#fff"]};
+const VAL=s=>{const z=ES[s].z,g=grp(z);return z==2?2:g<=2?g:g-10},EN=s=>+ES[s].en||0;
+const S={at:[],bd:[],sel:null,pend:null,tool:"move",id:1,bid:1,nw:0},WS=$("#ws"),at=id=>S.at.find(a=>a.id==id);
+const bs=a=>S.bd.reduce((t,b)=>t+(b.a==a.id||b.b==a.id?b.o:0),0),nb=a=>S.bd.filter(b=>b.a==a.id||b.b==a.id).length,fc=a=>ele(a).f;
+const HILL=c=>{const k=Object.keys(c).sort(),o=c.C?["C",...(c.H?["H"]:[]),...k.filter(x=>x!="C"&&x!="H")]:k;return o.map(x=>x+(c[x]>1?c[x]:"")).join("")};
+const DB=Object.fromEntries([["H2","Hydrogen"],["N2","Nitrogen"],["O2","Oxygen"],["F2","Fluorine"],["Cl2","Chlorine"],["Br2","Bromine"],["HF","Hydrogen fluoride"],["HCl","Hydrogen chloride"],["HBr","Hydrogen bromide"],["H2O","Water"],["H2O2","Hydrogen peroxide"],["H2S","Hydrogen sulfide"],["NH3","Ammonia"],["N2H4","Hydrazine"],["PH3","Phosphine"],["CH4","Methane"],["C2H6","Ethane"],["C2H4","Ethene"],["C2H2","Ethyne"],["CO","Carbon monoxide"],["CO2","Carbon dioxide"],["HCN","Hydrogen cyanide"],["CH2O","Methanal (formaldehyde)"],["CH3OH","Methanol"],["CH3Cl","Chloromethane"],["CCl4","Carbon tetrachloride"],["SiH4","Silane"],["BF3","Boron trifluoride"],["PCl3","Phosphorus trichloride"],["PCl5","Phosphorus pentachloride"],["SF6","Sulfur hexafluoride"],["SO2","Sulfur dioxide"],["O3","Ozone"],["N2O","Dinitrogen monoxide"]].map(([f,n])=>[HILL(parse(f)),[f,n]]));
+const GEO={"20":["linear","180°"],"30":["trigonal planar","120°"],"31":["bent","<120°"],"40":["tetrahedral","109.5°"],"41":["trigonal pyramidal","~107°"],"42":["bent","~104.5°"],"50":["trigonal bipyramidal","90°/120°"],"51":["seesaw","<90°/<120°"],"52":["T-shaped","<90°"],"53":["linear","180°"],"60":["octahedral","90°"],"61":["square pyramidal","<90°"],"62":["square planar","90°"]};
+const TET=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],TRI=[[1,0,0],[-.5,.866,0],[-.5,-.866,0]],TBP=[[0,0,1],[0,0,-1],...TRI],OCT=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+const VEC={"20":OCT.slice(0,2),"30":TRI,"31":TRI.slice(0,2),"40":TET,"41":TET.slice(0,3),"42":TET.slice(0,2),"50":TBP,"51":TBP.slice(0,4),"52":TBP.slice(0,3),"53":TBP.slice(0,2),"60":OCT,"61":OCT.slice(0,5),"62":OCT.slice(0,4)};
+function add(s,x,y){const a={id:S.id++,s,x:x??120+Math.random()*400,y:y??80+Math.random()*240,lp:0};S.at.push(a);S.nw=a.id;S.sel={t:"a",id:a.id};draw();return a}
+function link(a,b){const e=S.bd.find(k=>(k.a==a&&k.b==b)||(k.a==b&&k.b==a));if(e){e.o=Math.min(3,e.o+1);S.sel={t:"b",id:e.id}}else{const k={id:S.bid++,a,b,o:1};S.bd.push(k);S.sel={t:"b",id:k.id}}}
+function clearAll(){S.at=[];S.bd=[];S.sel=S.pend=null;draw()}
+function autoLP(){S.at.forEach(a=>{const z=ES[a.s].z,t=a.s=="B"?6:z<=2?2:8;a.lp=Math.max(0,Math.min(4,t/2-bs(a),Math.floor((VAL(a.s)-bs(a))/2)))});draw()}
+function lpAng(a){const pl=S.bd.filter(b=>b.a==a.id||b.b==a.id).map(b=>{const o=at(b.a==a.id?b.b:b.a);return Math.atan2(o.y-a.y,o.x-a.x)}),out=[];
+for(let i=0;i<a.lp;i++){let best=0,bd=-1;for(let k=0;k<12;k++){const t=k*Math.PI/6,d=Math.min(9,...pl.map(p=>{const x=Math.abs(t-p)%(2*Math.PI);return x>Math.PI?2*Math.PI-x:x}));if(d>bd){bd=d;best=t}}pl.push(best);out.push(best)}return out}
+function ele(a){const z=ES[a.s].z,b=bs(a),L=VAL(a.s)-b-2*a.lp,cap=z<=2?2:z>10?12:8;let u=0,f=0;if(L<0)f=L;else if(L>0){if(2*b+2*a.lp+L<=cap)u=L;else f=L}return{b,u,f,e:2*b+2*a.lp+u,z}}
+const stb=a=>{const{e,u,f,z}=ele(a),need=z<=2?2:a.s=="B"?6:8,bd=z<=2?(e==2?0:e<2?-1:1):a.s=="B"?(e==6||e==8?0:e<6?-1:1):z>10?(e>=8?0:-1):(e==8?0:e<8?-1:1),c8=z<=2?2:8;
+return{e,u,f,bd,need,z,pct:bd?Math.round(100*Math.min(e,c8)/c8):u?80:f?90:100,st:bd>0?3:bd<0?2:(u||f)?1:0}};
+function draw(){let h="";const nw=S.nw;
+S.bd.forEach(b=>{const p=at(b.a),q=at(b.b),dx=q.x-p.x,dy=q.y-p.y,l=Math.hypot(dx,dy)||1,nx=-dy/l*8,ny=dx/l*8,sl=S.sel&&S.sel.t=="b"&&S.sel.id==b.id;
+(b.o==1?[0]:b.o==2?[-.5,.5]:[-1,0,1]).forEach(k=>h+=`<line x1="${p.x+nx*k}" y1="${p.y+ny*k}" x2="${q.x+nx*k}" y2="${q.y+ny*k}" stroke="${sl?"#6366f1":"currentColor"}" stroke-width="${sl?4:3}" stroke-linecap="round"/>`);
+h+=`<line data-b="${b.id}" x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}" stroke="transparent" stroke-width="22" style="cursor:pointer"/>`});
+S.at.forEach(a=>{const[c1,c2]=COL[a.s],f=fc(a),{st,u}=stb(a),sl=S.sel&&S.sel.t=="a"&&S.sel.id==a.id,pd=S.pend==a.id;
+h+=`<g data-a="${a.id}" style="cursor:grab">`;
+lpAng({...a,lp:a.lp+u}).forEach((t,i)=>{const c=Math.cos(t),s=Math.sin(t),px=a.x+32*c,py=a.y+32*s;h+=i<a.lp?`<circle cx="${px-s*4}" cy="${py+c*4}" r="2.8" fill="#0ea5a4"/><circle cx="${px+s*4}" cy="${py-c*4}" r="2.8" fill="#0ea5a4"/>`:`<circle cx="${px}" cy="${py}" r="3" fill="#f59e0b"/>`});
+if(sl||pd)h+=`<circle cx="${a.x}" cy="${a.y}" r="28" fill="none" stroke="${pd?"#f59e0b":"#6366f1"}" stroke-width="3" ${pd?'stroke-dasharray="5 4"':""}/>`;
+h+=`<circle cx="${a.x}" cy="${a.y}" r="21" fill="${c1}" stroke="${["#16a34a","#f59e0b","#f97316","#dc2626"][st]}" stroke-width="3.5" ${a.id==nw?'class="pop"':""}/><text x="${a.x}" y="${a.y+5}" text-anchor="middle" font-weight="700" font-size="15" fill="${c2}" pointer-events="none">${a.s}</text>${f?`<text x="${a.x+19}" y="${a.y-17}" font-size="13" font-weight="700" fill="${f>0?"#ef4444":"#3b82f6"}" pointer-events="none">${Math.abs(f)>1?Math.abs(f):""}${f>0?"+":"−"}</text>`:""}</g>`});
+WS.innerHTML=h||`<text x="320" y="200" text-anchor="middle" fill="currentColor" opacity=".45">${X("Drag or click atoms from the palette above","اتم‌ها را از نوار بالا بکشید یا روی آن‌ها کلیک کنید")}</text>`;
+$("[data-k=tool]").textContent=S.tool=="bond"?X("Bond tool: ON","ابزار پیوند: روشن"):X("Bond tool: OFF","ابزار پیوند: خاموش");
+$("#hint").textContent=S.tool=="bond"?(S.pend?X("Now click the second atom.","اکنون روی اتم دوم کلیک کنید."):X("Click one atom, then another, to bond them. Repeat on the same pair to raise the bond order.","روی یک اتم و سپس اتم دیگر کلیک کنید تا پیوند بخورند. تکرار روی همان جفت، مرتبهٔ پیوند را بالا می‌برد.")):X("Drag atoms to move them. Click an atom or bond to select it, then use the buttons (Delete key works too).","اتم‌ها را بکشید تا جابه‌جا شوند. روی اتم یا پیوند کلیک کنید تا انتخاب شود، سپس از دکمه‌ها استفاده کنید (کلید Delete هم کار می‌کند).");
+S.nw=0;analyze()}
+const done=new Set(),FD={H2:"هیدروژن",N2:"نیتروژن",O2:"اکسیژن",F2:"فلوئور",Cl2:"کلر",Br2:"برم",HF:"هیدروژن فلوئورید",HCl:"هیدروژن کلرید",HBr:"هیدروژن برمید",H2O:"آب",H2O2:"هیدروژن پراکسید",H2S:"هیدروژن سولفید",NH3:"آمونیاک",N2H4:"هیدرازین",PH3:"فسفین",CH4:"متان",C2H6:"اتان",C2H4:"اتن",C2H2:"اتین",CO:"کربن مونوکسید",CO2:"کربن دی‌اکسید",HCN:"هیدروژن سیانید",CH2O:"متانال (فرمالدهید)",CH3OH:"متانول",CH3Cl:"کلرومتان",CCl4:"کربن تتراکلرید",SiH4:"سیلان",BF3:"بور تری‌فلوئورید",PCl3:"فسفر تری‌کلرید",PCl5:"فسفر پنتاکلرید",SF6:"گوگرد هگزافلوئورید",SO2:"گوگرد دی‌اکسید",O3:"ازن",N2O:"دی‌نیتروژن مونوکسید"},GF={"linear":"خطی","trigonal planar":"مثلثی مسطح","bent":"خمیده","tetrahedral":"چهاروجهی","trigonal pyramidal":"هرم مثلثی","trigonal bipyramidal":"دوهرمی مثلثی","seesaw":"الاکلنگی","T-shaped":"T شکل","octahedral":"هشت‌وجهی","square pyramidal":"هرم مربعی","square planar":"مسطح مربعی"};
+function analyze(){const o=$("#ana"),AT=S.at,fa=lang=="fa";if(!AT.length){o.innerHTML=`<p style="color:var(--mu)">${X("Build a structure to see its analysis here.","برای دیدن تحلیل، یک ساختار بسازید.")}</p>`;return}
+const cnt={};AT.forEach(a=>cnt[a.s]=(cnt[a.s]||0)+1);
+const vs=new Set(),stk=[AT[0].id];while(stk.length){const i=stk.pop();if(vs.has(i))continue;vs.add(i);S.bd.forEach(b=>{if(b.a==i)stk.push(b.b);if(b.b==i)stk.push(b.a)})}
+const conn=vs.size==AT.length,hf=HILL(cnt),nm=DB[hf],msgs=[],notes=[],lps={},fcs=[],sl=[];let valV=0,lpT=0,chg=0;
+AT.forEach(a=>{const{e,bd,st,need,z,u,pct}=stb(a),f=fc(a);valV+=VAL(a.s);lpT+=a.lp;chg+=f;if(a.lp)lps[a.s]=(lps[a.s]||0)+a.lp;if(f)fcs.push(`${a.s}: ${f>0?"+":"−"}${Math.abs(f)}`);
+sl.push(`<span style="color:${["var(--ok)","#d97706","#ea580c","var(--bad)"][st]};white-space:nowrap">${a.s} ${e}/${need} · ${pct}% ${[X("✓ stable","✓ پایدار"),X("⚠ complete, but unpaired electrons or formal charge","⚠ کامل، ولی الکترون جفت‌نشده یا بار صوری دارد"),X("◔ incomplete shell","◔ لایهٔ ناقص"),X("✗ too many electrons","✗ الکترون بیش از حد")][st]}</span>`);
+if(bd<0)msgs.push(X(`${a.s}: only ${e} of ${need} electrons. Add a bond or lone pair.`,`${a.s}: فقط ${e} از ${need} الکترون. یک پیوند یا جفت ناپیوندی اضافه کنید.`));
+else if(bd>0)msgs.push(X(`${a.s}: ${e} electrons is too many for this atom. Remove a bond or lone pair.`,`${a.s}: ${e} الکترون برای این اتم زیاد است. یک پیوند یا جفت ناپیوندی حذف کنید.`));
+else if(u)msgs.push(X(`${a.s}: ${u} unpaired electron${u>1?"s":""}. Pair them as lone pairs or form a bond.`,`${a.s}: ${u} الکترون جفت‌نشده. آن‌ها را جفت ناپیوندی کنید یا پیوند تشکیل دهید.`));
+else if(a.s=="B"&&e==6)notes.push(X("B with 6 electrons is a known incomplete-octet exception.","بور با ۶ الکترون یک استثنای شناخته‌شدهٔ هشتایی ناقص است."));
+else if(z>10&&e>8)notes.push(X(`${a.s} has ${e} electrons: expanded octet (allowed for period 3+).`,`${a.s} دارای ${e} الکترون است: هشتایی گسترش‌یافته (برای دورهٔ ۳ به بعد مجاز است).`))});
+if(AT.length>1&&!conn)msgs.push(X("Not all atoms are connected into one molecule.","همهٔ اتم‌ها در یک مولکول به هم متصل نیستند."));
+if(chg)notes.push(X(`Net charge ${chg>0?"+":"−"}${Math.abs(chg)}: this is an ion, not a neutral molecule.`,`بار خالص ${chg>0?"+":"−"}${Math.abs(chg)}: این یک یون است، نه مولکول خنثی.`));
+const BO=fa?["","یگانه","دوگانه","سه‌گانه"]:["","single","double","triple"],bt={};let sumO=0,ionic=false;
+S.bd.forEach(b=>{const p=at(b.a),q=at(b.b),d=Math.abs(EN(p.s)-EN(q.s)),k=[p.s,q.s].sort().join("–")+" "+BO[b.o];sumO+=b.o;if(d>=1.7)ionic=true;bt[k]=bt[k]||{n:0,d,ty:d<.4?X("nonpolar covalent","کووالانسی ناقطبی"):d<1.7?X("polar covalent","کووالانسی قطبی"):X("ionic character","خصلت یونی")};bt[k].n++});
+const gl=[];AT.forEach(a=>{const n=nb(a);if(n>=2){const g=GEO[""+(n+a.lp)+a.lp];gl.push(`${a.s}: ${g?(fa?GF[g[0]]:g[0])+" ("+g[1]+")":X("outside the Grade 11 VSEPR set","خارج از مجموعهٔ VSEPR پایهٔ یازدهم")} · ${n} ${X("bonded atoms","اتم متصل")} + ${a.lp} ${X("lone pair(s)","جفت ناپیوندی")}`)}});
+if(AT.length==2&&S.bd.length==1)gl.push(X("linear (only two atoms)","خطی (فقط دو اتم)"));
+const cen=AT.filter(a=>nb(a)>=2);let pol=X("Multi-centre structure: judge from bond dipoles and overall shape (not auto-computed).","ساختار چندمرکزی: با توجه به دوقطبی پیوندها و شکل کلی قضاوت کنید (خودکار محاسبه نمی‌شود).");
+if(AT.length==2&&S.bd.length==1){const d=Math.abs(EN(AT[0].s)-EN(AT[1].s));pol=d>=.4?X(`Polar (ΔEN ${d.toFixed(2)})`,`قطبی (ΔEN ${d.toFixed(2)})`):X("Nonpolar","ناقطبی")}
+else if(conn&&cen.length==1){const c=cen[0],v=VEC[""+(nb(c)+c.lp)+c.lp];if(v){let d=[0,0,0];S.bd.filter(b=>b.a==c.id||b.b==c.id).map(b=>at(b.a==c.id?b.b:b.a)).forEach((n,i)=>{const u=v[i],m=Math.hypot(...u),w=EN(n.s)-EN(c.s);d=d.map((x,j)=>x+w*u[j]/m)});pol=Math.hypot(...d)>.15?X("Polar molecule (bond dipoles do not cancel)","مولکول قطبی (دوقطبی پیوندها یکدیگر را خنثی نمی‌کنند)"):X("Nonpolar molecule (bond dipoles cancel by symmetry)","مولکول ناقطبی (دوقطبی‌ها بر اثر تقارن یکدیگر را خنثی می‌کنند)")}}
+const avg=Math.round(AT.reduce((t,a)=>t+stb(a).pct,0)/AT.length),ok=!msgs.length,r=(k,v)=>`<tr><th>${k}</th><td>${v}</td></tr>`,kind=!S.bd.length?X("Separate atoms","اتم‌های جدا"):ionic?X("Contains bonds with ionic character","شامل پیوند با خصلت یونی"):Object.keys(cnt).length==1?X("Covalent molecule (one element)","مولکول کووالانسی (تک‌عنصری)"):X("Covalent compound (molecule)","ترکیب کووالانسی (مولکولی)");
+o.innerHTML=`<div class="${ok?"ok":"bad"}" style="font-weight:700">${ok?X("✓ Stable: follows basic Lewis rules","✓ پایدار: از قاعدهٔ لوویس پیروی می‌کند"):X("◔ Not stable yet: this Lewis structure is incomplete or invalid","◔ هنوز پایدار نیست: این ساختار لوویس ناقص یا نامعتبر است")}</div>${msgs.length?`<ul class="bad">${msgs.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}
+<h3 style="margin:8px 0"><bdi class="f">${fm(nm?nm[0]:hf)}</bdi> — ${nm?(fa?FD[nm[0]]||nm[1]:nm[1]):X("not in the library","در کتابخانه نیست")}</h3>
+<table class="tb">${r(X("Type","نوع"),kind+(cen.length==1?` · ${X("central atom","اتم مرکزی")}: ${nmE(ES[cen[0].s])} (${cen[0].s})`:""))}${r(X("Elements","عنصرها"),Object.entries(cnt).map(([s,n])=>`${n} × ${nmE(ES[s])}`).join(", "))}${r(X("Atoms / bonds","اتم‌ها / پیوندها"),X(`${AT.length} atoms · ${S.bd.length} bonds (total bond order ${sumO})`,`${AT.length} اتم · ${S.bd.length} پیوند (مجموع مرتبهٔ پیوندها ${sumO})`))}${r(X("Bond types","نوع پیوندها"),Object.entries(bt).map(([k,v])=>`${k} ×${v.n} <small>(${v.ty}, ΔEN ${v.d.toFixed(2)})</small>`).join("<br>")||"—")}${r(X("Valence electrons","الکترون‌های ظرفیت"),`${valV-chg}`+(chg?` (${X("neutral atoms","اتم‌های خنثی")}: ${valV})`:""))}${r(X("Lone pairs","جفت‌های ناپیوندی"),lpT?`${lpT} (${Object.entries(lps).map(([s,n])=>s+": "+n).join(", ")})`:"0")}${r(X("Formal charges","بار صوری"),fcs.length?fcs.join(", "):X("all atoms 0","همهٔ اتم‌ها صفر"))}${r(X("Overall stability","پایداری کل"),meter(avg))}${r(X("Atom stability","پایداری اتم‌ها"),sl.join(" · ")+`<br><small style="color:var(--mu)">${X("Ring colour: green = stable (100%), yellow = complete but unpaired electrons or formal charge, orange = incomplete shell (% of the octet filled), red = too many electrons.","رنگ حلقه: سبز = پایدار (۱۰۰٪)، زرد = کامل ولی الکترون جفت‌نشده یا بار صوری، نارنجی = لایهٔ ناقص (درصد پر بودن هشتایی)، قرمز = الکترون بیش از حد.")}</small>`)}${r(X("Geometry","هندسه"),gl.join("<br>")||"—")}${r(X("Polarity","قطبیت"),pol)}</table>
+${notes.length?`<ul style="color:var(--mu);font-size:13px">${notes.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}<small style="color:var(--mu)">${X("Name is matched from the formula. Geometry and polarity use ideal VSEPR shapes (simplified).","نام از روی فرمول تطبیق داده می‌شود. شکل و قطبیت بر پایهٔ شکل‌های ایدئال VSEPR است (ساده‌شده).")}</small>`;
+if(ok&&nm&&AT.length>1&&!done.has(hf)){done.add(hf);if(!S.pre)addXP(20,X("Bond Master: ","استاد پیوند: ")+(fa?FD[nm[0]]||nm[1]:nm[1]))}}
+$("#pal").innerHTML=PS.map(s=>`<button draggable="true" data-s="${s}" style="padding:6px 12px;font-weight:700">${s}</button>`).join("");
+$("#pal").onclick=e=>{const b=e.target.closest("[data-s]");if(b)add(b.dataset.s)};
+$("#pal").ondragstart=e=>{const b=e.target.closest("[data-s]");if(b)e.dataTransfer.setData("text/plain",b.dataset.s)};
+const pt2=e=>{const p=WS.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(WS.getScreenCTM().inverse())};
+WS.ondragover=e=>e.preventDefault();WS.ondrop=e=>{e.preventDefault();const s=e.dataTransfer.getData("text/plain");if(ES[s]){const p=pt2(e);add(s,p.x,p.y)}};
+let drag=null;
+WS.onpointerdown=e=>{const a=e.target.closest("[data-a]"),b=e.target.closest("[data-b]");
+if(a){const id=+a.dataset.a;if(S.tool=="bond"){if(S.pend&&S.pend!=id){link(S.pend,id);S.pend=null}else S.pend=id}else{S.sel={t:"a",id};const p=pt2(e),q=at(id);drag={id,dx:q.x-p.x,dy:q.y-p.y};WS.setPointerCapture(e.pointerId)}}
+else if(b)S.sel={t:"b",id:+b.dataset.b};else{S.sel=null;S.pend=null}draw()};
+WS.onpointermove=e=>{if(!drag)return;const p=pt2(e),a=at(drag.id);a.x=Math.max(25,Math.min(615,p.x+drag.dx));a.y=Math.max(25,Math.min(375,p.y+drag.dy));draw()};
+WS.onpointerup=()=>drag=null;
+function act(k){const s=S.sel,sa=s&&s.t=="a"?at(s.id):null,sb=s&&s.t=="b"?S.bd.find(x=>x.id==s.id):null;
+if(k=="tool"){S.tool=S.tool=="bond"?"move":"bond";S.pend=null}
+else if(k=="auto")return autoLP();else if(k=="clear")return clearAll();
+else if(k=="o+"&&sb)sb.o=Math.min(3,sb.o+1);else if(k=="o-"&&sb){sb.o--;if(!sb.o){S.bd=S.bd.filter(x=>x!=sb);S.sel=null}}
+else if(k=="l+"&&sa)sa.lp=Math.min(4,sa.lp+1);else if(k=="l-"&&sa)sa.lp=Math.max(0,sa.lp-1);
+else if(k=="dup"&&sa){add(sa.s,sa.x+45,sa.y+45).lp=sa.lp;return draw()}
+else if(k=="del"){if(sa){S.at=S.at.filter(x=>x!=sa);S.bd=S.bd.filter(x=>x.a!=sa.id&&x.b!=sa.id);S.sel=null}else if(sb){S.bd=S.bd.filter(x=>x!=sb);S.sel=null}}
+draw()}
+$("#bt").onclick=e=>{const b=e.target.closest("[data-k]");if(b)act(b.dataset.k)};
+addEventListener("keydown",e=>{if((e.key=="Delete"||e.key=="Backspace")&&!/INPUT|TEXTAREA/.test(e.target.tagName)&&S.sel){e.preventDefault();act("del")}});
+const PRE={"H₂O":["O",["H","H"],[1,1]],"CO₂":["C",["O","O"],[2,2]],"NH₃":["N",["H","H","H"],[1,1,1]],"CH₄":["C",["H","H","H","H"],[1,1,1,1]],"N₂":["N",["N"],[3]],"HCN":["C",["H","N"],[1,3]]};
+$("#pr").insertAdjacentHTML("beforeend",Object.keys(PRE).map(k=>`<button data-pre="${k}" style="padding:4px 10px"><bdi>${k}</bdi></button>`).join(""));
+function pre(k){const[c,ns,os]=PRE[k];clearAll();const C=add(c,320,200);ns.forEach((s,i)=>{const t=ns.length<3?i*Math.PI:-Math.PI/2+2*Math.PI*i/ns.length,a=add(s,320+120*Math.cos(t),200+120*Math.sin(t));S.bd.push({id:S.bid++,a:C.id,b:a.id,o:os[i]})});S.sel=null;S.pre=1;autoLP();S.pre=0}
+$("#pr").onclick=e=>{const b=e.target.closest("[data-pre]");if(b)pre(b.dataset.pre)};
+pre("H₂O");
+// effects
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll(".rev").forEach(e=>io.observe(e));
+document.querySelectorAll("[data-n]").forEach(el=>{const t=+el.dataset.n;let v=0;const id=setInterval(()=>{v+=Math.ceil(t/30);if(v>=t){v=t;clearInterval(id)}el.textContent=v},30)});
+const cv=$("#bg"),cx=cv.getContext("2d"),F=["H₂O","CO₂","NaCl","CH₄","O₂","NH₃"];let P=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
+for(let i=0;i<34;i++)P.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,t:i%4==0?F[i%6]:null});
+function dr(){cx.clearRect(0,0,cv.width,cv.height);cx.fillStyle="#0ea5a4";cx.font="14px Inter";P.forEach(p=>{p.x=(p.x+p.vx+cv.width)%cv.width;p.y=(p.y+p.vy+cv.height)%cv.height;cx.globalAlpha=.3;if(p.t)cx.fillText(p.t,p.x,p.y);else{cx.beginPath();cx.arc(p.x,p.y,2.5,0,7);cx.fill()}});if(!matchMedia("(prefers-reduced-motion:reduce)").matches)requestAnimationFrame(dr)}dr();
+applyL();
+</script>
+</body>
+</html>
