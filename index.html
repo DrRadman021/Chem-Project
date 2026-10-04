@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Enformatic Chemistry - Intractive Lab</title>
+<title>Enformatic Chemistry - Interactive Lab</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f7fb;--card:rgba(255,255,255,.7);--tx:#0f1b2d;--mu:#5b6b82;--ac:#0ea5a4;--ac2:#6366f1;--bd:rgba(15,27,45,.12);--ok:#16a34a;--bad:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}}
-:root[data-theme="dark"]{--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}
 html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;line-height:1.5}
@@ -16,7 +16,7 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,s
 bdi,.f{direction:ltr;unicode-bidi:isolate;display:inline-block}
 #bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 18px;backdrop-filter:blur(14px);background:var(--card);border-bottom:1px solid var(--bd)}
-nav b{font-size:18px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;color:transparent;margin-inline-end:auto}
+nav b{font-size:18px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-inline-end:auto}
 nav a{color:var(--tx);text-decoration:none;font-size:14px;opacity:.8}nav a:hover{opacity:1;color:var(--ac)}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer;border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:8px 14px;transition:transform .15s,box-shadow .15s}
@@ -27,7 +27,7 @@ input{background:var(--card);border:1px solid var(--bd);border-radius:12px;paddi
 section{max-width:1100px;margin:auto;padding:56px 18px}
 .hero{text-align:center;padding-top:90px}
 h1{font-size:clamp(38px,8vw,72px);margin:0;line-height:1.05;font-weight:800}
-h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;color:transparent}
+h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
 h2{font-size:28px;margin:0 0 6px}
 p.s{color:var(--mu);max-width:640px;margin:14px auto 26px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.12)}
@@ -36,7 +36,7 @@ p.s{color:var(--mu);max-width:640px;margin:14px auto 26px}
 .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}.stats .card{padding:12px 22px}.stats b{font-size:26px;display:block;color:var(--ac)}
 .ctr{display:flex;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}.ctr label{width:92px}.ctr span{min-width:30px;text-align:center;font-weight:700}
 .big{font-size:44px;font-weight:800}
-.pt{display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:4px;direction:ltr}
+.pt{min-width:620px;display:grid;grid-template-columns:repeat(18,minmax(0,1fr));gap:4px;direction:ltr}
 .el{aspect-ratio:1;border-radius:8px;padding:2px;font-size:clamp(9px,1.6vw,15px);font-weight:700;text-align:center;border:1px solid var(--bd);display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.1;transition:transform .15s}
 .el small{font-size:.6em;font-weight:400;opacity:.8}.el:hover{transform:scale(1.25);z-index:2}.el[aria-pressed=true]{outline:3px solid var(--tx)}
 .ak{background:#ef444455}.ae{background:#f9731655}.tm{background:#eab30855}.md{background:#84cc1655}.nm{background:#22c55e55}.ha{background:#06b6d455}.ng{background:#8b5cf655}.pt2{background:#3b82f655}
@@ -50,6 +50,14 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 @keyframes spin{to{transform:rotate(360deg)}}
 .pop{animation:pop .35s}@keyframes pop{from{transform:scale(.7);opacity:.3}}
 .tb th,.tb td{text-align:start;vertical-align:top}svg .pop{transform-box:fill-box;transform-origin:center}#ws g[data-a]:hover circle{filter:drop-shadow(0 0 6px #0ea5a4)}
+.cp{padding-top:14px}#ct button[aria-pressed=true],#mtb button[aria-pressed=true]{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0}.kp{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;direction:ltr;margin-top:10px}.kp button{padding:12px 0;min-width:0;font-size:15px}#cbb{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline-start:20px;z-index:20;width:56px;height:56px;border-radius:50%;font-size:26px;padding:0;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0}
+#cbp{position:fixed;z-index:21;bottom:calc(88px + env(safe-area-inset-bottom,0px));inset-inline-start:12px;width:min(400px,calc(100vw - 24px));height:min(580px,calc(100vh - 140px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--bd);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}#cbp[hidden]{display:none}
+#cbh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--card)}#cbh button{padding:4px 9px;margin-inline-start:4px}
+#cbm{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}#cbk{padding:10px 14px;border-bottom:1px solid var(--bd);font-size:13px}
+.mg{max-width:88%;padding:9px 13px;border-radius:16px;font-size:14px;line-height:1.55;overflow-wrap:anywhere}.mg.u{align-self:flex-end;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}.mg.a{align-self:flex-start;background:var(--card);border:1px solid var(--bd)}
+.mg p{margin:0 0 6px}.mg code{background:var(--bd);padding:1px 5px;border-radius:5px}.mg ul,.mg ol{margin:4px 0;padding-inline-start:20px}.mg a{color:var(--ac)}
+#cbf{display:flex;gap:8px;padding:10px;border-top:1px solid var(--bd);align-items:flex-end}#cbi{flex:1;resize:none;max-height:110px;font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 12px}.chip{margin:3px;font-size:13px;padding:5px 11px;border-radius:99px}
+a.pri{display:inline-block;text-decoration:none;border-radius:12px}.ptw{overflow-x:auto;padding:4px}button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}.gg{display:grid;gap:8px;justify-content:start}#gb{margin-top:14px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -57,7 +65,7 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 <canvas id="bg" aria-hidden="true"></canvas>
 <nav>
 <b>⚛ Enformatic Chemistry</b>
-<a href="#atom" data-i="n_atom"></a><a href="#build" data-i="n_build"></a><a href="#table" data-i="n_table"></a><a href="#bal" data-i="n_bal"></a><a href="#mm" data-i="n_mm"></a><a href="#quiz" data-i="n_quiz"></a>
+<a href="#chem" data-i="n_chem"></a><a href="#math" data-i="n_math"></a><a href="#arcade" data-i="n_arcade"></a>
 <input id="q" type="search" data-p="search" style="width:130px" aria-label="Search" autocomplete="off">
 <span id="xp" title="XP">⭐ 0 · Lv 1</span>
 <button id="lang" aria-label="Language">فارسی</button><button id="th" aria-label="Theme">◐</button>
@@ -67,11 +75,13 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 <section class="hero">
 <h1 data-h="hero"></h1>
 <p class="s" data-i="sub"></p>
-<a href="#atom"><button class="pri" data-i="cta1"></button></a> <a href="#bal"><button class="pri" data-i="cta2" style="background:var(--card);color:var(--tx);border:1px solid var(--bd)"></button></a>
-<div class="stats"><div class="card"><b data-n="36">0</b><span data-i="st1"></span></div><div class="card"><b data-n="5">0</b><span data-i="st2"></span></div><div class="card"><b data-n="100">0</b><span data-i="st3"></span></div></div>
+<a class="pri" href="#atom" data-i="cta1"></a> <a class="pri" href="#bal" data-i="cta2" style="background:var(--card);color:var(--tx);border:1px solid var(--bd)"></a>
+<div class="stats"><div class="card"><b data-n="36">0</b><span data-i="st1"></span></div><div class="card"><b data-n="7">0</b><span data-i="st2"></span></div><div class="card"><b data-n="100">0</b><span data-i="st3"></span></div></div>
 </section>
 
-<section id="atom" class="rev">
+<section id="chem" class="rev">
+<h2 data-i="n_chem"></h2><div id="ct" class="ctr" role="tablist"><button data-t="atom" data-i="n_atom"></button><button data-t="build" data-i="n_build"></button><button data-t="table" data-i="n_table"></button><button data-t="bal" data-i="n_bal"></button><button data-t="mm" data-i="n_mm"></button><button data-t="quiz" data-i="n_quiz"></button></div>
+<div id="atom" class="cp" hidden>
 <h2 data-i="n_atom"></h2><p class="s" style="margin-inline:0" data-i="atom_d"></p>
 <div class="grid">
 <div class="card"><svg id="svg" viewBox="0 0 300 300" width="100%" role="img" aria-label="Atom model"></svg><small style="color:var(--mu)" data-i="simp"></small></div>
@@ -83,9 +93,9 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 <table><tr><th data-i="Z"></th><th data-i="A"></th><th data-i="chg"></th></tr><tr><td id="oz"></td><td id="oa"></td><td id="oc"></td></tr></table>
 <p><b data-i="cfg"></b>: <bdi id="cf" class="f"></bdi></p><p id="atype" style="color:var(--mu)"></p><div id="stab"></div>
 </div></div>
-</section>
+</div>
 
-<section id="build" class="rev">
+<div id="build" class="cp" hidden>
 <h2 data-i="n_build"></h2><p class="s" style="margin-inline:0" data-i="build_d"></p>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
 <div class="card"><div id="pal" class="ctr"></div>
@@ -94,38 +104,55 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 <div id="pr" class="ctr"><small style="color:var(--mu)">Examples:</small></div><small id="hint" style="color:var(--mu)"></small></div>
 <div class="card" id="ana" aria-live="polite"></div>
 </div>
-</section>
+</div>
 
-<section id="table" class="rev">
+<div id="table" class="cp" hidden>
 <h2 data-i="n_table"></h2>
 <div class="lg"><i class="ak">Alkali</i><i class="ae">Alkaline earth</i><i class="tm">Transition</i><i class="pt2">Post-transition</i><i class="md">Metalloid</i><i class="nm">Nonmetal</i><i class="ha">Halogen</i><i class="ng">Noble gas</i></div>
-<div class="pt" id="pt" role="group" aria-label="Periodic table"></div>
+<div class="ptw"><div class="pt" id="pt" role="group" aria-label="Periodic table"></div></div>
 <div class="card" id="det" style="margin-top:16px" aria-live="polite"></div>
-</section>
+</div>
 
-<section id="bal" class="rev">
+<div id="bal" class="cp" hidden>
 <h2 data-i="n_bal"></h2><p class="s" style="margin-inline:0" data-i="bal_d"></p>
 <div class="card">
 <div class="ctr"><input id="eq" value="C3H8 + O2 -> CO2 + H2O" style="flex:1;direction:ltr" aria-label="Equation"><button class="pri" id="bb" style="padding:8px 20px" data-i="bal_b"></button></div>
 <div id="bo"></div>
 </div>
-</section>
+</div>
 
-<section id="mm" class="rev">
+<div id="mm" class="cp" hidden>
 <h2 data-i="n_mm"></h2>
 <div class="card"><div class="ctr"><input id="mf" value="Ca(OH)2" style="direction:ltr" aria-label="Formula"><button class="pri" id="mb" style="padding:8px 20px" data-i="calc"></button></div><div id="mo"></div></div>
+</div>
+
+<div id="quiz" class="cp" hidden>
+<h2 data-i="n_quiz"></h2><div class="card" id="qc"></div>
+</div>
 </section>
 
-<section id="quiz" class="rev">
-<h2 data-i="n_quiz"></h2><div class="card" id="qc"></div>
+<section id="math" class="rev">
+<h2 data-i="n_math"></h2><div id="mtb" class="ctr"></div><div id="mpc" class="cp"></div><div id="mps" class="cp" hidden></div><div id="mpt" class="cp" hidden></div>
 </section>
+
+<section id="arcade" class="rev">
+<h2 data-i="n_arcade"></h2><p class="s" style="margin-inline:0" id="ap"></p>
+<div class="card"><div id="gt" class="ctr"></div><div id="gb"></div></div>
+</section>
+<button id="cbb" aria-label="AI assistant" aria-expanded="false">🤖</button>
+<div id="cbp" role="dialog" aria-label="AI assistant" hidden>
+<div id="cbh"><b id="cbt"></b><span><button id="cbs" aria-label="Settings">⚙</button><button id="cbc" aria-label="Clear chat">🗑</button><button id="cbx" aria-label="Close">✕</button></span></div>
+<div id="cbk" hidden></div><div id="cbm" aria-live="polite"></div>
+<div id="cbf"><textarea id="cbi" rows="1" dir="auto"></textarea><button id="cbg" class="pri" aria-label="Send" style="padding:10px 16px">➤</button></div>
+</div>
 <div id="toast" role="status"></div>
 
 <script>
-const L={en:{n_atom:"Atom Builder",n_build:"Structure Builder",build_d:"Drag atoms in (or click them), connect them with the Bond tool, then set bond order and lone pairs. The analysis updates live. Geometry and polarity use a simplified VSEPR model.",n_table:"Periodic Table",n_bal:"Equation Balancer",n_mm:"Molar Mass",n_quiz:"Practice",sub:"Explore atoms, bonds, molecules, reactions, and more through interactive simulations.",cta1:"Start Learning",cta2:"Open Chemistry Lab",st1:"elements",st2:"tools",st3:"% rule-based chemistry",atom_d:"Add or remove particles. Charge, mass number, shells and configuration update live.",simp:"Simplified Bohr-style visualization of shells.",pro:"Protons",neu:"Neutrons",ele:"Electrons",Z:"Atomic no. (Z)",A:"Mass no. (A)",chg:"Charge",cfg:"Electron configuration",bal_d:"Type reactants → products. Use + between compounds. Parentheses allowed.",bal_b:"Balance",calc:"Calculate",search:"Search…",ion_c:"Cation (lost electrons)",ion_a:"Anion (gained electrons)",neutral:"Neutral atom",iso:"Isotope of the element (neutron number differs from the common isotope)",hero:"Chemistry, <span>But Interactive.</span>"},
-fa:{n_atom:"سازنده اتم",n_build:"سازنده ساختار",build_d:"اتم‌ها را بکشید (یا کلیک کنید)، با ابزار پیوند به هم وصل کنید، سپس مرتبهٔ پیوند و جفت‌های ناپیوندی را تنظیم کنید. تحلیل به‌صورت زنده به‌روز می‌شود . هندسه و قطبیت از مدل ساده‌شدهٔ VSEPR استفاده می‌کنند.",n_table:"جدول تناوبی",n_bal:"موازنه معادله",n_mm:"جرم مولی",n_quiz:"تمرین",sub:"اتم‌ها، پیوندها، مولکول‌ها و واکنش‌ها را با شبیه‌سازی‌های تعاملی کاوش کنید.",cta1:"شروع یادگیری",cta2:"ورود به آزمایشگاه",st1:"عنصر",st2:"ابزار",st3:"٪ شیمی مبتنی بر قاعده",atom_d:"ذره اضافه یا کم کنید؛ بار، عدد جرمی، لایه‌ها و آرایش الکترونی به‌صورت زنده تغییر می‌کنند.",simp:"نمایش ساده‌شدهٔ لایه‌ها به سبک بور.",pro:"پروتون",neu:"نوترون",ele:"الکترون",Z:"عدد اتمی",A:"عدد جرمی",chg:"بار",cfg:"آرایش الکترونی",bal_d:"واکنش‌دهنده‌ها → فراورده‌ها را بنویسید؛ بین ترکیب‌ها + بگذارید.",bal_b:"موازنه کن",calc:"محاسبه",search:"جستجو…",ion_c:"کاتیون (الکترون از دست داده)",ion_a:"آنیون (الکترون گرفته)",neutral:"اتم خنثی",iso:"ایزوتوپ عنصر (تعداد نوترون با ایزوتوپ رایج فرق دارد)",hero:"شیمی، <span>اما تعاملی.</span>"}};
-let lang="en",xp=0;const $=s=>document.querySelector(s),T=k=>L[lang][k]||k;
+const L={en:{n_atom:"Atom Builder",n_build:"Structure Builder",build_d:"Drag atoms in (or click them), connect them with the Bond tool, then set bond order and lone pairs. The analysis updates live. Geometry and polarity use a simplified VSEPR model.",n_table:"Periodic Table",n_bal:"Equation Balancer",n_mm:"Molar Mass",n_quiz:"Practice",n_arcade:"Arcade",n_chem:"Chemistry",n_math:"Math",sub:"Explore atoms, bonds, molecules, reactions, and more through interactive simulations.",cta1:"Start Learning",cta2:"Open Chemistry Lab",st1:"elements",st2:"tools",st3:"% rule-based chemistry",atom_d:"Add or remove particles. Charge, mass number, shells and configuration update live.",simp:"Simplified Bohr-style visualization of shells.",pro:"Protons",neu:"Neutrons",ele:"Electrons",Z:"Atomic no. (Z)",A:"Mass no. (A)",chg:"Charge",cfg:"Electron configuration",bal_d:"Type reactants → products. Use + between compounds. Parentheses allowed.",bal_b:"Balance",calc:"Calculate",search:"Search…",ion_c:"Cation (lost electrons)",ion_a:"Anion (gained electrons)",neutral:"Neutral atom",iso:"Isotope of the element (neutron number differs from the common isotope)",hero:"Chemistry, <span>But Interactive.</span>"},
+fa:{n_atom:"سازنده اتم",n_build:"سازنده ساختار",build_d:"اتم‌ها را بکشید (یا کلیک کنید)، با ابزار پیوند به هم وصل کنید، سپس مرتبهٔ پیوند و جفت‌های ناپیوندی را تنظیم کنید. تحلیل به‌صورت زنده به‌روز می‌شود. هندسه و قطبیت از مدل ساده‌شدهٔ VSEPR استفاده می‌کنند.",n_table:"جدول تناوبی",n_bal:"موازنه معادله",n_mm:"جرم مولی",n_quiz:"تمرین",n_arcade:"سرگرمی",n_chem:"شیمی",n_math:"ریاضی",sub:"اتم‌ها، پیوندها، مولکول‌ها و واکنش‌ها را با شبیه‌سازی‌های تعاملی کاوش کنید.",cta1:"شروع یادگیری",cta2:"ورود به آزمایشگاه",st1:"عنصر",st2:"ابزار",st3:"٪ شیمی مبتنی بر قاعده",atom_d:"ذره اضافه یا کم کنید؛ بار، عدد جرمی، لایه‌ها و آرایش الکترونی به‌صورت زنده تغییر می‌کنند.",simp:"نمایش ساده‌شدهٔ لایه‌ها به سبک بور.",pro:"پروتون",neu:"نوترون",ele:"الکترون",Z:"عدد اتمی",A:"عدد جرمی",chg:"بار",cfg:"آرایش الکترونی",bal_d:"واکنش‌دهنده‌ها → فراورده‌ها را بنویسید؛ بین ترکیب‌ها + بگذارید.",bal_b:"موازنه کن",calc:"محاسبه",search:"جستجو…",ion_c:"کاتیون (الکترون از دست داده)",ion_a:"آنیون (الکترون گرفته)",neutral:"اتم خنثی",iso:"ایزوتوپ عنصر (تعداد نوترون با ایزوتوپ رایج فرق دارد)",hero:"شیمی، <span>اما تعاملی.</span>"}};
+let lang="en",xp=0;const $=s=>document.querySelector(s),T=k=>L[lang][k]||k,esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const E="H,Hydrogen,1.008,nm,2.20;He,Helium,4.0026,ng,;Li,Lithium,6.94,ak,0.98;Be,Beryllium,9.0122,ae,1.57;B,Boron,10.81,md,2.04;C,Carbon,12.011,nm,2.55;N,Nitrogen,14.007,nm,3.04;O,Oxygen,15.999,nm,3.44;F,Fluorine,18.998,ha,3.98;Ne,Neon,20.180,ng,;Na,Sodium,22.990,ak,0.93;Mg,Magnesium,24.305,ae,1.31;Al,Aluminium,26.982,pt2,1.61;Si,Silicon,28.085,md,1.90;P,Phosphorus,30.974,nm,2.19;S,Sulfur,32.06,nm,2.58;Cl,Chlorine,35.45,ha,3.16;Ar,Argon,39.948,ng,;K,Potassium,39.098,ak,0.82;Ca,Calcium,40.078,ae,1.00;Sc,Scandium,44.956,tm,1.36;Ti,Titanium,47.867,tm,1.54;V,Vanadium,50.942,tm,1.63;Cr,Chromium,51.996,tm,1.66;Mn,Manganese,54.938,tm,1.55;Fe,Iron,55.845,tm,1.83;Co,Cobalt,58.933,tm,1.88;Ni,Nickel,58.693,tm,1.91;Cu,Copper,63.546,tm,1.90;Zn,Zinc,65.38,tm,1.65;Ga,Gallium,69.723,pt2,1.81;Ge,Germanium,72.630,md,2.01;As,Arsenic,74.922,md,2.18;Se,Selenium,78.971,nm,2.55;Br,Bromine,79.904,ha,2.96;Kr,Krypton,83.798,ng,3.00".split(";").map((s,i)=>{const a=s.split(",");return{z:i+1,s:a[0],n:a[1],m:+a[2],c:a[3],en:a[4]}});
+const MA=[1,4,7,9,11,12,14,16,19,20,23,24,27,28,31,32,35,40,39,40,45,48,51,52,55,56,59,58,63,64,69,74,75,80,79,84];
 const XM={Ag:107.87,Sn:118.71,I:126.90,Ba:137.33,Au:196.97,Pb:207.2,Hg:200.59,Cs:132.91,Rb:85.468,Sr:87.62,Li:6.94};
 const MASS={};E.forEach(e=>MASS[e.s]=e.m);Object.assign(MASS,XM);
 const grp=z=>z==1?1:z==2?18:z<=4?z-2:z<=10?z+8:z<=12?z-10:z<=18?z:z-18;
@@ -141,9 +168,11 @@ L.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const sh={};L.forEach(x=>sh[x[0]]=(sh[x[0]]|
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
 function addXP(n,m){xp+=n;$("#xp").textContent=xpT();toast(`+${n} ${X("XP","امتیاز")} — ${m}`);try{localStorage.setItem("c11xp",xp)}catch(e){}}
 try{xp=+localStorage.getItem("c11xp")||0;$("#xp").textContent=xpT()}catch(e){}
+let DN=new Set();try{DN=new Set(JSON.parse(localStorage.getItem("c11done")||"[]"))}catch(e){}
+function once(k,n,m){if(DN.has(k))return;DN.add(k);try{localStorage.setItem("c11done",JSON.stringify([...DN]))}catch(e){}addXP(n,m)}
 // i18n
 function applyL(){document.documentElement.lang=lang;document.documentElement.dir=lang=="fa"?"rtl":"ltr";$("#lang").textContent=lang=="fa"?"English":"فارسی";
-document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));document.querySelectorAll("[data-p]").forEach(e=>e.placeholder=T(e.dataset.p));document.querySelectorAll("[data-h]").forEach(e=>e.innerHTML=T(e.dataset.h));atom();walk();sel(cz);draw();balance();mm();rq()}
+document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));document.querySelectorAll("[data-p]").forEach(e=>e.placeholder=T(e.dataset.p));document.querySelectorAll("[data-h]").forEach(e=>e.innerHTML=T(e.dataset.h));atom();walk();sel(cz);draw();balance();mm();rq();gm();mth();botL()}
 $("#lang").onclick=()=>{lang=lang=="en"?"fa":"en";applyL()};
 $("#th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark"};
 function X(e,f){return lang=="fa"?f:e}
@@ -162,43 +191,43 @@ let A={p:6,n:6,e:6},touched=0;
 function atom(){const{p,n,e}=A,el=E[p-1],c=cfg(e,p),q=p-e;
 $("#vp").textContent=p;$("#vn").textContent=n;$("#ve").textContent=e;$("#sym").textContent=el.s+(q?(Math.abs(q)>1?Math.abs(q):"")+(q>0?"⁺":"⁻"):"");$("#nm").textContent=nmE(el);
 $("#oz").textContent=p;$("#oa").textContent=p+n;$("#oc").textContent=(q>0?"+":"")+q;$("#cf").innerHTML=c.str;
-const common=Math.round(el.m)-p;$("#atype").textContent=(q>0?T("ion_c"):q<0?T("ion_a"):T("neutral"))+(n!=common?" · "+T("iso"):"");
+const common=MA[p-1]-p;$("#atype").textContent=(q>0?T("ion_c"):q<0?T("ion_a"):T("neutral"))+(n!=common?" · "+T("iso"):"");
 let s=`<circle cx="150" cy="150" r="${22+Math.min(10,(p+n)/6)}" fill="url(#g)" class="pop"/><defs><radialGradient id="g"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#6366f1"/></radialGradient></defs><text x="150" y="154" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">${p}p ${n}n</text>`;
 c.sh.forEach((k,i)=>{const r=48+i*28;s+=`<circle cx="150" cy="150" r="${r}" fill="none" stroke="currentColor" opacity=".25" stroke-dasharray="3 4"/><g class="sh" style="animation-duration:${8+i*5}s;animation-direction:${i%2?"reverse":"normal"}">`;for(let j=0;j<k;j++){const a=2*Math.PI*j/k;s+=`<circle cx="${150+r*Math.cos(a)}" cy="${150+r*Math.sin(a)}" r="5" fill="#0ea5a4" class="pop"/>`}s+="</g>"});
 $("#svg").innerHTML=s;stab()}
-document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{const[k,d]=[b.dataset.a[0],+b.dataset.a.slice(1)];const v=A[k]+d;if(k=="p"){if(v<1||v>36)return;A.p=v;if(d>0)A.e=Math.min(A.e+0,A.e)}else if(v<0||(k=="e"&&v>40))return;A[k]=v;if(++touched==8)addXP(10,X("Atom Builder","سازنده اتم"));atom()});
+document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>{const[k,d]=[b.dataset.a[0],+b.dataset.a.slice(1)];const v=A[k]+d;if(k=="p"){if(v<1||v>36)return;A.p=v}else if(v<0||(k=="e"&&v>36))return;A[k]=v;if(++touched==8)once("atom",10,X("Atom Builder","سازنده اتم"));atom()});
 // periodic table
 const pt=$("#pt");pt.innerHTML=E.map(e=>`<button class="el ${e.c}" style="grid-column:${grp(e.z)};grid-row:${per(e.z)};padding:2px" data-z="${e.z}" aria-pressed="false" aria-label="${e.n}"><small>${e.z}</small>${e.s}</button>`).join("");
 const seen=new Set();
 let cz=8;const CATF={ak:"فلز قلیایی",ae:"فلز قلیایی خاکی",tm:"فلز واسطه",md:"شبه‌فلز",nm:"نافلز",ha:"هالوژن",ng:"گاز نجیب",pt2:"فلز پس‌واسطه"};
-function sel(z){cz=z;const e=E[z-1];pt.querySelectorAll(".el").forEach(b=>b.setAttribute("aria-pressed",b.dataset.z==z));const nn=Math.round(e.m)-z,stt=GAS.includes(z)?X("gas","گاز"):z==35?X("liquid","مایع"):X("solid","جامد");
-$("#det").innerHTML=`<div class="pop"><div class="big"><bdi>${e.s}</bdi> <small style="font-size:18px">${nmE(e)}</small></div><table><tr><th>Z</th><th>${X("Mass","جرم اتمی")}</th><th>${X("p / n / e⁻","پروتون / نوترون / الکترون")}</th><th>${X("Group","گروه")}</th><th>${X("Period","دوره")}</th></tr><tr><td>${z}</td><td>${e.m}</td><td>${z} / ${nn} / ${z}</td><td>${grp(z)}</td><td>${per(z)}</td></tr></table><p><b>${X("Config","آرایش")}:</b> <bdi class="f">${cfg(z,z).str}</bdi> · <b>${X("Category","دسته")}:</b> ${lang=="fa"?CATF[e.c]:CAT[e.c]} · <b>${X("State (25 °C)","حالت (۲۵ درجه)")}:</b> ${stt} · <b>${X("Electronegativity","الکترونگاتیوی")}:</b> ${e.en||"—"} · <b>${X("Oxidation states","اعداد اکسایش")}:</b> <bdi class="f">${OX[z]}</bdi></p><small style="color:var(--mu)">${X("Neutrons shown for the most common isotope (rounded mass − Z).","نوترون‌ها برای رایج‌ترین ایزوتوپ نشان داده شده‌اند (جرم گردشده − Z).")}</small></div>`;
-if(!seen.has(z)){seen.add(z);if(seen.size==10)addXP(15,X("Periodic Table Explorer","کاوشگر جدول تناوبی"))}}
+function sel(z){cz=z;const e=E[z-1];pt.querySelectorAll(".el").forEach(b=>b.setAttribute("aria-pressed",b.dataset.z==z));const nn=MA[z-1]-z,stt=GAS.includes(z)?X("gas","گاز"):z==35?X("liquid","مایع"):X("solid","جامد");
+$("#det").innerHTML=`<div class="pop"><div class="big"><bdi>${e.s}</bdi> <small style="font-size:18px">${nmE(e)}</small></div><table><tr><th>Z</th><th>${X("Mass","جرم اتمی")}</th><th>${X("p / n / e⁻","پروتون / نوترون / الکترون")}</th><th>${X("Group","گروه")}</th><th>${X("Period","دوره")}</th></tr><tr><td>${z}</td><td>${e.m}</td><td>${z} / ${nn} / ${z}</td><td>${grp(z)}</td><td>${per(z)}</td></tr></table><p><b>${X("Config","آرایش")}:</b> <bdi class="f">${cfg(z,z).str}</bdi> · <b>${X("Category","دسته")}:</b> ${lang=="fa"?CATF[e.c]:CAT[e.c]} · <b>${X("State (25 °C)","حالت (۲۵ درجه)")}:</b> ${stt} · <b>${X("Electronegativity","الکترونگاتیوی")}:</b> ${e.en||"—"} · <b>${X("Oxidation states","اعداد اکسایش")}:</b> <bdi class="f">${OX[z]}</bdi></p><small style="color:var(--mu)">${X("Neutrons shown for the most common isotope (mass number of the most abundant isotope − Z).","نوترون‌ها برای رایج‌ترین ایزوتوپ نشان داده شده‌اند (عدد جرمی فراوان‌ترین ایزوتوپ − Z).")}</small></div>`;
+if(!seen.has(z)){seen.add(z);if(seen.size==10)once("pt",15,X("Periodic Table Explorer","کاوشگر جدول تناوبی"))}}
 pt.onclick=e=>{const b=e.target.closest(".el");if(b)sel(+b.dataset.z)};sel(8);
 // search
 const R=$("#res");$("#q").oninput=e=>{const v=e.target.value.trim().toLowerCase();if(!v){R.style.display="none";return}
 const hits=E.filter(x=>x.n.toLowerCase().includes(v)||FN[x.z-1].includes(v)||x.s.toLowerCase()==v||String(x.z)==v).slice(0,6);const extra=[[T("n_bal"),"#bal"],[T("n_mm"),"#mm"],[T("n_atom"),"#atom"],[T("n_build"),"#build"],[T("n_quiz"),"#quiz"]].filter(x=>x[0].toLowerCase().includes(v));
-R.innerHTML=hits.map(x=>`<button data-z="${x.z}">${x.s} — ${nmE(x)}</button>`).join("")+extra.map(x=>`<button data-h="${x[1]}">${x[0]}</button>`).join("")||"…";R.style.display="block"};
-R.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.z){sel(+b.dataset.z);location.hash="#table"}else location.hash=b.dataset.h;R.style.display="none"};
+R.innerHTML=hits.map(x=>`<button data-z="${x.z}">${x.s} — ${nmE(x)}</button>`).join("")+extra.map(x=>`<button data-href="${x[1]}">${x[0]}</button>`).join("")||"…";R.style.display="block"};
+R.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.z){sel(+b.dataset.z);go("table")}else go(b.dataset.href.slice(1));R.style.display="none"};
 // balancer
-function parse(f){f=f.replace(/[₀-₉]/g,c=>c.charCodeAt(0)-8320);let i=0;const num=()=>{let s="";while(/\d/.test(f[i]||""))s+=f[i++];return s?+s:1};
-function g(){const m={};while(i<f.length){const c=f[i];if(c=="("){i++;const s=g();i++;const n=num();for(const k in s)m[k]=(m[k]||0)+s[k]*n}else if(c==")")return m;else if(/[A-Z]/.test(c)){let s=c;i++;while(/[a-z]/.test(f[i]||""))s+=f[i++];if(!(s in MASS))throw Error(X("Unknown element: ","عنصر ناشناخته: ")+s);m[s]=(m[s]||0)+num()}else i++}return m}return g()}
+function parse(f){f=f.replace(/[₀-₉]/g,c=>c.charCodeAt(0)-8320).replace(/\((s|l|g|aq)\)/g,"");let i=0;const num=()=>{let s="";while(/\d/.test(f[i]||""))s+=f[i++];return s?+s:1};
+function g(){const m={};while(i<f.length){const c=f[i];if(c=="("){i++;const s=g();i++;const n=num();for(const k in s)m[k]=(m[k]||0)+s[k]*n}else if(c==")")return m;else if(/[A-Z]/.test(c)){let s=c;i++;while(/[a-z]/.test(f[i]||""))s+=f[i++];if(!(s in MASS))throw Error(X("Unknown element: ","عنصر ناشناخته: ")+s);m[s]=(m[s]||0)+num()}else if(/\s/.test(c))i++;else throw Error(X("Unexpected character: ","نویسهٔ نامعتبر: ")+c)}return m}const r=g();if(i<f.length)throw Error(X("Unbalanced parentheses.","پرانتزها متوازن نیستند."));return r}
 function solve(sp,nl){const els=[...new Set(sp.flatMap(Object.keys))],n=sp.length,M=els.map(e=>sp.map((s,j)=>(s[e]||0)*(j<nl?1:-1)));let r=0;const pv=[];
 for(let c=0;c<n&&r<M.length;c++){let p=r;for(let k=r;k<M.length;k++)if(Math.abs(M[k][c])>Math.abs(M[p][c]))p=k;if(Math.abs(M[p][c])<1e-9)continue;[M[r],M[p]]=[M[p],M[r]];const d=M[r][c];M[r]=M[r].map(v=>v/d);for(let k=0;k<M.length;k++)if(k!=r){const f=M[k][c];M[k]=M[k].map((v,j)=>v-f*M[r][j])}pv.push(c);r++}
 const fr=[...Array(n).keys()].filter(c=>!pv.includes(c));if(fr.length!=1)return null;const x=Array(n).fill(0);x[fr[0]]=1;pv.forEach((c,i)=>x[c]=-M[i][fr[0]]);if(x.every(v=>v<=1e-9))x.forEach((v,i)=>x[i]=-v);
 for(let k=1;k<=200;k++){const y=x.map(v=>v*k);if(y.every(v=>Math.abs(v-Math.round(v))<1e-6&&Math.round(v)>0))return{co:y.map(Math.round),els}}return null}
 let balanced=new Set();
-function balance(){const o=$("#bo");try{const [l,r]=$("#eq").value.replace(/→|=>|=/g,"->").split("->");if(!r)throw Error(X("Use '->' between reactants and products.","بین واکنش‌دهنده‌ها و فراورده‌ها از '->' استفاده کنید."));
-const cl=s=>s.split("+").map(x=>x.trim().replace(/^\d+\s*/,"")).filter(Boolean),L1=cl(l),R1=cl(r),all=[...L1,...R1],sp=all.map(parse),res=solve(sp,L1.length);if(!res)throw Error(X("Could not balance this equation (check formulas — every element must appear on both sides).","این معادله موازنه نشد (فرمول‌ها را بررسی کنید؛ هر عنصر باید در هر دو طرف باشد)."));
+function balance(aw){const o=$("#bo");try{const [l,r]=$("#eq").value.replace(/→|=>|=/g,"->").split("->");if(!r)throw Error(X("Use '->' between reactants and products.","بین واکنش‌دهنده‌ها و فراورده‌ها از '->' استفاده کنید."));
+const cl=s=>s.split("+").map(x=>x.trim().replace(/^\d+\s*/,"")).filter(Boolean),L1=cl(l),R1=cl(r),all=[...L1,...R1],sp=all.map(parse),res=L1.length&&R1.length?solve(sp,L1.length):null;if(!res)throw Error(X("Could not balance this equation (check formulas — every element must appear on both sides).","این معادله موازنه نشد (فرمول‌ها را بررسی کنید؛ هر عنصر باید در هر دو طرف باشد)."));
 const co=res.co,show=(a,off)=>a.map((f,i)=>(co[i+off]>1?co[i+off]+" ":"")+`<bdi class="f">${fm(f)}</bdi>`).join(" + ");
 const cnt=(idx,e,w)=>idx.reduce((t,i)=>t+(sp[i][e]||0)*(w?co[i]:1),0),li=L1.map((_,i)=>i),ri=R1.map((_,i)=>i+L1.length);
 o.innerHTML=`<h3 class="ok pop">${show(L1,0)} → ${show(R1,L1.length)}</h3><table><tr><th></th><th colspan=2>${X("Before","قبل")}</th><th colspan=2>${X("After","بعد")}</th></tr><tr><th>${X("Atom","اتم")}</th><th>${X("Left","چپ")}</th><th>${X("Right","راست")}</th><th>${X("Left","چپ")}</th><th>${X("Right","راست")}</th></tr>${res.els.map(e=>{const a=cnt(li,e,0),b=cnt(ri,e,0),c=cnt(li,e,1),d=cnt(ri,e,1);return`<tr><td>${e}</td><td>${a}</td><td class="${a==b?"ok":"bad"}">${b}</td><td class="ok">${c}</td><td class="ok">${d}</td></tr>`}).join("")}</table>
 <ol><li>${X("Count each element on both sides (the “Before” columns).","تعداد هر عنصر را در دو طرف بشمارید (ستون‌های «قبل»).")}</li><li>${X("Where counts differ, adjust coefficients, never subscripts, which would change the substance.","جایی که تعدادها فرق دارد، ضریب‌ها را تغییر دهید نه زیروندها را؛ زیروند ماهیت ماده را عوض می‌کند.")}</li><li>${X("Solving the atom-conservation equations gives the smallest whole-number set:","حل معادلات پایستگی اتم‌ها کوچک‌ترین مجموعهٔ اعداد صحیح را می‌دهد:")} <b>${co.join(", ")}</b>.</li><li>${X("Check: every element now has equal atoms on both sides, so mass is conserved.","بررسی: اکنون هر عنصر در دو طرف تعداد برابر دارد، پس جرم پایسته است.")}</li></ol>`;
-if(!balanced.has(l+r)){balanced.add(l+r);addXP(15,X("Reaction Expert","متخصص واکنش"))}}catch(e){o.innerHTML=`<p class="bad">${e.message}</p>`}}
-$("#bb").onclick=balance;$("#eq").onkeydown=e=>{if(e.key=="Enter")balance()};balance();
+if(aw)once("bal:"+(l+r).replace(/\s/g,""),15,X("Reaction Expert","متخصص واکنش"))}catch(e){o.innerHTML=`<p class="bad">${esc(e.message)}</p>`}}
+$("#bb").onclick=()=>balance(1);$("#eq").onkeydown=e=>{if(e.key=="Enter")balance(1)};balance();
 // molar mass
 function mm(){const o=$("#mo");try{const p=parse($("#mf").value.trim().replace(/^\d+/,""));let tot=0;const rows=Object.entries(p).map(([e,n])=>{const s=MASS[e]*n;tot+=s;return`<tr><td>${e}</td><td>${n}</td><td>${MASS[e]}</td><td>${s.toFixed(3)}</td></tr>`});if(!rows.length)throw Error(X("Enter a formula such as H2O or Ca(OH)2.","فرمولی مانند H2O یا Ca(OH)2 وارد کنید."));
-o.innerHTML=`<table class="pop"><tr><th>${X("Element","عنصر")}</th><th>${X("Atoms","تعداد اتم")}</th><th>${X("Atomic mass","جرم اتمی")}</th><th>${X("Subtotal (g/mol)","جزء (g/mol)")}</th></tr>${rows.join("")}<tr><th colspan=3>${X("Molar mass of ","جرم مولی ")}<bdi class="f">${fm($("#mf").value)}</bdi></th><th class="ok">${tot.toFixed(3)} ${X("g/mol","گرم بر مول")}</th></tr></table>`}catch(e){o.innerHTML=`<p class="bad">${e.message}</p>`}}
+o.innerHTML=`<table class="pop"><tr><th>${X("Element","عنصر")}</th><th>${X("Atoms","تعداد اتم")}</th><th>${X("Atomic mass","جرم اتمی")}</th><th>${X("Subtotal (g/mol)","جزء (g/mol)")}</th></tr>${rows.join("")}<tr><th colspan=3>${X("Molar mass of ","جرم مولی ")}<bdi class="f">${fm($("#mf").value)}</bdi></th><th class="ok">${tot.toFixed(3)} ${X("g/mol","گرم بر مول")}</th></tr></table>`}catch(e){o.innerHTML=`<p class="bad">${esc(e.message)}</p>`}}
 $("#mb").onclick=mm;$("#mf").onkeydown=e=>{if(e.key=="Enter")mm()};mm();
 // quiz
 const Q=[{q:"How many electrons does a Cl⁻ ion have?",o:["16","17","18","19"],a:2,x:"Cl has Z = 17. Gaining one electron gives 18 electrons and charge −1."},{q:"Electron configuration of oxygen (Z = 8)?",o:["1s² 2s² 2p⁴","1s² 2s² 2p⁶","1s² 2s⁴ 2p²","1s² 2p⁶"],a:0,x:"Fill 1s (2), 2s (2), then 4 electrons remain for 2p."},{q:"Which pair has a triple bond?",o:["O₂","N₂","H₂","Cl₂"],a:1,x:"N₂: each N has 5 valence electrons and shares 3 pairs to reach an octet."},{q:"Molar mass of H₂O (H = 1.008, O = 15.999)?",o:["17.007","18.015","19.023","16.007"],a:1,x:"2 × 1.008 + 15.999 = 18.015 g/mol."},{q:"Mass number = ?",o:["protons","protons + electrons","protons + neutrons","neutrons"],a:2,x:"Mass number A counts nucleons: protons + neutrons."}];
@@ -206,8 +235,8 @@ let qi=0,sc=0;
 const QF=[["یون Cl⁻ چند الکترون دارد؟",0,"Cl عدد اتمی ۱۷ دارد. با گرفتن یک الکترون، ۱۸ الکترون و بار ۱− پیدا می‌کند."],["آرایش الکترونی اکسیژن (Z = 8) کدام است؟",0,"ابتدا 1s (۲)، سپس 2s (۲)؛ ۴ الکترون باقی‌مانده در 2p قرار می‌گیرد."],["کدام جفت پیوند سه‌گانه دارد؟",0,"N₂: هر اتم نیتروژن ۵ الکترون ظرفیت دارد و برای رسیدن به هشتایی ۳ جفت الکترون به اشتراک می‌گذارد."],["جرم مولی H₂O چقدر است؟ (H = 1.008، O = 15.999)",0,"2 × 1.008 + 15.999 = 18.015 گرم بر مول."],["عدد جرمی = ؟",["پروتون‌ها","پروتون + الکترون","پروتون + نوترون","نوترون‌ها"],"عدد جرمی تعداد نوکلئون‌ها است: پروتون + نوترون."]];
 function rq(){const c=$("#qc");if(qi>=Q.length){c.innerHTML=`<h3>${X("Score","امتیاز")}: ${sc}/${Q.length}</h3><button id="rs" class="pri">${X("Restart","شروع دوباره")}</button>`;$("#rs").onclick=()=>{qi=sc=0;rq()};return}
 const fa=lang=="fa",q=Q[qi],qq=fa?QF[qi][0]:q.q,oo=(fa&&QF[qi][1])||q.o,xx=fa?QF[qi][2]:q.x;
-c.innerHTML=`<small>${X("Easy","آسان")} · ${qi+1}/${Q.length}</small><h3>${qq}</h3>${oo.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}<div id="fb"></div>`;
-c.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=+b.dataset.i==q.a;c.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.i==q.a)x.classList.add("ok")});b.classList.add(ok?"ok":"bad");if(ok){sc++;addXP(10,X("Correct!","درست!"))}
+c.innerHTML=`<small>${X("Easy","آسان")} · ${qi+1}/${Q.length}</small><h3>${qq}</h3>${oo.map((o,i)=>`<button class="opt" data-o="${i}">${o}</button>`).join("")}<div id="fb"></div>`;
+c.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=+b.dataset.o==q.a;c.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.o==q.a)x.classList.add("ok")});b.classList.add(ok?"ok":"bad");if(ok){sc++;once("q"+qi,10,X("Correct!","درست!"))}
 $("#fb").innerHTML=`<p class="${ok?"ok":"bad"}"><b>${ok?X("Correct","درست"):X("Not quite","کامل نیست")}.</b> ${xx}</p><button id="nx" class="pri">${X("Next","بعدی")}</button>`;$("#nx").onclick=()=>{qi++;rq()}})}rq();
 // structure builder
 const ES={};E.forEach(e=>ES[e.s]=e);
@@ -268,7 +297,7 @@ o.innerHTML=`<div class="${ok?"ok":"bad"}" style="font-weight:700">${ok?X("✓ S
 <h3 style="margin:8px 0"><bdi class="f">${fm(nm?nm[0]:hf)}</bdi> — ${nm?(fa?FD[nm[0]]||nm[1]:nm[1]):X("not in the library","در کتابخانه نیست")}</h3>
 <table class="tb">${r(X("Type","نوع"),kind+(cen.length==1?` · ${X("central atom","اتم مرکزی")}: ${nmE(ES[cen[0].s])} (${cen[0].s})`:""))}${r(X("Elements","عنصرها"),Object.entries(cnt).map(([s,n])=>`${n} × ${nmE(ES[s])}`).join(", "))}${r(X("Atoms / bonds","اتم‌ها / پیوندها"),X(`${AT.length} atoms · ${S.bd.length} bonds (total bond order ${sumO})`,`${AT.length} اتم · ${S.bd.length} پیوند (مجموع مرتبهٔ پیوندها ${sumO})`))}${r(X("Bond types","نوع پیوندها"),Object.entries(bt).map(([k,v])=>`${k} ×${v.n} <small>(${v.ty}, ΔEN ${v.d.toFixed(2)})</small>`).join("<br>")||"—")}${r(X("Valence electrons","الکترون‌های ظرفیت"),`${valV-chg}`+(chg?` (${X("neutral atoms","اتم‌های خنثی")}: ${valV})`:""))}${r(X("Lone pairs","جفت‌های ناپیوندی"),lpT?`${lpT} (${Object.entries(lps).map(([s,n])=>s+": "+n).join(", ")})`:"0")}${r(X("Formal charges","بار صوری"),fcs.length?fcs.join(", "):X("all atoms 0","همهٔ اتم‌ها صفر"))}${r(X("Overall stability","پایداری کل"),meter(avg))}${r(X("Atom stability","پایداری اتم‌ها"),sl.join(" · ")+`<br><small style="color:var(--mu)">${X("Ring colour: green = stable (100%), yellow = complete but unpaired electrons or formal charge, orange = incomplete shell (% of the octet filled), red = too many electrons.","رنگ حلقه: سبز = پایدار (۱۰۰٪)، زرد = کامل ولی الکترون جفت‌نشده یا بار صوری، نارنجی = لایهٔ ناقص (درصد پر بودن هشتایی)، قرمز = الکترون بیش از حد.")}</small>`)}${r(X("Geometry","هندسه"),gl.join("<br>")||"—")}${r(X("Polarity","قطبیت"),pol)}</table>
 ${notes.length?`<ul style="color:var(--mu);font-size:13px">${notes.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}<small style="color:var(--mu)">${X("Name is matched from the formula. Geometry and polarity use ideal VSEPR shapes (simplified).","نام از روی فرمول تطبیق داده می‌شود. شکل و قطبیت بر پایهٔ شکل‌های ایدئال VSEPR است (ساده‌شده).")}</small>`;
-if(ok&&nm&&AT.length>1&&!done.has(hf)){done.add(hf);if(!S.pre)addXP(20,X("Bond Master: ","استاد پیوند: ")+(fa?FD[nm[0]]||nm[1]:nm[1]))}}
+if(ok&&nm&&AT.length>1&&!done.has(hf)){done.add(hf);if(!S.pre)once("bond:"+hf,20,X("Bond Master: ","استاد پیوند: ")+(fa?FD[nm[0]]||nm[1]:nm[1]))}}
 $("#pal").innerHTML=PS.map(s=>`<button draggable="true" data-s="${s}" style="padding:6px 12px;font-weight:700">${s}</button>`).join("");
 $("#pal").onclick=e=>{const b=e.target.closest("[data-s]");if(b)add(b.dataset.s)};
 $("#pal").ondragstart=e=>{const b=e.target.closest("[data-s]");if(b)e.dataTransfer.setData("text/plain",b.dataset.s)};
@@ -279,7 +308,7 @@ WS.onpointerdown=e=>{const a=e.target.closest("[data-a]"),b=e.target.closest("[d
 if(a){const id=+a.dataset.a;if(S.tool=="bond"){if(S.pend&&S.pend!=id){link(S.pend,id);S.pend=null}else S.pend=id}else{S.sel={t:"a",id};const p=pt2(e),q=at(id);drag={id,dx:q.x-p.x,dy:q.y-p.y};WS.setPointerCapture(e.pointerId)}}
 else if(b)S.sel={t:"b",id:+b.dataset.b};else{S.sel=null;S.pend=null}draw()};
 WS.onpointermove=e=>{if(!drag)return;const p=pt2(e),a=at(drag.id);a.x=Math.max(25,Math.min(615,p.x+drag.dx));a.y=Math.max(25,Math.min(375,p.y+drag.dy));draw()};
-WS.onpointerup=()=>drag=null;
+WS.onpointerup=WS.onpointercancel=()=>drag=null;
 function act(k){const s=S.sel,sa=s&&s.t=="a"?at(s.id):null,sb=s&&s.t=="b"?S.bd.find(x=>x.id==s.id):null;
 if(k=="tool"){S.tool=S.tool=="bond"?"move":"bond";S.pend=null}
 else if(k=="auto")return autoLP();else if(k=="clear")return clearAll();
@@ -301,6 +330,166 @@ document.querySelectorAll("[data-n]").forEach(el=>{const t=+el.dataset.n;let v=0
 const cv=$("#bg"),cx=cv.getContext("2d"),F=["H₂O","CO₂","NaCl","CH₄","O₂","NH₃"];let P=[];function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
 for(let i=0;i<34;i++)P.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,t:i%4==0?F[i%6]:null});
 function dr(){cx.clearRect(0,0,cv.width,cv.height);cx.fillStyle="#0ea5a4";cx.font="14px Inter";P.forEach(p=>{p.x=(p.x+p.vx+cv.width)%cv.width;p.y=(p.y+p.vy+cv.height)%cv.height;cx.globalAlpha=.3;if(p.t)cx.fillText(p.t,p.x,p.y);else{cx.beginPath();cx.arc(p.x,p.y,2.5,0,7);cx.fill()}});if(!matchMedia("(prefers-reduced-motion:reduce)").matches)requestAnimationFrame(dr)}dr();
+// arcade
+let G="ttt",tm=null,sn=null,kh=null;
+const GN=()=>({ttt:X("Tic-Tac-Toe","دوز"),mem:X("Memory Match","حافظه"),snk:X("Snake","مار"),rps:X("Rock Paper Scissors","سنگ کاغذ قیچی"),num:X("Number Guess","حدس عدد"),mole:X("Whack-a-Mole","موش‌زنی"),idleA:"🍪 "+X("Idle Bakery","نانوایی خودکار"),idleB:"💎 "+X("Space Miner","معدن فضایی")});
+function stopSn(){clearInterval(sn);sn=null;clearTimeout(tm);$("#gb").onkeydown=null;if(kh){removeEventListener("keydown",kh);kh=null}}
+function gm(){stopSn();$("#ap").textContent=X("Take a break with classic games, or idle games that keep earning while you are away. No chemistry required.","کمی استراحت کنید؛ بازی‌های کلاسیک یا بازی‌های خودکار که در نبود شما هم پیش می‌روند. بدون شیمی.");
+$("#gt").innerHTML=Object.entries(GN()).map(([k,v])=>`<button data-g="${k}" aria-pressed="${k==G}" ${k==G?'class="pri"':""} style="padding:8px 18px">${v}</button>`).join("");({ttt,mem,snk,rps,num,mole,idleA:()=>idle("a"),idleB:()=>idle("b")})[G]()}
+$("#gt").onclick=e=>{const b=e.target.closest("[data-g]");if(b){G=b.dataset.g;gm()}};
+function ttt(){stopSn();let b=Array(9).fill(""),over=0;const W=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],win=p=>W.find(w=>w.every(i=>b[i]==p)),
+pick=()=>{for(const p of["O","X"])for(const w of W){const em=w.filter(i=>!b[i]);if(em.length==1&&w.filter(i=>b[i]==p).length==2)return em[0]}const f=b.map((v,i)=>v?-1:i).filter(i=>i>=0);return b[4]?f[Math.floor(Math.random()*f.length)]:4},
+r=()=>{const w=win("X")||win("O"),full=b.every(Boolean),you=w&&b[w[0]]=="X";over=!!(w||full);if(you)once("g:ttt",10,X("Tic-Tac-Toe win","برد در دوز"));
+$("#gb").innerHTML=`<p aria-live="polite"><b>${w?(you?X("You win! 🎉","شما بردید! 🎉"):X("Computer wins","کامپیوتر برد")):full?X("Draw","مساوی"):X("Your turn (X)","نوبت شما (X)")}</b></p><div class="gg" style="grid-template-columns:repeat(3,72px)">${b.map((v,i)=>`<button data-c="${i}" ${v||over?"disabled":""} style="font-size:28px;font-weight:800;height:72px;${w&&w.includes(i)?"background:var(--ac);color:#fff":""}">${v}</button>`).join("")}</div><button data-c="r" style="margin-top:12px">${X("New game","بازی جدید")}</button>`};
+$("#gb").onclick=e=>{const c=e.target.closest("[data-c]");if(!c)return;if(c.dataset.c=="r")return ttt();if(over)return;b[+c.dataset.c]="X";r();if(!over){b[pick()]="O";r()}};r()}
+function mem(){stopSn();const em=["🍕","🚀","🎸","🐙","🌵","🎲","🍩","🦊"];let d=[...em,...em].sort(()=>Math.random()-.5),op=[],mt=new Set(),mv=0,lock=0;
+const r=()=>{$("#gb").innerHTML=`<p aria-live="polite"><b>${mt.size==8?X("All matched in "+mv+" moves! 🎉","همه جفت شدند در "+mv+" حرکت! 🎉"):X("Moves: ","حرکت: ")+mv}</b></p><div class="gg" style="grid-template-columns:repeat(4,64px)">${d.map((v,i)=>{const sh=op.includes(i)||mt.has(v);return`<button data-c="${i}" aria-label="${sh?v:X("hidden card","کارت پنهان")}" style="font-size:26px;height:64px;${sh?"":"background:linear-gradient(135deg,var(--ac),var(--ac2))"}">${sh?v:""}</button>`}).join("")}</div><button data-c="r" style="margin-top:12px">${X("Shuffle","بُر زدن")}</button>`;if(mt.size==8)once("g:mem",10,X("Memory Match","بازی حافظه"))};
+$("#gb").onclick=e=>{const c=e.target.closest("[data-c]");if(!c)return;if(c.dataset.c=="r")return mem();const i=+c.dataset.c;if(lock||op.includes(i)||mt.has(d[i]))return;op.push(i);if(op.length==2){mv++;if(d[op[0]]==d[op[1]]){mt.add(d[i]);op=[]}else{lock=1;r();tm=setTimeout(()=>{op=[];lock=0;r()},700);return}}r()};r()}
+function snk(){stopSn();const N=20,C=16;let s=[[10,10],[9,10],[8,10]],d=[1,0],nd=[1,0],f=[15,10],sc=0,dead=0;
+$("#gb").innerHTML=`<p aria-live="polite"><b id="ss"></b></p><canvas id="snc" width="${N*C}" height="${N*C}" style="max-width:100%;border:1px solid var(--bd);border-radius:12px;background:var(--card)"></canvas><div class="ctr" style="margin-top:10px;max-width:${N*C}px"><button data-d="0,-1" aria-label="up">▲</button><button data-d="-1,0" aria-label="left">◀</button><button data-d="1,0" aria-label="right">▶</button><button data-d="0,1" aria-label="down">▼</button><button data-d="go" class="pri" style="padding:8px 18px">${X("Start","شروع")}</button></div>`;
+const g2=$("#snc").getContext("2d"),msg=()=>$("#ss").textContent=(dead?X("Game over. ","پایان بازی. "):sn?"":X("Press Start or an arrow key. ","شروع یا کلید جهت را بزنید. "))+X("Score: ","امتیاز: ")+sc,
+paint=()=>{g2.clearRect(0,0,N*C,N*C);g2.fillStyle="#ef4444";g2.beginPath();g2.arc(f[0]*C+C/2,f[1]*C+C/2,C/2-2,0,7);g2.fill();g2.fillStyle="#0ea5a4";s.forEach((q,i)=>{g2.globalAlpha=i?.85:1;g2.fillRect(q[0]*C+1,q[1]*C+1,C-2,C-2)});g2.globalAlpha=1},
+step=()=>{d=nd;const h=[(s[0][0]+d[0]+N)%N,(s[0][1]+d[1]+N)%N];if(s.some(q=>q[0]==h[0]&&q[1]==h[1])){dead=1;clearInterval(sn);sn=null;msg();return}
+s.unshift(h);if(h[0]==f[0]&&h[1]==f[1]){sc++;if(sc==5)once("g:snk",10,X("Snake","مار"));do f=[Math.floor(Math.random()*N),Math.floor(Math.random()*N)];while(s.some(q=>q[0]==f[0]&&q[1]==f[1]))}else s.pop();paint();msg()},
+go=()=>{if(dead)return snk();if(!sn)sn=setInterval(step,110);msg()},dir=(x,y)=>{if(x+d[0]||y+d[1])nd=[x,y];go()};
+kh=e=>{const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[e.key];if(m){if(sn)e.preventDefault();dir(...m)}};addEventListener("keydown",kh);
+$("#gb").onclick=e=>{const b=e.target.closest("[data-d]");if(b)b.dataset.d=="go"?go():dir(...b.dataset.d.split(",").map(Number))};paint();msg()}
+
+function rps(){stopSn();let w=0,l=0,t=0,m="";const M=["✊","✋","✌️"],N=["rock","paper","scissors"];
+const r=()=>{$("#gb").innerHTML=`<p aria-live="polite"><b>${m||X("Pick one","یکی را انتخاب کنید")}</b></p><p>${X("Wins","برد")}: ${w} · ${X("Losses","باخت")}: ${l} · ${X("Draws","مساوی")}: ${t}</p><div class="ctr">${M.map((v,i)=>`<button data-c="${i}" aria-label="${N[i]}" style="font-size:34px;padding:10px 20px">${v}</button>`).join("")}</div>`};
+$("#gb").onclick=e=>{const c=e.target.closest("[data-c]");if(!c)return;const a=+c.dataset.c,b=Math.floor(Math.random()*3),d=(a-b+3)%3;d==1?w++:d==2?l++:t++;m=`${M[a]} vs ${M[b]} — ${d==1?X("You win","شما بردید"):d==2?X("You lose","باختید"):X("Draw","مساوی")}`;if(w==5)once("g:rps",10,X("Rock Paper Scissors","سنگ کاغذ قیچی"));r()};r()}
+function num(){stopSn();let n=1+Math.floor(Math.random()*100),k=0,done=0,m=X("I'm thinking of a number from 1 to 100.","عددی بین ۱ تا ۱۰۰ در ذهن دارم.");
+const r=()=>{$("#gb").innerHTML=`<p aria-live="polite"><b>${m}</b></p><div class="ctr"><input id="ng" type="number" min="1" max="100" style="width:100px" ${done?"disabled":""} aria-label="Guess"><button data-c="g" ${done?"disabled":""}>${X("Guess","حدس")}</button><button data-c="r">${X("New game","بازی جدید")}</button></div>`},
+gs=()=>{const v=+$("#ng").value;if(!v||v<1||v>100)m=X("Enter a number from 1 to 100.","عددی بین ۱ تا ۱۰۰ وارد کنید.");else{k++;if(v==n){done=1;m=X(`Got it in ${k} guesses! 🎉`,`در ${k} حدس پیدا کردید! 🎉`);once("g:num",10,X("Number Guess","حدس عدد"))}else m=(v<n?X("Higher","بالاتر"):X("Lower","پایین‌تر"))+" ("+k+")"}r();const g=$("#ng");if(g&&!done)g.focus({preventScroll:true})};
+$("#gb").onclick=e=>{const c=e.target.closest("[data-c]");if(c)c.dataset.c=="r"?num():gs()};$("#gb").onkeydown=e=>{if(e.key=="Enter"&&e.target.id=="ng"&&!done)gs()};r()}
+function mole(){stopSn();let sc=0,t=30,p=-1,run=0,c=0;
+const r=()=>{$("#gb").innerHTML=`<p aria-live="polite"><b>${X("Score: ","امتیاز: ")+sc} · ${X("Time: ","زمان: ")+t}s</b></p><div class="gg" style="grid-template-columns:repeat(3,72px)">${Array.from({length:9},(_,i)=>`<button data-c="${i}" aria-label="hole" style="font-size:30px;height:72px">${i==p?"🐹":""}</button>`).join("")}</div><button data-c="s" style="margin-top:12px">${run?X("Restart","شروع دوباره"):X("Start","شروع")}</button>`},
+tick=()=>{p=Math.floor(Math.random()*9);if(++c%2==0)t--;if(t<=0){clearInterval(sn);sn=null;run=0;p=-1;if(sc>=15)once("g:mole",10,X("Whack-a-Mole","موش‌زنی"))}r()};
+$("#gb").onclick=e=>{const b=e.target.closest("[data-c]");if(!b)return;if(b.dataset.c=="s"){clearInterval(sn);sc=0;t=30;c=0;run=1;p=-1;sn=setInterval(tick,500);return r()}if(run&&+b.dataset.c==p){sc++;p=-1;r()}};r()}
+// idle games
+const IDL=()=>({a:{e:"🍪",n:X("Idle Bakery","نانوایی خودکار"),u:[["🧑‍🍳",X("Baker","نانوا"),15,.2],["🔥",X("Oven","تنور"),100,1],["🚚",X("Delivery truck","کامیون"),1100,8],["🏪",X("Shop","فروشگاه"),12000,47],["🤖",X("Robot chef","سرآشپز ربات"),130000,260]]},
+b:{e:"💎",n:X("Space Miner","معدن فضایی"),u:[["⛏️",X("Pickaxe","کلنگ"),10,.1],["🤖",X("Mining bot","ربات معدنچی"),80,.8],["🚀",X("Mining ship","کشتی معدنچی"),900,6],["🛰️",X("Asteroid rig","دکل سیارک"),10000,40],["🌌",X("Planet harvester","برداشت‌کنندهٔ سیاره"),120000,250]]}});
+function idle(k){stopSn();const D=IDL()[k],K="c11idle_"+k;let st={n:0,t:0,l:0,o:D.u.map(()=>0),ts:Date.now()},away=0,c=0;
+try{const v=JSON.parse(localStorage.getItem(K));if(v&&v.o&&v.o.length==D.u.length)st=v}catch(e){}
+const cps=()=>D.u.reduce((a,u,i)=>a+u[3]*st.o[i],0),cost=i=>Math.ceil(D.u[i][2]*1.15**st.o[i]),cc=()=>Math.ceil(15*1.6**st.l),
+fmt=n=>{if(n<1e3)return n<10&&n%1?n.toFixed(1):String(Math.floor(n));const S=["","K","M","B","T","Qa"];let i=0;while(n>=1e3&&i<5){n/=1e3;i++}return n.toFixed(2)+S[i]},
+save=()=>{st.ts=Date.now();try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
+const dt=Math.min((Date.now()-st.ts)/1000,28800);if(dt>30&&cps()>0){away=cps()*dt;st.n+=away;st.t+=away}
+$("#gb").innerHTML=`<p><span style="font-size:42px">${D.e}</span> <b class="big" id="in"></b></p><p id="ic" style="color:var(--mu)"></p>${away?`<p class="ok">${X("While you were away: +","در زمان غیبت شما: +")+fmt(away)}</p>`:""}<button id="ik" data-u="k" class="pri" style="font-size:20px;padding:16px 28px"></button> <button id="iu" data-u="c"></button><div class="gg" id="il" style="margin-top:12px;grid-template-columns:minmax(0,440px)">${D.u.map((u,i)=>`<button data-u="${i}" style="text-align:start"></button>`).join("")}</div><button data-u="x" style="margin-top:12px">${X("Reset progress","بازنشانی پیشرفت")}</button>`;
+const upd=()=>{$("#in").textContent=fmt(st.n);$("#ic").textContent=fmt(cps())+" /s · +"+(1+st.l)+" "+X("per click","به‌ازای هر کلیک");$("#ik").textContent=D.e+" +"+(1+st.l);const b=$("#iu");b.textContent=X("Stronger click","کلیک قوی‌تر")+" ("+(st.l+1)+") — "+fmt(cc());b.disabled=st.n<cc();
+$("#il").querySelectorAll("button").forEach((x,i)=>{x.textContent=`${D.u[i][0]} ${D.u[i][1]} ×${st.o[i]} — ${fmt(cost(i))} (+${D.u[i][3]}/s)`;x.disabled=st.n<cost(i)})};
+sn=setInterval(()=>{const a=cps()/10;st.n+=a;st.t+=a;if(st.t>=1000)once("g:idle"+k,10,D.n);upd();if(++c%20==0)save()},100);
+$("#gb").onclick=e=>{const b=e.target.closest("[data-u]");if(!b)return;const u=b.dataset.u;
+if(u=="k"){st.n+=1+st.l;st.t+=1+st.l}else if(u=="c"){if(st.n>=cc()){st.n-=cc();st.l++}}
+else if(u=="x"){if(b.dataset.s){try{localStorage.removeItem(K)}catch(e){}return idle(k)}b.dataset.s=1;b.textContent=X("Click again to confirm","برای تأیید دوباره بزنید");return}
+else{const i=+u;if(st.n>=cost(i)){st.n-=cost(i);st.o[i]++}}save();upd()};upd()}
+
+// math
+const fa2=n=>{if(n<0||n%1||n>170)return NaN;let r=1;for(let k=2;k<=n;k++)r*=k;return r};
+function ev(src,V={},deg=0){const t=String(src).toLowerCase().replace(/\s+/g,"").replace(/×/g,"*").replace(/÷/g,"/").replace(/[−–]/g,"-").replace(/π/g,"pi").replace(/√/g,"sqrt");let i=0;
+const R=x=>deg?x*Math.PI/180:x,B=x=>deg?x*180/Math.PI:x,FU={sin:x=>Math.sin(R(x)),cos:x=>Math.cos(R(x)),tan:x=>Math.tan(R(x)),asin:x=>B(Math.asin(x)),acos:x=>B(Math.acos(x)),atan:x=>B(Math.atan(x)),sqrt:Math.sqrt,cbrt:Math.cbrt,ln:Math.log,log:Math.log10,exp:Math.exp,abs:Math.abs,floor:Math.floor,ceil:Math.ceil,round:Math.round,fact:fa2},K={pi:Math.PI,e:Math.E,...V},
+pk=()=>t[i],cl=()=>{if(pk()!=")")throw Error(X("Missing )","پرانتز بسته کم است"));i++},
+ex=()=>{let v=tm();while(pk()=="+"||pk()=="-"){const o=t[i++],w=tm();v=o=="+"?v+w:v-w}return v},
+tm=()=>{let v=un();for(;;){const c=pk();if(c=="*"||c=="/"){i++;const w=un();v=c=="*"?v*w:v/w}else if(c&&/[0-9.a-z(]/.test(c))v*=un();else return v}},
+un=()=>pk()=="-"?(i++,-un()):pk()=="+"?(i++,un()):pw(),
+pw=()=>{const b=po();if(pk()=="^"){i++;return Math.pow(b,un())}return b},
+po=()=>{let v=pr();for(;;){if(pk()=="!"){i++;v=fa2(v)}else if(pk()=="%"){i++;v/=100}else return v}},
+pr=()=>{const c=pk()||"";if(c=="("){i++;const v=ex();cl();return v}
+if(/[0-9.]/.test(c)){const m=/^\d*\.?\d*/.exec(t.slice(i))[0];if(m==".")throw Error(X("Bad number","عدد نامعتبر"));i+=m.length;return +m}
+if(/[a-z]/.test(c)){const m=/^[a-z]+/.exec(t.slice(i))[0];if(FU[m]&&t[i+m.length]=="("){i+=m.length+1;const v=ex();cl();return FU[m](v)}if(m in K){i+=m.length;return K[m]}throw Error(X("Unknown name: ","نام ناشناخته: ")+m)}
+throw Error(X("Unexpected ","نامنتظر: ")+(c||X("end of input","پایان عبارت")))};
+const v=ex();if(i<t.length)throw Error(X("Unexpected ","نامنتظر: ")+t[i]);return v}
+const fmt=n=>!isFinite(n)?(isNaN(n)?X("Math error","خطای ریاضی"):n>0?"∞":"−∞"):Math.abs(n)<1e-12?"0":Math.abs(n)>=1e15||Math.abs(n)<1e-9?n.toExponential(8).replace(/\.?0+e/,"e"):String(+n.toPrecision(12)),
+cl6=v=>Math.abs(v)<1e-6?0:Math.round(v*1e6)/1e6,cpx=(a,b)=>b?fmt(a)+(b<0?" − ":" + ")+fmt(Math.abs(b))+"i":fmt(a),ok_=h=>`<p class="ok" style="margin:6px 0"><b>${h}</b></p>`,
+polyStr=c=>{let s="";for(let i=c.length-1;i>=0;i--){const v=c[i];if(!v)continue;const a=Math.abs(v);s+=(s?(v<0?" − ":" + "):(v<0?"−":""))+(i?(a==1?"":fmt(a))+"x"+(i>1?sup(i):""):fmt(a))}return s||"0"};
+function roots(c){const d=c.length-1,a=c.map(v=>v/c[d]),mul=(p,q)=>[p[0]*q[0]-p[1]*q[1],p[0]*q[1]+p[1]*q[0]],dv=(p,q)=>{const m=q[0]*q[0]+q[1]*q[1];return[(p[0]*q[0]+p[1]*q[1])/m,(p[1]*q[0]-p[0]*q[1])/m]};
+let r=Array.from({length:d},(_,k)=>[Math.cos(k*2.4+.4)*(1+k*.1),Math.sin(k*2.4+.4)*(1+k*.1)]);
+for(let it=0;it<500;it++)r=r.map((z,i)=>{let p=[1,0];for(let k=d-1;k>=0;k--){p=mul(p,z);p[0]+=a[k]}let q=[1,0];r.forEach((w,j)=>{if(j!=i)q=mul(q,[z[0]-w[0],z[1]-w[1]])});const s=dv(p,q);return[z[0]-s[0],z[1]-s[1]]});return r}
+function solveEq(src){const q=src.split("=");if(q.length!=2)throw Error(X("Write one equation with = and x, for example 2x+3=11.","یک معادله با = و x بنویسید، مثلاً 2x+3=11."));
+const f=x=>ev(q[0],{x})-ev(q[1],{x}),ys=Array.from({length:9},(_,k)=>f(k));let h="",d=-1;const Lv=[ys];
+if(ys.every(isFinite)){for(let k=1;k<9;k++)Lv.push(Lv[k-1].slice(1).map((v,i)=>v-Lv[k-1][i]));const sc=1+Math.max(...ys.map(Math.abs));for(let k=0;k<8;k++)if(Lv[k+1].every(v=>Math.abs(v)<1e-7*sc)){d=k;break}}
+if(d>=0){let c=Array(d+1).fill(0),P=[1],fa=1;for(let k=0;k<=d;k++){if(k)fa*=k;P.forEach((v,i)=>c[i]+=Lv[k][0]/fa*v);P=Array.from({length:P.length+1},(_,i)=>(P[i-1]||0)-k*(P[i]||0))}
+c=c.map(v=>Math.abs(v-Math.round(v))<1e-8?Math.round(v):v);h+=`<p style="margin:4px 0">${polyStr(c)} = 0</p>`;
+if(d==0)h+=c[0]?X("No solution.","جواب ندارد."):X("True for every x.","به‌ازای همهٔ x برقرار است.");
+else if(d==1)h+=`x = −b/a = ${fmt(-c[0])}/${fmt(c[1])}`+ok_("x = "+fmt(-c[0]/c[1]));
+else if(d==2){const[C,B,A]=c,D=B*B-4*A*C,re=-B/2/A,im=Math.sqrt(Math.abs(D))/2/A;h+=`Δ = b² − 4ac = ${fmt(D)}`+(D>0?ok_(`x₁ = ${fmt(re+im)},  x₂ = ${fmt(re-im)}`):D==0?ok_("x = "+fmt(re)):ok_(`x = ${cpx(re,im)},  ${cpx(re,-im)}`)+X("Δ < 0: no real roots, two complex roots.","Δ < 0: ریشهٔ حقیقی ندارد؛ دو ریشهٔ مختلط."))}
+else{const m={};roots(c).forEach(z=>{const k=cpx(cl6(z[0]),cl6(z[1]));m[k]=(m[k]||0)+1});h+=ok_(Object.entries(m).map(([k,n])=>"x = "+k+(n>1?` (×${n})`:"")).join("<br>"))}return h}
+const rs=[];let pv=f(-50);for(let x=-49.99;x<=50.001;x+=.01){const y=f(x);if(isFinite(y)&&isFinite(pv)&&pv*y<=0){let lo=x-.01,hi=x;for(let k=0;k<60;k++){const m=(lo+hi)/2;if(f(lo)*f(m)<=0)hi=m;else lo=m}const r=(lo+hi)/2;if(Math.abs(f(r))<1e-6&&!rs.some(z=>Math.abs(z-r)<1e-4))rs.push(r)}pv=y}
+return rs.length?ok_(rs.slice(0,12).map(r=>"x ≈ "+fmt(+r.toFixed(6))).join("<br>"))+`<small style="color:var(--mu)">${X("Numeric search on −50 … 50.","جست‌وجوی عددی در بازهٔ ‎−۵۰ تا ۵۰.")}</small>`:`<p class="bad">${X("No real solution found between −50 and 50.","جواب حقیقی در بازهٔ −۵۰ تا ۵۰ پیدا نشد.")}</p>`}
+const MH={eq:v=>solveEq(v.eq),
+sy:v=>{const[a,b,c,d,e,f]=["a1","b1","c1","a2","b2","c2"].map(k=>ev(v[k])),D=a*e-b*d;if(Math.abs(D)<1e-12)return`<p class="bad">${X("No unique solution (the lines are parallel or identical).","جواب یکتا ندارد (خطوط موازی یا منطبق‌اند).")}</p>`;return`D = ${fmt(a)}·${fmt(e)} − ${fmt(b)}·${fmt(d)} = ${fmt(D)}`+ok_(`x = ${fmt((c*e-b*f)/D)},  y = ${fmt((a*f-c*d)/D)}`)},
+nf:v=>{const n=ev(v.n);if(!Number.isInteger(n)||n<2||n>1e12)throw Error(X("Enter an integer from 2 to 10¹².","عدد صحیح ۲ تا ۱۰¹² وارد کنید."));let m=n;const f={};for(let p=2;p*p<=m;p++)while(m%p==0){f[p]=(f[p]||0)+1;m/=p}if(m>1)f[m]=(f[m]||0)+1;const ks=Object.keys(f);return ok_(ks.length==1&&f[ks[0]]==1?X("Prime","عدد اول است"):X("Composite","عدد مرکب است"))+X("Prime factors: ","تجزیهٔ اول: ")+ks.map(p=>p+(f[p]>1?sup(f[p]):"")).join(" × ")+`<br>${X("Number of divisors: ","تعداد مقسوم‌علیه‌ها: ")}${ks.reduce((t,p)=>t*(f[p]+1),1)}`},
+gl:v=>{const a=ev(v.a),b=ev(v.b);if(!Number.isInteger(a)||!Number.isInteger(b)||a<1||b<1)throw Error(X("Enter positive integers.","اعداد صحیح مثبت وارد کنید."));let x=a,y=b;while(y)[x,y]=[y,x%y];return ok_(`${X("GCD","ب.م.م")} = ${x}`)+ok_(`${X("LCM","ک.م.م")} = ${fmt(a/x*b)}`)},
+pc:v=>{const p=ev(v.p),n=ev(v.n);return ok_(`${fmt(p)}% × ${fmt(n)} = ${fmt(p*n/100)}`)+`${X("Increased by","افزایش")} ${fmt(p)}%: ${fmt(n*(1+p/100))}<br>${X("Decreased by","کاهش")} ${fmt(p)}%: ${fmt(n*(1-p/100))}`},
+ca:v=>{const F=x=>ev(v.f,{x}),a=ev(v.a),b=ev(v.b),h=1e-5,N=2000,w=(b-a)/N;let t=F(a)+F(b);for(let k=1;k<N;k++)t+=F(a+k*w)*(k%2?4:2);const d=(F(a+h)-F(a-h))/(2*h),I=t*w/3;if(!isFinite(d)||!isFinite(I))throw Error(X("f(x) is not defined on this interval.","f(x) روی این بازه تعریف نشده است."));return ok_(`f′(${fmt(a)}) ≈ ${fmt(+d.toPrecision(8))}`)+ok_(`∫ f(x)dx [${fmt(a)}, ${fmt(b)}] ≈ ${fmt(+I.toPrecision(10))}`)}};
+const MI=()=>({eq:[X("Solve for x","حل معادله برای x"),[["eq",X("Equation","معادله"),"x^2-5x+6=0"]]],sy:[X("Linear system  a₁x + b₁y = c₁,  a₂x + b₂y = c₂","دستگاه خطی  a₁x + b₁y = c₁ ،  a₂x + b₂y = c₂"),[["a1","a₁","2"],["b1","b₁","1"],["c1","c₁","5"],["a2","a₂","1"],["b2","b₂","-1"],["c2","c₂","1"]]],
+nf:[X("Prime check and factorisation","اول بودن و تجزیه"),[["n","n","360"]]],gl:[X("GCD and LCM","ب.م.م و ک.م.م"),[["a","a","48"],["b","b","180"]]],pc:[X("Percentages","درصد"),[["p","%","15"],["n",X("of","از"),"200"]]],ca:[X("Derivative and integral","مشتق و انتگرال"),[["f","f(x)","x^2"],["a","a","0"],["b","b","3"]]]});
+const mini=(id,[t,fl])=>`<div class="card" style="margin-top:14px"><h3 style="margin:0 0 8px">${t}</h3><div class="ctr">${fl.map(([k,lb,d])=>`<label style="width:auto">${lb}</label><input id="${id}_${k}" value="${d}" style="width:${k=="eq"||k=="f"?"min(100%,300px)":"84px"};direction:ltr" aria-label="${lb}">`).join("")}<button class="pri" data-mi="${id}" style="padding:8px 20px">${X("Solve","حل کن")}</button></div><div id="${id}_o" aria-live="polite"></div></div>`;
+function runMini(id){const o=$("#"+id+"_o"),v={};try{MI()[id][1].forEach(([k])=>v[k]=$("#"+id+"_"+k).value);o.innerHTML=MH[id](v)}catch(e){o.innerHTML=`<p class="bad">${esc(e.message)}</p>`}}
+let dg=0,ans=0,CH=[],mcur="mpc";
+const KP=[["sin","sin("],["cos","cos("],["tan","tan("],["ln","ln("],["log","log("],["√","sqrt("],["asin","asin("],["acos","acos("],["atan","atan("],["x²","^2"],["xʸ","^"],["n!","!"],["7"],["8"],["9"],["÷","/"],["AC"],["⌫","BS"],["4"],["5"],["6"],["×","*"],["("],[")"],["1"],["2"],["3"],["−","-"],["π","pi"],["e"],["0"],["."],["%"],["+"],["Ans","ans"],["=","EQ"]];
+function cshow(){const i=$("#ci").value;let t="";try{if(i.trim())t=fmt(ev(i,{ans},dg))}catch(e){}$("#co").textContent=t}
+function chist(){$("#chs").innerHTML=CH.map(([a,b],j)=>`<button data-h="${j}" style="display:block;width:100%;text-align:end;direction:ltr;margin:3px 0">${esc(a)} = <b>${b}</b></button>`).join("")}
+function ceq(){const el=$("#ci");if(!el.value.trim())return;try{const v=ev(el.value,{ans},dg);if(!isFinite(v)){$("#co").textContent=fmt(v);return}ans=v;CH.unshift([el.value,fmt(v)]);CH=CH.slice(0,6);el.value=fmt(v);$("#co").textContent=""}catch(e){$("#co").textContent=e.message;return}chist()}
+function mtab(id){mcur=id;["mpc","mps","mpt"].forEach(k=>$("#"+k).hidden=k!=id);document.querySelectorAll("#mtb button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mt==id))}
+function mth(){const keep={};document.querySelectorAll("#math input").forEach(i=>keep[i.id]=i.value);
+$("#mtb").innerHTML=[["mpc",X("Calculator","ماشین حساب")],["mps",X("Equations","معادلات")],["mpt",X("Number tools","ابزار اعداد")]].map(([k,l])=>`<button data-mt="${k}">${l}</button>`).join("");
+$("#mpc").innerHTML=`<div class="card" style="max-width:520px"><input id="ci" autocomplete="off" spellcheck="false" placeholder="${X("Type or tap, e.g. 2(3+4)^2/sqrt(16)","تایپ کنید یا لمس کنید، مثلاً 2(3+4)^2/sqrt(16)")}" style="width:100%;font-size:22px;direction:ltr;text-align:end" aria-label="${X("Expression","عبارت")}"><div id="co" class="big" style="text-align:end;direction:ltr;min-height:56px;color:var(--ac)" aria-live="polite"></div><div class="ctr"><button id="cd">${dg?"DEG":"RAD"}</button><small style="color:var(--mu)">${X("Also: abs cbrt exp floor ceil round fact, constants pi e ans","همچنین: abs cbrt exp floor ceil round fact، ثابت‌ها pi e ans")}</small></div><div class="kp">${KP.map(([l,v])=>`<button data-k="${v||l}"${v=="EQ"?' class="pri"':""}>${l}</button>`).join("")}</div><div id="chs" style="margin-top:12px"></div></div>`;
+const M=MI();$("#mps").innerHTML=mini("eq",M.eq)+mini("sy",M.sy);$("#mpt").innerHTML=["nf","gl","pc","ca"].map(k=>mini(k,M[k])).join("");
+document.querySelectorAll("#math input").forEach(i=>{if(i.id in keep)i.value=keep[i.id]});cshow();chist();mtab(mcur)}
+$("#math").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+if(d.mt)return mtab(d.mt);if(d.mi)return runMini(d.mi);if(d.h!==undefined){$("#ci").value=CH[+d.h][0];return cshow()}
+if(b.id=="cd"){dg=dg?0:1;b.textContent=dg?"DEG":"RAD";return cshow()}
+if(d.k!==undefined){const el=$("#ci");if(d.k=="EQ")return ceq();if(d.k=="AC")el.value="";else if(d.k=="BS")el.value=el.value.slice(0,-1);else el.setRangeText(d.k,el.selectionStart,el.selectionEnd,"end");cshow()}});
+$("#math").addEventListener("input",e=>{if(e.target.id=="ci")cshow()});
+$("#math").addEventListener("keydown",e=>{if(e.key!="Enter")return;if(e.target.id=="ci")ceq();else if(e.target.id.includes("_"))runMini(e.target.id.split("_")[0])});
+
+// AI chat
+const SYS=()=>"You are the study assistant inside an interactive Grade 11 chemistry and math learning site. Students write in English or Persian (Farsi). Always reply in the language of the student's latest message; Persian replies must be natural Persian, keeping chemical formulas and numbers readable. Solve problems step by step: state the formula, show the working with units, then check the answer. When the student asks for facts, news, sources, or anything you are not sure of, use web search and mention the sources. Use plain text and unicode (x², H₂O, →), never LaTeX. Be concise and friendly. If the student asks for hints, give hints first instead of the full solution. Short markdown is fine: **bold**, lists. The site UI language is "+(lang=="fa"?"Persian":"English")+".";
+let CHT=[],busy=0;
+const cbMd=t=>esc(t).replace(/^#{1,4}\s*(.+)$/gm,"<b>$1</b>").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>').split(/\n{2,}/).map(b=>{const L=b.split("\n"),u=/^\s*[-*•]\s+/,o=/^\s*\d+[.)]\s+/;
+return L.every(l=>u.test(l))?"<ul>"+L.map(l=>"<li>"+l.replace(u,"")+"</li>").join("")+"</ul>":L.every(l=>o.test(l))?"<ol>"+L.map(l=>"<li>"+l.replace(o,"")+"</li>").join("")+"</ol>":"<p>"+L.join("<br>")+"</p>"}).join("");
+async function cbAi(msgs){const key=(()=>{try{return localStorage.getItem("c11key")||""}catch(e){return""}})(),h={"Content-Type":"application/json"};
+if(key){h["x-api-key"]=key;h["anthropic-version"]="2023-06-01";h["anthropic-dangerous-direct-browser-access"]="true"}
+const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:h,body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1500,system:SYS(),messages:msgs,tools:[{type:"web_search_20250305",name:"web_search",max_uses:3}]})}),d=await r.json();
+if(!r.ok)throw Error(d.error&&d.error.message||String(r.status));const src=new Map();let text="";
+(d.content||[]).forEach(b=>{if(b.type=="text"){text+=b.text;(b.citations||[]).forEach(c=>{if(c.url&&/^https?:/.test(c.url))src.set(c.url,c.title||c.url)})}});return{text:text.trim(),src:[...src].slice(0,5)}}
+function cbOff(q){let c=q.trim();const m=c.match(/([0-9x+\-*\/^().\s]+=[0-9x+\-*\/^().\s]+)/i);
+if(m&&/x/i.test(m[1]))try{return solveEq(m[1].trim())}catch(e){}
+c=c.replace(/^(solve|find|calculate|compute|what is|what's|حل کن|محاسبه کن|حساب کن)[:\s]*/i,"").replace(/[?؟=]+$/,"");
+if(/\d/.test(c)&&!/[a-wyz]{3,}/i.test(c))try{const v=ev(c);if(isFinite(v))return`<p>${esc(c)} = <b>${fmt(v)}</b></p>`}catch(e){}
+const w=q.toLowerCase();
+if(/molar mass|جرم مولی/i.test(q)){const f=q.match(/[A-Z][A-Za-z0-9()₀-₉]*/g);if(f)try{const p=parse(f[f.length-1]);let t=0;Object.entries(p).forEach(([e,n])=>t+=MASS[e]*n);if(t)return`<p>${X("Molar mass of","جرم مولی")} <bdi class="f">${fm(f[f.length-1])}</bdi> = <b>${t.toFixed(3)} ${X("g/mol","گرم بر مول")}</b></p>`}catch(e){}}
+const el=E.find(e=>e.s==q.trim())||E.find(e=>new RegExp("\\b"+e.n.toLowerCase()+"\\b").test(w))||E.find(e=>q.includes(FN[e.z-1]));
+if(el)return`<p><b>${nmE(el)} (${el.s})</b></p><p>Z = ${el.z} · ${X("Mass","جرم اتمی")} ${el.m}<br>${X("Group","گروه")} ${grp(el.z)} · ${X("Period","دوره")} ${per(el.z)}<br>${X("Config","آرایش")}: <bdi class="f">${cfg(el.z,el.z).str}</bdi><br>${X("Electronegativity","الکترونگاتیوی")}: ${el.en||"—"}</p>`;return""}
+function cbBub(role,html){const d=document.createElement("div");d.className="mg "+role;d.dir="auto";d.innerHTML=html;$("#cbm").append(d);$("#cbm").scrollTop=1e9;return d}
+async function cbSend(txt){txt=(txt||$("#cbi").value).trim();if(!txt||busy)return;$("#cbi").value="";$("#cbi").style.height="auto";const bh=$("#bh");if(bh)bh.remove();
+cbBub("u",esc(txt));CHT.push({role:"user",content:txt});busy=1;const w=cbBub("a","…");
+try{const r=await cbAi(CHT.slice(-20));CHT.push({role:"assistant",content:r.text||"…"});w.innerHTML=cbMd(r.text||"…")+(r.src.length?`<small>${X("Sources","منابع")}: ${r.src.map(([u,t])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>`).join(" · ")}</small>`:"")}
+catch(err){CHT.pop();const o=cbOff(txt);w.innerHTML=o?`<small style="color:var(--mu)">${X("Offline mode: add an API key in ⚙ for full AI answers and web search.","حالت آفلاین: برای پاسخ‌های کامل هوش مصنوعی و جست‌وجوی وب، کلید API را در ⚙ وارد کنید.")}</small>`+o:`<p>${X("I couldn't reach the AI service. Tap ⚙ to add your API key, then try again.","به سرویس هوش مصنوعی دسترسی پیدا نشد. روی ⚙ بزنید، کلید API را وارد کنید و دوباره تلاش کنید.")}</p><small style="color:var(--mu)">${esc(err.message)}</small>`}
+busy=0;$("#cbm").scrollTop=1e9}
+function botL(){$("#cbt").textContent=X("AI Study Assistant","دستیار هوشمند درس");$("#cbi").placeholder=X("Ask anything…","هر چیزی بپرسید…");
+$("#cbk").innerHTML=`<p style="margin:0 0 8px">${X("Full AI answers and web search need an Anthropic API key. It is saved only in this browser. Without a key, the bot still solves math and looks up elements offline.","پاسخ‌های کامل هوش مصنوعی و جست‌وجوی وب به کلید API شرکت Anthropic نیاز دارند. کلید فقط در همین مرورگر ذخیره می‌شود. بدون کلید، ربات همچنان مسائل ریاضی را حل می‌کند و عنصرها را آفلاین پیدا می‌کند.")}</p><div class="ctr"><input id="cbkey" type="password" placeholder="sk-ant-…" autocomplete="off" style="flex:1;direction:ltr" aria-label="API key"><button id="cbsv" class="pri" style="padding:6px 14px">${X("Save","ذخیره")}</button><button id="cbrm">${X("Remove","حذف")}</button></div>`;
+if(!CHT.length){const bh=$("#bh")||Object.assign(document.createElement("div"),{id:"bh"});bh.innerHTML=`<p style="color:var(--mu);margin:0 0 8px">${X("Hi! I can solve chemistry and math problems step by step, explain topics, and search the web.","سلام! می‌توانم مسائل شیمی و ریاضی را مرحله‌به‌مرحله حل کنم، مباحث را توضیح بدهم و در وب جست‌وجو کنم.")}</p>`+[X("Solve x^2-5x+6=0","معادلهٔ x^2-5x+6=0 را حل کن"),X("Explain covalent vs ionic bonds","تفاوت پیوند کووالانسی و یونی را توضیح بده"),X("Balance C3H8 + O2 → CO2 + H2O","واکنش C3H8 + O2 → CO2 + H2O را موازنه کن"),X("Who discovered oxygen? Search it","کشف اکسیژن توسط چه کسی بود؟ جست‌وجو کن")].map(t=>`<button class="chip" data-q="${esc(t)}">${esc(t)}</button>`).join("");$("#cbm").append(bh)}}
+function cbOpen(o){$("#cbp").hidden=!o;$("#cbb").setAttribute("aria-expanded",o);if(o)$("#cbi").focus({preventScroll:true})}
+$("#cbb").onclick=()=>cbOpen($("#cbp").hidden);
+$("#cbp").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+if(b.id=="cbx")cbOpen(0);else if(b.id=="cbs")$("#cbk").hidden=!$("#cbk").hidden;else if(b.id=="cbg")cbSend();
+else if(b.id=="cbc"){CHT=[];$("#cbm").innerHTML="";botL()}
+else if(b.id=="cbsv"){try{localStorage.setItem("c11key",$("#cbkey").value.trim())}catch(e){}$("#cbkey").value="";$("#cbk").hidden=true;toast(X("API key saved","کلید ذخیره شد"))}
+else if(b.id=="cbrm"){try{localStorage.removeItem("c11key")}catch(e){}toast(X("API key removed","کلید حذف شد"))}
+else if(b.dataset.q)cbSend(b.dataset.q)});
+$("#cbi").addEventListener("keydown",e=>{if(e.key=="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();cbSend()}});
+$("#cbi").addEventListener("input",e=>{e.target.style.height="auto";e.target.style.height=Math.min(110,e.target.scrollHeight)+"px"});
+addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#cbp").hidden)cbOpen(0)});
+// chemistry tabs
+const CP=["atom","build","table","bal","mm","quiz"];
+function tab(id){CP.forEach(k=>$("#"+k).hidden=k!=id);document.querySelectorAll("#ct button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t==id))}
+function go(id){if(CP.includes(id)){tab(id);$("#chem").scrollIntoView({behavior:"smooth"})}else{const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth"})}}
+$("#ct").onclick=e=>{const b=e.target.closest("[data-t]");if(b)tab(b.dataset.t)};
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute("href").slice(1);if(CP.includes(id)||["chem","arcade","math"].includes(id)){e.preventDefault();go(id)}});
+tab("atom");if(CP.includes(location.hash.slice(1)))go(location.hash.slice(1));
+document.addEventListener("click",e=>{if(!e.target.closest("#res,#q"))R.style.display="none"});
 applyL();
 </script>
 </body>
