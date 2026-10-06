@@ -11,7 +11,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwZWE1YTQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2MzY2ZjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iZiI+PHBhdGggZD0iTTI3IDEyaDEwdjEwbDEzLjIgMjQuMkE3IDcgMCAwIDEgNDQgNTdIMjBhNyA3IDAgMCAxLTYuMi0xMC44TDI3IDIyeiIvPjwvY2xpcFBhdGg+PC9kZWZzPjxwYXRoIGQ9Ik0yNiA2aDEyYTIuNSAyLjUgMCAwIDEgMCA1aC0xdjExbDEzLjIgMjQuMkE3IDcgMCAwIDEgNDQgNTdIMjBhNyA3IDAgMCAxLTYuMi0xMC44TDI3IDIyVjExaC0xYTIuNSAyLjUgMCAwIDEgMC01eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2cpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxnIGNsaXAtcGF0aD0idXJsKCNmKSI+PHJlY3QgeD0iOCIgeT0iMzYiIHdpZHRoPSI0OCIgaGVpZ2h0PSIyNCIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjI2IiBjeT0iNDQiIHI9IjMuNCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjkiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjUwIiByPSIyLjYiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii43NSIvPjxjaXJjbGUgY3g9IjMxIiBjeT0iNDAiIHI9IjEuOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjYiLz48L2c+PC9zdmc+">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f7fb;--card:rgba(255,255,255,.7);--tx:#0f1b2d;--mu:#5b6b82;--ac:#0ea5a4;--ac2:#6366f1;--bd:rgba(15,27,45,.12);--ok:#16a34a;--bad:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#f4f7fb;--card:rgba(255,255,255,.7);--tx:#0f1b2d;--mu:#5b6b82;--ac:#0ea5a4;--ac2:#6366f1;--bd:rgba(15,27,45,.12);--ok:#16a34a;--bad:#dc2626;box-sizing:border-box}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#0a1220;--card:rgba(255,255,255,.07);--tx:#e8f0fb;--mu:#8fa3bf;--bd:rgba(255,255,255,.14)}
 html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
@@ -20,7 +20,7 @@ html{-webkit-text-size-adjust:100%}body{overflow-x:clip;margin:0;background:var(
 [dir=rtl] body{font-family:Vazirmatn,Inter,sans-serif}
 bdi,.f{direction:ltr;unicode-bidi:isolate;display:inline-block}
 #bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 18px;backdrop-filter:blur(14px);background:var(--card);border-bottom:1px solid var(--bd)}
+nav{position:sticky;top:0;z-index:9;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 10px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:var(--card);border-bottom:1px solid var(--bd)}
 nav b{font-size:18px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-inline-end:auto}
 nav a{color:var(--tx);text-decoration:none;font-size:14px;opacity:.8}nav a:hover{opacity:1;color:var(--ac)}
 button,input{font:inherit;color:inherit}
@@ -35,7 +35,7 @@ h1{font-size:clamp(38px,8vw,72px);margin:0;line-height:1.05;font-weight:800}
 h1 span{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
 h2{font-size:28px;margin:0 0 6px}
 p.s{color:var(--mu);max-width:640px;margin:14px auto 26px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.12)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 40px rgba(0,0,0,.12)}
 .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
 .rev{opacity:0;transform:translateY(26px);transition:.7s}.rev.in{opacity:1;transform:none}
 .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}.stats .card{padding:12px 22px}.stats b{font-size:26px;display:block;color:var(--ac)}
@@ -56,9 +56,11 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:6px;borde
 .tb th,.tb td{text-align:start;vertical-align:top}svg .pop{transform-box:fill-box;transform-origin:center}#ws g[data-a]:hover circle{filter:drop-shadow(0 0 6px #0ea5a4)}
 .cp{padding-top:14px}#m3b button[aria-pressed=true]{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0}.kp{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;direction:ltr;margin-top:10px}.kp button{padding:12px 0;min-width:0;font-size:15px}a.pri{display:inline-block;text-decoration:none;border-radius:12px}.ptw{overflow-x:auto;padding:4px}button:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}.gg{display:grid;gap:8px;justify-content:center}.gcard .gg{margin:10px auto 0}
 select{font:inherit;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 10px;min-width:0;max-width:100%;flex:1 1 200px}select option,select optgroup{background:var(--bg);color:var(--tx)}select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+input{font-family:inherit;font-size:16px;color:inherit;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 10px;min-width:0;max-width:100%}input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+a,button,input,select{-webkit-tap-highlight-color:transparent}
 canvas{max-width:100%}.card,.grid>*,.ctr>*{min-width:0}svg{max-width:100%}
 @media(max-width:700px){
-nav{padding:8px 12px;gap:6px 10px}nav b{flex-basis:100%;font-size:16px}nav a{font-size:13px}#q{flex:1;width:auto!important;min-width:100px}#res{inset-inline:10px;width:auto;max-width:none}
+nav{padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;gap:6px 10px}nav b{flex-basis:100%;font-size:16px}nav a{font-size:13px}#q{flex:1;width:auto!important;min-width:100px}#res{inset-inline:10px;width:auto;max-width:none}
 section{padding:36px 14px}.hero{padding-top:48px}h2{font-size:23px}.card{padding:14px;border-radius:16px}.big{font-size:32px}.stats .card{padding:10px 16px}
 input,select,textarea{font-size:16px}button:not(.el){min-height:40px}
 table{display:block;overflow-x:auto;max-width:100%}.pt{min-width:560px}.ctr label{width:auto}
@@ -86,7 +88,7 @@ nav a.nl.active{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#f
 .homegrid h3{margin:8px 0 4px;font-size:20px}
 .homegrid p{margin:0;color:var(--mu);font-size:14px}
 .gcard{margin-top:16px}
-footer{margin-top:44px;border-top:1px solid var(--bd);background:var(--card);backdrop-filter:blur(12px);padding:28px 18px calc(28px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mu);font-size:14px;line-height:1.7}
+footer{margin-top:44px;border-top:1px solid var(--bd);background:var(--card);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding:28px 18px calc(28px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mu);font-size:14px;line-height:1.7}
 footer .fpow{background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
 footer b{color:var(--tx)}
 footer .fnav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
@@ -126,17 +128,18 @@ nav.nav-hide{transform:translateY(-110%);box-shadow:none}
 
 /* ===== mobile nav: desktop-style bar (brand start, controls end) ===== */
 @media(max-width:700px){
-nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px}
+nav{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px}
 nav b{margin-inline-end:0;flex-basis:auto;font-size:17px;white-space:nowrap;display:flex;align-items:center}
 .logo{width:24px;height:24px;margin-inline-end:6px}
-.navr{gap:7px;margin-inline-start:0;flex:none}
-nav .xpwrap{flex-wrap:nowrap;column-gap:5px;row-gap:0;min-width:0;min-height:40px;padding:0 11px;border-radius:999px;border:1px solid var(--bd);background:var(--card)}
-#xp{font-size:12px;font-weight:700}
+.navr{gap:7px;margin-inline-start:0;flex:0 1 auto;min-width:0}
+nav .xpwrap{flex:0 1 auto;flex-wrap:nowrap;column-gap:5px;row-gap:0;min-width:0;min-height:40px;padding:0 11px;border-radius:999px;border:1px solid var(--bd);background:var(--card)}
+#xp{font-size:12px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 nav .xpbar{flex:0 0 auto;width:42px}
 #lang,#th{min-height:40px;height:40px;padding:0 13px;border-radius:999px;font-size:13px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
 #th{width:40px;padding:0}
 }
-@media(max-width:360px){nav .xpwrap{min-width:0;flex:0 1 auto}nav .xpbar{display:none}nav b{font-size:16px}#xp{font-size:11px}#lang,#th{min-height:38px;height:38px;padding:0 10px}#th{width:38px}}
+@media(max-width:430px){nav{gap:6px;padding-inline:10px}nav b{font-size:16px}.logo{width:21px;height:21px;margin-inline-end:5px}.navr{gap:5px}nav .xpwrap{padding:0 9px;column-gap:4px}#xp{font-size:11px}nav .xpbar{display:none}#lang,#th{min-height:38px;height:38px;padding:0 10px;font-size:12px}#th{width:38px}}
+@media(max-width:360px){nav b{font-size:15px}#xp{max-width:60px}#lang{padding:0 8px}}
 
 /* ===== section shortcuts ===== */
 nav.jump{position:static;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:10px 0 4px;border:0;background:none;backdrop-filter:none;transform:none!important;transition:none}
@@ -938,21 +941,21 @@ function rx(rs,ps,ty,en,fa,o){o=o||{};const cl=s=>s.replace(/[↑↓]/g,""),sl=s
 const ND={"H2+O2":[["H2O"],"Explosive reaction when sparked; water forms.","با جرقه به‌شدت واکنش می‌دهد و آب تشکیل می‌شود.",1,1],"Cl2+H2":[["HCl↑"],"Reacts explosively in sunlight or a flame, forming hydrogen chloride gas.","در نور خورشید یا شعله به‌شدت واکنش می‌دهد و گاز هیدروژن کلرید می‌سازد.",1,1],"Br2+H2":[["HBr↑"],"Reacts on heating with a platinum catalyst, giving hydrogen bromide.","با گرما و کاتالیزور پلاتین واکنش می‌دهد و هیدروژن برمید می‌سازد.",1,0],"H2+I2":[["HI↑"],"A slow, reversible reaction on heating that gives hydrogen iodide.","واکنشی کند و برگشت‌پذیر با گرما که هیدروژن یدید می‌دهد.",0,0],"H2+N2":[["NH3↑"],"Haber process: about 450 °C, 200 atm and an iron catalyst. The reaction is reversible and gives ammonia.","فرایند هابر: حدود ۴۵۰ درجه، ۲۰۰ اتمسفر و کاتالیزور آهن. واکنش برگشت‌پذیر است و آمونیاک می‌دهد.",1,0],"C+O2":[["CO2↑"],"Carbon burns with a glowing red-orange flame, forming carbon dioxide.","کربن با شعلهٔ سرخ‌نارنجی می‌سوزد و کربن دی‌اکسید می‌دهد.",1,1],"O2+S":[["SO2↑"],"Sulfur burns with a pale blue flame, giving choking sulfur dioxide gas.","گوگرد با شعلهٔ آبی کم‌رنگ می‌سوزد و گاز خفه‌کنندهٔ گوگرد دی‌اکسید می‌دهد.",1,1]},
 FL={Mg:["with a dazzling white flame","با شعلهٔ سفید خیره‌کننده"],Na:["with an intense yellow flame","با شعلهٔ زرد شدید"],K:["with a lilac flame","با شعلهٔ ارغوانی"],Li:["with a crimson flame","با شعلهٔ سرخ"],Ca:["with a brick-red flame","با شعلهٔ سرخ آجری"],Ba:["with a pale green flame","با شعلهٔ سبز کم‌رنگ"]},
 WRT={Na:["Fizzes violently and H₂ gas is released; the solution becomes basic.","به‌شدت می‌جوشد و گاز H₂ آزاد می‌شود؛ محلول بازی می‌شود."],K:["Extremely violent: the metal skates, ignites with a lilac flame and H₂ is released.","بسیار شدید: فلز روی آب می‌دود، با شعلهٔ ارغوانی می‌سوزد و H₂ آزاد می‌شود."],Ca:["Steady bubbling of H₂; the water turns cloudy as Ca(OH)₂ forms.","حباب‌های پیوستهٔ H₂؛ آب کدر می‌شود چون Ca(OH)₂ تشکیل می‌شود."],Li:["Fizzes steadily and darts across the surface; H₂ is released and the solution becomes basic.","پیوسته می‌جوشد و روی سطح می‌دود؛ H₂ آزاد و محلول بازی می‌شود."],Ba:["Vigorous bubbling of H₂; the solution becomes strongly basic.","جوشش شدید H₂؛ محلول به‌شدت بازی می‌شود."],Mg:["Only a few tiny bubbles in cold water (a Mg(OH)₂ coating slows it); much faster with hot water or steam.","در آب سرد فقط چند حباب ریز دیده می‌شود (لایهٔ Mg(OH)₂ آن را کند می‌کند)؛ با آب داغ یا بخار بسیار سریع‌تر است."]};
-function dbl(X,Y){const c1=X.c,a1=X.a,c2=Y.c,a2=Y.a,ions=[...ic(c1,a1),...ic(c2,a2)];
- if(!sol(c1,a1)||!sol(c2,a2)){const f=sol(c1,a1)?Y.f:X.f;return nr(`${f} is insoluble in water, so there are no free ions available to react.`,`${f} در آب نامحلول است؛ پس یون آزادی برای واکنش وجود ندارد.`)}
- const nh=c1.s=="NH4"&&a2.s=="OH"&&c2.s!="NH4"?[X,Y]:c2.s=="NH4"&&a1.s=="OH"&&c1.s!="NH4"?[Y,X]:0;
+function dbl(C,Y){const c1=C.c,a1=C.a,c2=Y.c,a2=Y.a,ions=[...ic(c1,a1),...ic(c2,a2)];
+ if(!sol(c1,a1)||!sol(c2,a2)){const f=sol(c1,a1)?Y.f:C.f;return nr(`${f} is insoluble in water, so there are no free ions available to react.`,`${f} در آب نامحلول است؛ پس یون آزادی برای واکنش وجود ندارد.`)}
+ const nh=c1.s=="NH4"&&a2.s=="OH"&&c2.s!="NH4"?[C,Y]:c2.s=="NH4"&&a1.s=="OH"&&c1.s!="NH4"?[Y,C]:0;
  if(nh){const s=mk(nh[1].c,nh[0].a),i=!sol(nh[1].c,nh[0].a);return rx([nh[0].f,nh[1].f],[s+(i?"↓":""),"NH3↑","H2O"],"Gas evolution","Gentle warming releases ammonia gas (sharp smell; turns damp red litmus blue).","با گرمای ملایم گاز آمونیاک آزاد می‌شود (بوی تند؛ کاغذ تورنسل قرمز مرطوب را آبی می‌کند).",{heat:0,ppt:i?pcol(s)[0]:0})}
  if(c1.k==c2.k||a1.s==a2.s)return nr("These two share an ion, so swapping partners just gives the same compounds back.","این دو یک یون مشترک دارند؛ پس جابه‌جایی شریک‌ها همان ترکیب‌ها را برمی‌گرداند.",ions);
  const bad=(c,a)=>c.s=="Al"&&["CO3","S","SO3"].includes(a.s)||c.k=="Fe3"&&a.s=="CO3",pr=[[c1,a2],[c2,a1]];
- if(bad(...pr[0])||bad(...pr[1])){const h=bad(...pr[0])?0:1,[hc,ha]=pr[h],[oc,oa]=pr[1-h];return rx([X.f,Y.f,"H2O"],[mk(hc,ANf("OH"))+"↓",mk(oc,oa),{CO3:"CO2",S:"H2S",SO3:"SO2"}[ha.s]+"↑"],"Double replacement","The hydroxide precipitates and gas bubbles off (the carbonate/sulfide of this ion cannot exist in water).","هیدروکسید رسوب می‌کند و گاز آزاد می‌شود (کربنات یا سولفید این یون در آب پایدار نیست).",{ppt:pcol(mk(hc,ANf("OH")))[0]})}
+ if(bad(...pr[0])||bad(...pr[1])){const h=bad(...pr[0])?0:1,[hc,ha]=pr[h],[oc,oa]=pr[1-h];return rx([C.f,Y.f,"H2O"],[mk(hc,ANf("OH"))+"↓",mk(oc,oa),{CO3:"CO2",S:"H2S",SO3:"SO2"}[ha.s]+"↑"],"Double replacement","The hydroxide precipitates and gas bubbles off (the carbonate/sulfide of this ion cannot exist in water).","هیدروکسید رسوب می‌کند و گاز آزاد می‌شود (کربنات یا سولفید این یون در آب پایدار نیست).",{ppt:pcol(mk(hc,ANf("OH")))[0]})}
  const ps=pr.map(([c,a])=>({f:mk(c,a),c,a,i:!sol(c,a)})),pp=ps.filter(x=>x.i);
  if(pp.length){let prods=ps.map(x=>x.f+(x.i?"↓":"")),net=pp.map(x=>{const g=gcd(x.c.q,x.a.q),m=x.a.q/g,n=x.c.q/g;return`${m>1?m:""}${ion(x.c,1)} + ${n>1?n:""}${ion(x.a,0)} → ${x.f}↓`}).join("; ");
   if(prods.includes("AgOH↓")){prods=prods.map(s=>s=="AgOH↓"?"Ag2O↓":s);prods.push("H2O");net=""}
   const nm=pp.map(x=>x.f=="AgOH"?"Ag2O":x.f),co=nm.map(f=>pcol(f)),sc=ps.filter(x=>!x.i&&cw(x.c))[0],
   en=pp.length>1?`Two precipitates form: ${nm[0]} (${co[0][1]}) and ${nm[1]} (${co[1][1]}).`:`A ${co[0][1]} precipitate of ${nm[0]} forms.`,fa=pp.length>1?`دو رسوب تشکیل می‌شود: ${nm[0]} (${co[0][2]}) و ${nm[1]} (${co[1][2]}).`:`رسوب ${co[0][2]} ${nm[0]} تشکیل می‌شود.`;
-  return rx([X.f,Y.f],prods,"Precipitation",en,fa,{ppt:co[0][0],net,liq:sc?cw(sc.c)[0]:0})}
- const wk=[[X,Y,c1,a2],[Y,X,c2,a1]].find(([s,o,c,a])=>s.t=="a"&&STR.includes(s.f)&&["CH3COO","PO4"].includes(a.s));
- if(wk){const w=mk(wk[2],wk[3]),sa=mk(wk[1].c,wk[0].a);return rx([X.f,Y.f],[w,sa],"Double replacement",`The strong acid's H⁺ is captured to form the weak acid ${w}; there is little visible change.`,`H⁺ اسید قوی گرفته می‌شود و اسید ضعیف ${w} می‌سازد؛ تغییر قابل‌مشاهده‌ای دیده نمی‌شود.`)}
+  return rx([C.f,Y.f],prods,"Precipitation",en,fa,{ppt:co[0][0],net,liq:sc?cw(sc.c)[0]:0})}
+ const wk=[[C,Y,c1,a2],[Y,C,c2,a1]].find(([s,o,c,a])=>s.t=="a"&&STR.includes(s.f)&&["CH3COO","PO4"].includes(a.s));
+ if(wk){const w=mk(wk[2],wk[3]),sa=mk(wk[1].c,wk[0].a);return rx([C.f,Y.f],[w,sa],"Double replacement",`The strong acid's H⁺ is captured to form the weak acid ${w}; there is little visible change.`,`H⁺ اسید قوی گرفته می‌شود و اسید ضعیف ${w} می‌سازد؛ تغییر قابل‌مشاهده‌ای دیده نمی‌شود.`)}
  return nr(`Swapping partners would give ${ps[0].f} and ${ps[1].f}. Both are soluble and no gas or water forms, so all the ions stay dissolved as spectators: no net reaction.`,`با جابه‌جایی شریک‌ها ${ps[0].f} و ${ps[1].f} به‌دست می‌آید. هر دو محلول‌اند و گاز یا آبی تشکیل نمی‌شود؛ پس همهٔ یون‌ها تماشاگر می‌مانند: واکنش خالصی رخ نمی‌دهد.`,ions)}
 function sim(a,b){const A=K(a),B=K(b);
  if(A.f==B.f)return nr("These are the same substance: mixing it with itself changes nothing.","این دو یک ماده‌اند: مخلوط‌کردن یک ماده با خودش چیزی را تغییر نمی‌دهد.");
