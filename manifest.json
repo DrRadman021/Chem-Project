@@ -1,0 +1,40 @@
+{
+  "name": "Rachem — Interactive Chemistry Lab",
+  "short_name": "Rachem",
+  "description": "Interactive chemistry learning: atom builder, 3D molecules, periodic table, equation balancer, reaction lab, quizzes and math tools. English & Persian.",
+  "id": "rachem",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0ea5a4",
+  "background_color": "#f4f7fb",
+  "lang": "en",
+  "dir": "auto",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "_fav.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Chemistry",
+      "url": "./#/chemistry",
+      "description": "Atom builder, periodic table, molecules, reactions"
+    },
+    {
+      "name": "Arcade",
+      "url": "./#/arcade",
+      "description": "Chemistry and classic games"
+    }
+  ]
+}
