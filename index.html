@@ -2050,7 +2050,7 @@ uiText();applyL();if(/^#\/?space/.test(location.hash))route();
 
 <script>
   // ---------- کلید API خود را اینجا قرار دهید ----------
-  const API_KEY = "AQ.Ab8RN6JHRVPsQDlKPOayU0meTV0kMzS56-B_4XNIr308CFHvOg"; 
+  const API_KEY = "AQ.Ab8RN6Lt_eRlQvqZ1TYfyd5H6MdZGfUG2KluvblMniiJ_bxPkg"; 
   // ---------------------------------------------------
 
   function toggleAiChat() {
@@ -2092,12 +2092,15 @@ async function sendAiMessage() {
     msgContainer.scrollTop = msgContainer.scrollHeight;
 
     try {
-      // استفاده از نسخه v1 پایدار و فرمت رشته‌ای ساده برای جلوگیری از خطای کاراکتر مخفی
-      const apiUrl = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + API_KEY.trim();
+      // آدرس تمیز و بدون کلید
+      const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
       
       const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-goog-api-key': API_KEY.trim() // ارسال کلید از طریق هدر برای جلوگیری از مسدود شدن
+        },
         body: JSON.stringify({
           contents: [{ role: "user", parts: [{ text: text }] }]
         })
