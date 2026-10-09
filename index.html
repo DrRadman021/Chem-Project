@@ -693,7 +693,7 @@ c.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=+b.dataset.o==q.a;
 $("#fb").innerHTML=`<p class="${ok?"ok":"bad"}"><b>${ok?X("Correct","درست"):X("Not quite","کامل نیست")}.</b> ${xx}</p><button id="nx" class="pri">${X("Next","بعدی")}</button>`;$("#nx").onclick=()=>{qi++;rq()}})}rq();
 // structure builder
 const ES={};E.forEach(e=>ES[e.s]=e);
-const PS="H C N O F Cl Br I S P Si B Se".split(" "),COL={H:["#e5e7eb","#111"],C:["#4b5563","#fff"],N:["#3b82f6","#fff"],O:["#ef4444","#fff"],F:["#22c55e","#fff"],Cl:["#16a34a","#fff"],Br:["#9a3412","#fff"],S:["#eab308","#111"],P:["#f97316","#fff"],Si:["#b8a07e","#111"],B:["#f9a8a4","#111"],Se:["#ca8a04","#fff"],I:["#7c3aed","#fff"]};
+const PS="H C N O F Cl Br I S P Si B Se Al Ge As Sn Te".split(" "),COL={H:["#e5e7eb","#111"],C:["#4b5563","#fff"],N:["#3b82f6","#fff"],O:["#ef4444","#fff"],F:["#22c55e","#fff"],Cl:["#16a34a","#fff"],Br:["#9a3412","#fff"],S:["#eab308","#111"],P:["#f97316","#fff"],Si:["#b8a07e","#111"],B:["#f9a8a4","#111"],Se:["#ca8a04","#fff"],I:["#7c3aed","#fff"],Al:["#bfa6a6","#111"],Ge:["#758490","#fff"],As:["#bd80e3","#111"],Sn:["#668080","#fff"],Te:["#d47a00","#fff"]};
 const VAL=s=>{const z=ES[s].z,g=grp(z);return z==2?2:g<=2?g:g-10},EN=s=>+ES[s].en||0;
 const S={at:[],bd:[],sel:null,pend:null,tool:"move",id:1,bid:1,nw:0},at=id=>S.at.find(a=>a.id==id);let WS=null;const HIST=[],snapStr=()=>JSON.stringify({at:S.at,bd:S.bd,id:S.id,bid:S.bid});
 function updUndo(){const b=document.querySelector('#bt [data-k="undo"]');if(b)b.disabled=!HIST.length}
@@ -701,12 +701,140 @@ function snap(str){HIST.push(str||snapStr());if(HIST.length>40)HIST.shift();updU
 function undo(){const h=HIST.pop();if(!h){toast(X("Nothing to undo.","چیزی برای واگرد نیست."));return}const o=JSON.parse(h);S.at=o.at;S.bd=o.bd;S.id=o.id;S.bid=o.bid;S.sel=S.pend=null;updUndo();draw()}
 const bs=a=>S.bd.reduce((t,b)=>t+(b.a==a.id||b.b==a.id?b.o:0),0),nb=a=>S.bd.filter(b=>b.a==a.id||b.b==a.id).length,fc=a=>ele(a).f;
 const HILL=c=>{const k=Object.keys(c).sort(),o=c.C?["C",...(c.H?["H"]:[]),...k.filter(x=>x!="C"&&x!="H")]:k;return o.map(x=>x+(c[x]>1?c[x]:"")).join("")};
-const DB=Object.fromEntries([["H2","Hydrogen"],["N2","Nitrogen"],["O2","Oxygen"],["F2","Fluorine"],["Cl2","Chlorine"],["Br2","Bromine"],["HF","Hydrogen fluoride"],["HCl","Hydrogen chloride"],["HBr","Hydrogen bromide"],["H2O","Water"],["H2O2","Hydrogen peroxide"],["H2S","Hydrogen sulfide"],["NH3","Ammonia"],["N2H4","Hydrazine"],["PH3","Phosphine"],["CH4","Methane"],["C2H6","Ethane"],["C2H4","Ethene"],["C2H2","Ethyne"],["CO","Carbon monoxide"],["CO2","Carbon dioxide"],["HCN","Hydrogen cyanide"],["CH2O","Methanal (formaldehyde)"],["CH3OH","Methanol"],["CH3Cl","Chloromethane"],["CCl4","Carbon tetrachloride"],["SiH4","Silane"],["BF3","Boron trifluoride"],["PCl3","Phosphorus trichloride"],["PCl5","Phosphorus pentachloride"],["SF6","Sulfur hexafluoride"],["SO2","Sulfur dioxide"],["O3","Ozone"],["N2O","Dinitrogen monoxide"]].map(([f,n])=>[HILL(parse(f)),[f,n]]));
+const DB=Object.fromEntries([["H2","Hydrogen"],["N2","Nitrogen"],["O2","Oxygen"],["F2","Fluorine"],["Cl2","Chlorine"],["Br2","Bromine"],["HF","Hydrogen fluoride"],["HCl","Hydrogen chloride"],["HBr","Hydrogen bromide"],["H2O","Water"],["H2O2","Hydrogen peroxide"],["H2S","Hydrogen sulfide"],["NH3","Ammonia"],["N2H4","Hydrazine"],["PH3","Phosphine"],["CH4","Methane"],["C2H6","Ethane"],["C2H4","Ethene"],["C2H2","Ethyne"],["CO","Carbon monoxide"],["CO2","Carbon dioxide"],["HCN","Hydrogen cyanide"],["CH2O","Methanal (formaldehyde)"],["CH3OH","Methanol"],["CH3Cl","Chloromethane"],["CCl4","Carbon tetrachloride"],["SiH4","Silane"],["BF3","Boron trifluoride"],["PCl3","Phosphorus trichloride"],["PCl5","Phosphorus pentachloride"],["SF6","Sulfur hexafluoride"],["SO2","Sulfur dioxide"],["O3","Ozone"],["N2O","Dinitrogen monoxide"],["C3H8","Propane"],["NO","Nitrogen monoxide"],["NO2","Nitrogen dioxide"],["N2O4","Dinitrogen tetroxide"]].map(([f,n])=>[HILL(parse(f)),[f,n]]));
 const GEO={"10":["linear (diatomic)","—"],"20":["linear","180°"],"30":["trigonal planar","120°"],"31":["bent","<120°"],"40":["tetrahedral","109.5°"],"41":["trigonal pyramidal","~107°"],"42":["bent","~104.5°"],"50":["trigonal bipyramidal","90°/120°"],"51":["seesaw","<90°/<120°"],"52":["T-shaped","<90°"],"53":["linear","180°"],"60":["octahedral","90°"],"61":["square pyramidal","<90°"],"62":["square planar","90°"]};
 const TET=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]],TRI=[[1,0,0],[-.5,.866,0],[-.5,-.866,0]],TBP=[[0,0,1],[0,0,-1],...TRI],OCT=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
 const VEC={"10":[[1,0,0]],"20":OCT.slice(0,2),"30":TRI,"31":TRI.slice(0,2),"40":TET,"41":TET.slice(0,3),"42":TET.slice(0,2),"50":TBP,"51":TBP.slice(0,4),"52":TBP.slice(0,3),"53":TBP.slice(0,2),"60":OCT,"61":OCT.slice(0,5),"62":OCT.slice(0,4)};
+/*STRUCTID-START structure-aware identification: SMILES-subset parser + canonical graph key + structure DB */
+const SMV={B:3,C:4,N:3,O:2,P:3,S:2,F:1,Cl:1,Br:1,I:1};
+function smiParse(sm){const at=[],bd=[],stack=[];let i=0,prev=null,pb=0;const ring={};
+ while(i<sm.length){const c=sm[i];
+  if(c=="("){stack.push(prev);i++}
+  else if(c==")"){if(!stack.length)throw Error("bad branch in "+sm);prev=stack.pop();i++}
+  else if(c=="-"||c=="="||c=="#"){pb=c=="="?2:c=="#"?3:1;i++}
+  else if(/\d/.test(c)){let s="";while(/\d/.test(sm[i]||""))s+=sm[i++];if(prev==null)throw Error("ring bond without atom in "+sm);
+   if(ring[s]==null)ring[s]={a:prev,o:pb||1};else{bd.push([ring[s].a,prev,pb||ring[s].o]);delete ring[s]}pb=0}
+  else{let s,q=0,h=0,brk=false;
+   if(c=="["){brk=true;i++;const m=/^[A-Z][a-z]?/.exec(sm.slice(i));if(!m)throw Error("bad bracket atom in "+sm);s=m[0];i+=s.length;
+    const hm=/^H(\d*)/.exec(sm.slice(i));if(hm){h=hm[1]?+hm[1]:1;i+=hm[0].length}
+    const qm=/^([+-])(\d*)/.exec(sm.slice(i));if(qm){q=(qm[1]=="-"?-1:1)*(qm[2]?+qm[2]:1);i+=qm[0].length}
+    if(sm[i]=="]")i++;else throw Error("unterminated bracket in "+sm)}
+   else{const m=/^[A-Z][a-z]?/.exec(sm.slice(i));if(!m)throw Error("unexpected character '"+c+"' in "+sm);s=m[0];i+=s.length;
+    if(!(s in SMV))throw Error("unsupported element: "+s);h=SMV[s]}
+   const idx=at.length;at.push({s,q,h,brk});if(prev!=null)bd.push([prev,idx,pb||1]);pb=0;prev=idx}}
+ if(stack.length)throw Error("unbalanced branches in "+sm);if(Object.keys(ring).length)throw Error("unclosed ring in "+sm);
+ at.forEach((a,idx)=>{let nh;if(a.brk)nh=a.h;else{const used=bd.reduce((t,b)=>t+(b[0]==idx||b[1]==idx?b[2]:0),0);nh=Math.max(0,SMV[a.s]-used)}
+  for(let k=0;k<nh;k++){const j=at.length;at.push({s:"H",q:0,h:0,brk:true});bd.push([idx,j,1])}});
+ return{at:at.map(a=>({s:a.s,q:a.q})),bd}}
+function ckey(at,bd,useQ){const n=at.length;if(!n)return"0:";const adj=at.map(()=>[]);
+ bd.forEach(b=>{const i=b[0],j=b[1],o=b[2];if(i<0||j<0||i>=n||j>=n||i==j)return;adj[i].push([j,o]);adj[j].push([i,o])});
+ const id=at.map(a=>a.s+(useQ&&a.q?(a.q>0?"+":"-")+Math.abs(a.q):""));let lab=id.slice();
+ {const set=[...new Set(lab)].sort();lab=lab.map(x=>set.indexOf(x))}
+ for(let it=0;it<8;it++){const nl=lab.map((L,i)=>L+"|"+adj[i].map(x=>x[1]+":"+lab[x[0]]).sort().join(","));
+  const set=[...new Set(nl)].sort(),nx=nl.map(x=>set.indexOf(x));
+  const same=nx.every((v,i)=>v==lab[i]);lab=nx;if(same)break}
+ adj.forEach(l=>l.sort((a,b)=>lab[a[0]]-lab[b[0]]||a[1]-b[1]));
+ let best=null;const seen=new Array(n),ord=[];
+ function tok(v,p){seen[v]=ord.length;ord.push(v);const out=[];
+  for(let t=0;t<adj[v].length;t++){const j=adj[v][t][0],o=adj[v][t][1];if(j==p)continue;
+   if(seen[j]>=0)out.push(o+"*");else out.push(o+tok(j,v))}
+  out.sort();return id[v]+"~"+lab[v]+"("+out.join("")+")"}
+ for(let r=0;r<n;r++){seen.fill(-1);ord.length=0;const t=tok(r,-1);if(best==null||t<best)best=t}
+ return n+":"+best}
+const SR=[
+["OO","Hydrogen peroxide","هیدروژن پراکسید"],
+["NN","Hydrazine","هیدرازین"],
+["C#N","Hydrogen cyanide","هیدروژن سیانید"],
+["[NH]#[C]","Hydrogen isocyanide","هیدروژن ایزوسیانید"],
+["[O-][O+]=O","Ozone","ازن"],
+["N#N[O]","Dinitrogen monoxide","دی‌نیتروژن مونوکسید"],
+["[N-]=[N+]=O","Dinitrogen monoxide","دی‌نیتروژن مونوکسید"],
+["C","Methane","متان"],
+["CC","Ethane","اتان"],
+["CCC","Propane","پروپان"],
+["CCCC","Butane","بوتان"],
+["CC(C)C","2-Methylpropane (isobutane)","۲-متیل‌پروپان (ایزوبوتان)"],
+["CCCCC","Pentane","پنتان"],
+["CC(C)CC","2-Methylbutane (isopentane)","۲-متیل‌بوتان (ایزوپنتان)"],
+["CC(C)(C)C","2,2-Dimethylpropane (neopentane)","۲و۲-دی‌متیل‌پروپان (نئوپنتان)"],
+["CCCCCC","Hexane","هگزان"],
+["C1CC1","Cyclopropane","سیکلوپروپان"],
+["C1CCC1","Cyclobutane","سیکلوبوتان"],
+["C1CCCC1","Cyclopentane","سیکلوپنتان"],
+["C1CCCCC1","Cyclohexane","سیکلوهگزان"],
+["C=C","Ethene","اتن"],
+["CC=C","Propene","پروپن"],
+["CCC=C","But-1-ene","۱-بوتن"],
+["CC=CC","But-2-ene","۲-بوتن"],
+["CC(C)=C","2-Methylpropene","۲-متیل‌پروپن"],
+["C=CC=C","Buta-1,3-diene","بوتا-۱و۳-دی‌ان"],
+["C#C","Ethyne","اتین"],
+["CC#C","Propyne","پروپین"],
+["CCC#C","But-1-yne","۱-بوتین"],
+["C=C=C","Propadiene (allene)","پروپادی‌ان (آلن)"],
+["C1=CC=CC=C1","Benzene","بنزن"],
+["CC1=CC=CC=C1","Toluene","تولوئن"],
+["OC1=CC=CC=C1","Phenol","فنل"],
+["NC1=CC=CC=C1","Aniline","آنیلین"],
+["CO","Methanol","متانول"],
+["CCO","Ethanol","اتانول"],
+["CCCO","Propan-1-ol","پروپان-۱-اول"],
+["CC(C)O","Propan-2-ol","پروپان-۲-اول"],
+["CCCCO","Butan-1-ol","بوتان-۱-اول"],
+["OCCO","Ethane-1,2-diol (ethylene glycol)","اتان-۱و۲-دی‌اول (اتیلن گلیکول)"],
+["OCC(O)CO","Glycerol (propane-1,2,3-triol)","گلیسرول"],
+["C=CCO","Prop-2-en-1-ol (allyl alcohol)","پروپ-۲-ان-۱-اول (الکل آلیل)"],
+["COC","Dimethyl ether","دی‌متیل اتر"],
+["CCOC","Methoxyethane","متوکسی‌اتان"],
+["CCOCC","Diethyl ether","دی‌اتیل اتر"],
+["C=O","Methanal (formaldehyde)","متانال (فرمالدهید)"],
+["CC=O","Ethanal (acetaldehyde)","اتانال (استالدهید)"],
+["CCC=O","Propanal","پروپانال"],
+["CC(C)=O","Propanone (acetone)","پروپانون (استون)"],
+["CCC(C)=O","Butanone","بوتانون"],
+["C1CO1","Oxirane (ethylene oxide)","اکسیران (اتیلن اکسید)"],
+["C1COC1","Oxetane","اکستان"],
+["C1CC1O","Cyclopropanol","سیکلوپروپانول"],
+["OC=O","Methanoic acid (formic acid)","متانوئیک اسید (فرمیک اسید)"],
+["CC(=O)O","Ethanoic acid (acetic acid)","اتانوئیک اسید (استیک اسید)"],
+["CCC(=O)O","Propanoic acid","پروپانوئیک اسید"],
+["COC=O","Methyl methanoate","متیل متانوات"],
+["COC(C)=O","Methyl ethanoate","متیل اتانوات"],
+["CCOC=O","Ethyl methanoate","اتیل متانوات"],
+["CCOC(C)=O","Ethyl ethanoate","اتیل اتانوات"],
+["CN","Methylamine","متیل‌آمین"],
+["CNC","Dimethylamine","دی‌متیل‌آمین"],
+["CN(C)C","Trimethylamine","تری‌متیل‌آمین"],
+["CCN","Ethylamine","اتیل‌آمین"],
+["CC(=O)N","Ethanamide (acetamide)","اتانامید (استامید)"],
+["CC#N","Ethanenitrile (acetonitrile)","اتان‌نیتریل (استونیتریل)"],
+["C[N+]#[C-]","Methyl isocyanide","متیل ایزوسیانید"],
+["[NH4+]","Ammonium ion","یون آمونیوم"],
+["[OH3+]","Hydronium ion","یون هیدرونیوم"],
+["[OH-]","Hydroxide ion","یون هیدروکسید"],
+["[C-]#N","Cyanide ion","یون سیانید"],
+["[N+]([O-])([O-])=O","Nitrate ion","یون نیترات"],
+["[C]([O-])([O-])=O","Carbonate ion","یون کربنات"],
+["[S](=O)(=O)([O-])[O-]","Sulfate ion","یون سولفات"],
+["CC(=O)[O-]","Acetate ion","یون استات"]];
+let SDB=null,BYF=null,NK=null,SDBn=-1;
+function ensureSDB(){if(SDB&&SDBn===MOLS.length)return;SDBn=MOLS.length;SDB=new Map();BYF=new Map();NK=new Map();
+ const rec=(at,bd,en,fa)=>{try{const k=ckey(at,bd,true);if(SDB.has(k))return;const r={at,bd,en,fa};SDB.set(k,r);
+  const cnt={};at.forEach(a=>cnt[a.s]=(cnt[a.s]||0)+1);const hk=HILL(cnt);if(!BYF.has(hk))BYF.set(hk,[]);if(!BYF.get(hk).some(x=>x.en==en))BYF.get(hk).push(r);
+  const k2=ckey(at,bd,false);if(!NK.has(k2))NK.set(k2,new Set());NK.get(k2).add(k)}catch(e){console.warn("SDB entry skipped:",en,e)}};
+ MOLS.forEach(m=>{try{const at=[{s:m[3],q:0},...m[4].map(x=>({s:x,q:0}))],bd=m[4].map((_,i)=>[0,i+1,m[5]]);rec(at,bd,m[1],m[2])}catch(e){console.warn("MOLS->SDB skipped:",m[0],e)}});
+ SR.forEach(r=>{try{const g=smiParse(r[0]);rec(g.at,g.bd,r[1],r[2])}catch(e){console.warn("SR entry skipped:",r[0],e)}})}
+function structMatch(){try{ensureSDB();
+ const idx=new Map(S.at.map((a,i)=>[a.id,i])),at=S.at.map(a=>({s:a.s,q:fc(a)})),bd=[];
+ for(const b of S.bd){const i=idx.get(b.a),j=idx.get(b.b);if(i==null||j==null||i==j)return null;bd.push([i,j,b.o])}
+ const qt=at.reduce((t,a)=>t+a.q,0);
+ const r0=SDB.get(ckey(at,bd,true));if(r0)return r0;
+ let pick=null;for(const ck of(NK.get(ckey(at,bd,false))||[])){const r=SDB.get(ck);if(!r||r.at.reduce((t,a)=>t+a.q,0)!==qt)continue;if(pick&&pick.en!==r.en)return null;pick=r}
+ return pick}catch(e){console.warn("structMatch:",e);return null}}
+function candOf(hf){try{ensureSDB();return BYF.get(hf)||null}catch(e){console.warn("candOf:",e);return null}}
+/*STRUCTID-END*/
 // (removed: manual 2D builder draw/analyze functions)
-const done=new Set(),FD={H2:"هیدروژن",N2:"نیتروژن",O2:"اکسیژن",F2:"فلوئور",Cl2:"کلر",Br2:"برم",HF:"هیدروژن فلوئورید",HCl:"هیدروژن کلرید",HBr:"هیدروژن برمید",H2O:"آب",H2O2:"هیدروژن پراکسید",H2S:"هیدروژن سولفید",NH3:"آمونیاک",N2H4:"هیدرازین",PH3:"فسفین",CH4:"متان",C2H6:"اتان",C2H4:"اتن",C2H2:"اتین",CO:"کربن مونوکسید",CO2:"کربن دی‌اکسید",HCN:"هیدروژن سیانید",CH2O:"متانال (فرمالدهید)",CH3OH:"متانول",CH3Cl:"کلرومتان",CCl4:"کربن تتراکلرید",SiH4:"سیلان",BF3:"بور تری‌فلوئورید",PCl3:"فسفر تری‌کلرید",PCl5:"فسفر پنتاکلرید",SF6:"گوگرد هگزافلوئورید",SO2:"گوگرد دی‌اکسید",O3:"ازن",N2O:"دی‌نیتروژن مونوکسید"},GF={"linear (diatomic)":"خطی (دو‌اتمی)","linear":"خطی","trigonal planar":"مثلثی مسطح","bent":"خمیده","tetrahedral":"چهاروجهی","trigonal pyramidal":"هرم مثلثی","trigonal bipyramidal":"دوهرمی مثلثی","seesaw":"الاکلنگی","T-shaped":"T شکل","octahedral":"هشت‌وجهی","square pyramidal":"هرم مربعی","square planar":"مسطح مربعی"};
+const done=new Set(),FD={H2:"هیدروژن",N2:"نیتروژن",O2:"اکسیژن",F2:"فلوئور",Cl2:"کلر",Br2:"برم",HF:"هیدروژن فلوئورید",HCl:"هیدروژن کلرید",HBr:"هیدروژن برمید",H2O:"آب",H2O2:"هیدروژن پراکسید",H2S:"هیدروژن سولفید",NH3:"آمونیاک",N2H4:"هیدرازین",PH3:"فسفین",CH4:"متان",C2H6:"اتان",C2H4:"اتن",C2H2:"اتین",CO:"کربن مونوکسید",CO2:"کربن دی‌اکسید",HCN:"هیدروژن سیانید",CH2O:"متانال (فرمالدهید)",CH3OH:"متانول",CH3Cl:"کلرومتان",CCl4:"کربن تتراکلرید",SiH4:"سیلان",BF3:"بور تری‌فلوئورید",PCl3:"فسفر تری‌کلرید",PCl5:"فسفر پنتاکلرید",SF6:"گوگرد هگزافلوئورید",SO2:"گوگرد دی‌اکسید",O3:"ازن",N2O:"دی‌نیتروژن مونوکسید",C3H8:"پروپان",NO:"نیتروژن مونوکسید",NO2:"نیتروژن دی‌اکسید",N2O4:"دی‌نیتروژن تتراکسید"},GF={"linear (diatomic)":"خطی (دو‌اتمی)","linear":"خطی","trigonal planar":"مثلثی مسطح","bent":"خمیده","tetrahedral":"چهاروجهی","trigonal pyramidal":"هرم مثلثی","trigonal bipyramidal":"دوهرمی مثلثی","seesaw":"الاکلنگی","T-shaped":"T شکل","octahedral":"هشت‌وجهی","square pyramidal":"هرم مربعی","square planar":"مسطح مربعی"};
 // ===== manual covalent structure builder (interactive 3D) =====
 const V={rx:.3,ry:-.6};let d3=null;
 function add(s,x,y,z){snap();let px=x??120+Math.random()*400,py=y??80+Math.random()*240,pz=z??0;if(x==null){let t=0;while(t++<12&&S.at.some(o=>Math.hypot(o.x-px,o.y-py,(o.z||0)-pz)<110)){px=120+Math.random()*400;py=80+Math.random()*240;pz=(Math.random()-.5)*90}}const a={id:S.id++,s,x:px,y:py,z:pz,lp:0,ts:performance.now()};let nb=null,nd=1e9;S.at.forEach(o=>{const d=Math.hypot(o.x-px,o.y-py,(o.z||0)-pz);if(d<nd){nd=d;nb=o}});if(nb&&nd<70){const k=70/(nd||1);a.x=nb.x+(px-nb.x)*k;a.y=nb.y+(py-nb.y)*k;a.z=(nb.z||0)+(pz-(nb.z||0))*k}S.at.push(a);S.nw=a.id;S.sel={t:"a",id:a.id};autoBond(a);draw();return a}
@@ -752,10 +880,11 @@ if(f0){g.fillStyle=f0>0?"#ef4444":"#3b82f6";g.font="700 "+Math.round(Math.max(9*
 items.sort((a,b)=>a[0]-b[0]).forEach(x=>x[1]());
 const sig=S.at.map(a=>a.s+a.lp).join()+"/"+S.bd.map(b=>b.a+"."+b.b+"."+b.o).join()+"/"+lang;if(sig!==draw._sig){draw._sig=sig;analyze()}}
 (function wsL(t){requestAnimationFrame(wsL);const b=$("#build");if(!b||!b.offsetParent||document.hidden||matchMedia("(prefers-reduced-motion:reduce)").matches)return;try{if(V.auto&&!d3)V.ry+=.01;draw(t)}catch(e){console.error(e)}})(0);
-function analyze(){const o=$("#ana"),AT=S.at,fa=lang=="fa";if(!o)return;if(!AT.length){o.innerHTML=`<p style="color:var(--mu)">${X("Build a structure to see its analysis here.","برای دیدن تحلیل، یک ساختار بسازید.")}</p>`;return}
+function analyze(){const o=$("#ana"),AT=S.at,fa=lang=="fa";if(!o)return;S.bd=S.bd.filter(b=>at(b.a)&&at(b.b));if(!AT.length){o.innerHTML=`<p style="color:var(--mu)">${X("Build a structure to see its analysis here.","برای دیدن تحلیل، یک ساختار بسازید.")}</p>`;return}
 const cnt={};AT.forEach(a=>cnt[a.s]=(cnt[a.s]||0)+1);
 const vs=new Set(),stk=[AT[0].id];while(stk.length){const i=stk.pop();if(vs.has(i))continue;vs.add(i);S.bd.forEach(b=>{if(b.a==i)stk.push(b.b);if(b.b==i)stk.push(b.a)})}
 const conn=vs.size==AT.length,hf=HILL(cnt),nm=DB[hf],msgs=[],notes=[],lps={},fcs=[],sl=[];let valV=0,lpT=0,chg=0;
+const sm=conn?structMatch():null;
 AT.forEach(a=>{const{e,bd,st,need,z,u,pct}=stb(a),f=fc(a);valV+=VAL(a.s);lpT+=a.lp;chg+=f;if(a.lp)lps[a.s]=(lps[a.s]||0)+a.lp;if(f)fcs.push(`${a.s}: ${f>0?"+":"−"}${Math.abs(f)}`);
 sl.push(`<span style="color:${["var(--ok)","#d97706","#ea580c","var(--bad)"][st]};display:block;margin:3px 0">${a.s} ${e}/${need} · ${pct}% ${[X("✓ stable","✓ پایدار"),X("⚠ complete, but unpaired electrons or formal charge","⚠ کامل، ولی الکترون جفت‌نشده یا بار صوری دارد"),X("◔ incomplete shell","◔ لایهٔ ناقص"),X("✗ too many electrons","✗ الکترون بیش از حد")][st]}</span>`);
 if(bd<0)msgs.push(X(`${a.s}: only ${e} of ${need} electrons. Add a bond or lone pair.`,`${a.s}: فقط ${e} از ${need} الکترون. یک پیوند یا جفت ناپیوندی اضافه کنید.`));
@@ -773,16 +902,26 @@ const cen=AT.filter(a=>nb(a)>=2);let pol=X("Multi-centre structure: judge from b
 if(AT.length==2&&S.bd.length==1){const d=Math.abs(EN(AT[0].s)-EN(AT[1].s));pol=d>=.4?X(`Polar (ΔEN ${d.toFixed(2)})`,`قطبی (ΔEN ${d.toFixed(2)})`):X("Nonpolar","ناقطبی")}
 else if(conn&&cen.length==1){const c=cen[0],v=VEC[""+(nb(c)+c.lp)+c.lp];if(v){let d=[0,0,0];S.bd.filter(b=>b.a==c.id||b.b==c.id).map(b=>at(b.a==c.id?b.b:b.a)).forEach((n,i)=>{const u=v[i],m=Math.hypot(...u),w=EN(n.s)-EN(c.s);d=d.map((x,j)=>x+w*u[j]/m)});pol=Math.hypot(...d)>.15?X("Polar molecule (bond dipoles do not cancel)","مولکول قطبی (دوقطبی پیوندها یکدیگر را خنثی نمی‌کنند)"):X("Nonpolar molecule (bond dipoles cancel by symmetry)","مولکول ناقطبی (دوقطبی‌ها بر اثر تقارن یکدیگر را خنثی می‌کنند)")}}
 const avg=Math.round(AT.reduce((t,a)=>t+stb(a).pct,0)/AT.length),ok=!msgs.length,r=(k,v)=>`<tr><th>${k}</th><td>${v}</td></tr>`,kind=!S.bd.length?X("Separate atoms","اتم‌های جدا"):ionic?X("Contains bonds with ionic character","شامل پیوند با خصلت یونی"):Object.keys(cnt).length==1?X("Covalent molecule (one element)","مولکول کووالانسی (تک‌عنصری)"):X("Covalent compound (molecule)","ترکیب کووالانسی (مولکولی)");
-const sys=!nm,disp=nm?(fa?FD[nm[0]]||nm[1]:nm[1]):sysName(cnt,fa);
+const cands=sm||!conn?null:candOf(hf);let disp,tag="",idl="";
+if(AT.length>1&&!conn){disp=X("Not identified — the atoms are not one connected molecule","شناسایی نشد — اتم‌ها یک مولکول پیوسته نیستند")}
+else if(sm){disp=fa?sm.fa:sm.en;tag=X("(identified from the built structure)","(شناسایی از روی ساختار ساخته‌شده)");idl=sm.en}
+else if(cands&&cands.length){disp=X("Unidentified structure","ساختار شناسایی‌نشده");
+ notes.push(X("This exact connectivity is not in the library. Known compound(s) with the same formula ","این آرایش دقیق پیوندها در کتابخانه نیست. ترکیب(های) شناخته‌شده با فرمول ")+hf+": "+cands.map(r=>fa?r.fa:r.en).join(" / ")+X(". Your structure may be another isomer or a resonance form.",". ساختار شما ممکن است ایزومر یا شکل رزونانسی دیگری باشد."))}
+else if(nm){disp=fa?FD[nm[0]]||nm[1]:nm[1];tag=X("(formula match — verify the structure)","(تطبیق از روی فرمول — ساختار را بررسی کنید)");idl=nm[0]}
+else{const ks=Object.keys(cnt);if(ks.length==1||(ks.length==2&&!(cnt.C&&cnt.H))){disp=sysName(cnt,fa);tag=`(${X("systematic name","نام نظام‌مند")})`}else disp=X("Unknown compound — not in the library","ترکیب ناشناخته — در کتابخانه نیست")}
 o.innerHTML=`<div class="${ok?"ok":"bad"}" style="font-weight:700">${ok?X("✓ Stable: follows basic Lewis rules","✓ پایدار: از قاعدهٔ لوویس پیروی می‌کند"):X("◔ Not stable yet: this Lewis structure is incomplete or invalid","◔ هنوز پایدار نیست: این ساختار لوویس ناقص یا نامعتبر است")}</div>${msgs.length?`<ul class="bad">${msgs.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}
-<h3 style="margin:8px 0"><bdi class="f">${fm(nm?nm[0]:hf)}</bdi> — ${disp}${sys?` <small style="color:var(--mu);font-weight:400;font-size:13px">(${X("systematic name","نام نظام‌مند")})</small>`:""}</h3>
+<h3 style="margin:8px 0"><bdi class="f">${fm(hf)}</bdi>${chg?`<sup>${chg>0?"+":"−"}${Math.abs(chg)>1?Math.abs(chg):""}</sup>`:""} — ${disp}${tag?` <small style="color:var(--mu);font-weight:400;font-size:13px">${tag}</small>`:""}</h3>
 <table class="tb">${r(X("Type","نوع"),kind+(cen.length==1?` · ${X("central atom","اتم مرکزی")}: ${nmE(ES[cen[0].s])} (${cen[0].s})`:""))}${r(X("Elements","عنصرها"),Object.entries(cnt).map(([s,n])=>`${n} × ${nmE(ES[s])}`).join(", "))}${r(X("Molar mass","جرم مولی"),Object.entries(cnt).reduce((t,[s,n])=>t+(MASS[s]||0)*n,0).toFixed(3)+" "+X("g/mol","گرم بر مول"))}${r(X("Atoms / bonds","اتم‌ها / پیوندها"),X(`${AT.length} atoms · ${S.bd.length} bonds (total bond order ${sumO})`,`${AT.length} اتم · ${S.bd.length} پیوند (مجموع مرتبهٔ پیوندها ${sumO})`))}${r(X("Bond types","نوع پیوندها"),Object.entries(bt).map(([k,v])=>`${k} ×${v.n} <small>(${v.ty}, ΔEN ${v.d.toFixed(2)})</small>`).join("<br>")||"—")}${r(X("Valence electrons","الکترون‌های ظرفیت"),`${valV-chg}`+(chg?` (${X("neutral atoms","اتم‌های خنثی")}: ${valV})`:""))}${r(X("Lone pairs","جفت‌های ناپیوندی"),lpT?`${lpT} (${Object.entries(lps).map(([s,n])=>s+": "+n).join(", ")})`:"0")}${r(X("Formal charges","بار صوری"),fcs.length?fcs.join(", "):X("all atoms 0","همهٔ اتم‌ها صفر"))}${r(X("Overall stability","پایداری کل"),meter(avg))}${r(X("Atom stability","پایداری اتم‌ها"),sl.join("")+`<br><small style="color:var(--mu)">${X("Ring colour: green = stable (100%), yellow = complete but unpaired electrons or formal charge, orange = incomplete shell (% of the octet filled), red = too many electrons.","رنگ حلقه: سبز = پایدار (۱۰۰٪)، زرد = کامل ولی الکترون جفت‌نشده یا بار صوری، نارنجی = لایهٔ ناقص (درصد پر بودن هشتایی)، قرمز = الکترون بیش از حد.")}</small>`)}${r(X("Geometry","هندسه"),gl.join("<br>")||"—")}${r(X("Polarity","قطبیت"),pol)}</table>
-${notes.length?`<ul style="color:var(--mu);font-size:13px">${notes.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}<small style="color:var(--mu)">${X("Common names are matched from the formula; anything else gets an IUPAC-style systematic name built from the element counts. Geometry and polarity use ideal VSEPR shapes (simplified).","نام‌های رایج از روی فرمول تطبیق داده می‌شوند؛ برای بقیه، یک نام نظام‌مند به سبک IUPAC از تعداد عنصرها ساخته می‌شود. شکل و قطبیت بر پایهٔ شکل‌های ایدئال VSEPR است (ساده‌شده).")}</small>`;
-if(ok&&AT.length>1&&!done.has(hf)){done.add(hf);if(!S.pre)once("bond:"+hf,20,X("Bond Master: ","استاد پیوند: ")+disp)}}
+${notes.length?`<ul style="color:var(--mu);font-size:13px">${notes.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}<small style="color:var(--mu)">${X("Compounds are identified from the built structure — atom connectivity, bond orders and formal charges — so isomers (e.g. ethanol vs dimethyl ether) are told apart. Unmatched structures are never named from the formula alone; they are listed as unidentified with any known compounds sharing the formula. Geometry and polarity use ideal VSEPR shapes (simplified).","شناسایی ترکیب‌ها از روی ساختار ساخته‌شده انجام می‌شود — آرایش اتصال اتم‌ها، مرتبهٔ پیوندها و بارهای صوری — پس ایزومرها (مثل اتانول و دی‌متیل اتر) از هم تشخیص داده می‌شوند. ساختارهای ناشناخته هرگز فقط از روی فرمول نام‌گذاری نمی‌شوند؛ بلکه با ذکر ترکیب‌های هم‌فرمول، ناشناخته اعلام می‌شوند. شکل و قطبیت بر پایهٔ شکل‌های ایدئال VSEPR است (ساده‌شده).")}</small>`;
+if(ok&&AT.length>1){const ak=idl||hf;if(!done.has(ak)){done.add(ak);if(!S.pre)once("bond:"+ak,20,X("Bond Master: ","استاد پیوند: ")+disp)}}}
 const PRE={"H₂O":["O",["H","H"],[1,1]],"CO₂":["C",["O","O"],[2,2]],"NH₃":["N",["H","H","H"],[1,1,1]],"CH₄":["C",["H","H","H","H"],[1,1,1,1]],"N₂":["N",["N"],[3]],"HCN":["C",["H","N"],[1,3]],
 "O₂":{a:[["O",265,200],["O",375,200]],b:[[0,1,2]]},"Cl₂":{a:[["Cl",265,200],["Cl",375,200]],b:[[0,1,1]]},"HF":{a:[["H",265,200],["F",375,200]],b:[[0,1,1]]},"HCl":{a:[["H",265,200],["Cl",375,200]],b:[[0,1,1]]},
 "H₂S":["S",["H","H"],[1,1]],"PH₃":["P",["H","H","H"],[1,1,1]],"BF₃":["B",["F","F","F"],[1,1,1]],"CH₂O":["C",["O","H","H"],[2,1,1]],
-"C₂H₄":{a:[["C",265,200],["C",375,200],["H",210,105],["H",210,295],["H",430,105],["H",430,295]],b:[[0,1,2],[0,2,1],[0,3,1],[1,4,1],[1,5,1]]},"C₂H₂":{a:[["H",190,200],["C",265,200],["C",375,200],["H",450,200]],b:[[0,1,1],[1,2,3],[2,3,1]]}};
+"C₂H₄":{a:[["C",265,200],["C",375,200],["H",210,105],["H",210,295],["H",430,105],["H",430,295]],b:[[0,1,2],[0,2,1],[0,3,1],[1,4,1],[1,5,1]]},"C₂H₂":{a:[["H",190,200],["C",265,200],["C",375,200],["H",450,200]],b:[[0,1,1],[1,2,3],[2,3,1]]},
+"C₂H₆":{a:[["C",265,200],["C",375,200],["H",190,110],["H",190,290],["H",255,320],["H",450,110],["H",450,290],["H",385,80]],b:[[0,1,1],[0,2,1],[0,3,1],[0,4,1],[1,5,1],[1,6,1],[1,7,1]]},
+"C₂H₅OH":{a:[["C",210,210],["C",330,210],["O",440,150],["H",455,255],["H",135,130],["H",135,290],["H",245,325],["H",320,95],["H",395,305]],b:[[0,1,1],[1,2,1],[2,3,1],[0,4,1],[0,5,1],[0,6,1],[1,7,1],[1,8,1]]},
+"CH₃OCH₃":{a:[["C",200,140],["O",320,235],["C",440,140],["H",95,95],["H",105,235],["H",260,50],["H",545,95],["H",535,235],["H",380,50]],b:[[0,1,1],[1,2,1],[0,3,1],[0,4,1],[0,5,1],[2,6,1],[2,7,1],[2,8,1]]},
+"C₆H₆":{a:[["C",320,110],["C",398,155],["C",398,245],["C",320,290],["C",242,245],["C",242,155],["H",320,35],["H",463,118],["H",463,282],["H",320,365],["H",177,282],["H",177,118]],b:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[0,6,1],[1,7,1],[2,8,1],[3,9,1],[4,10,1],[5,11,1]]}};
 function pre(k,init){if(!init)snap();const p=PRE[k];S.at=[];S.bd=[];S.sel=S.pend=null;let A,B;if(p.a){A=p.a;B=p.b}else{const[c,ns,os]=p;A=[[c,320,200],...ns.map((x,i)=>{const t=ns.length<3?i*Math.PI:-Math.PI/2+2*Math.PI*i/ns.length;return[x,320+120*Math.cos(t),200+120*Math.sin(t)]})];B=ns.map((_,i)=>[0,i+1,os[i]])}
 const ids=A.map(([x,px,py])=>{const a={id:S.id++,s:x,x:px,y:py,z:0,lp:0,ts:performance.now()};S.at.push(a);return a.id});B.forEach(([i,j,o])=>S.bd.push({id:S.bid++,a:ids[i],b:ids[j],o}));S.pre=1;autoLP();S.pre=0}
 function act0(k){const s=S.sel,sa=s&&s.t=="a"?at(s.id):null,sb=s&&s.t=="b"?S.bd.find(x=>x.id==s.id):null;
@@ -1150,19 +1289,23 @@ $("#lab").addEventListener("input",e=>{if(e.target.id=="rax"||e.target.id=="rbx"
 $("#lab").addEventListener("click",e=>{if(!e.target.closest("#rrnd"))return;const L=SUBG.flatMap(x=>x[2].split(" "));for(let i=0;i<80;i++){const a=L[Math.random()*L.length|0],b=L[Math.random()*L.length|0];let o;try{o=sim(a,b)}catch(_){continue}if(o.r){$("#ra").value=a;$("#rb").value=b;$("#rax").value=$("#rbx").value="";rxShow();return}}});
 const MOLS=[["H2O","Water","آب","O",["H","H"],1,2],["CO2","Carbon dioxide","کربن دی‌اکسید","C",["O","O"],2,0],["NH3","Ammonia","آمونیاک","N",["H","H","H"],1,1],["CH4","Methane","متان","C",["H","H","H","H"],1,0],["BF3","Boron trifluoride","بور تری‌فلوئورید","B",["F","F","F"],1,0],["SF4","Sulfur tetrafluoride","گوگرد تترافلوئورید","S",["F","F","F","F"],1,1],["ClF3","Chlorine trifluoride","کلر تری‌فلوئورید","Cl",["F","F","F"],1,2],["SF6","Sulfur hexafluoride","گوگرد هگزافلوئورید","S",["F","F","F","F","F","F"],1,0],["PCl5","Phosphorus pentachloride","فسفر پنتاکلرید","P",["Cl","Cl","Cl","Cl","Cl"],1,0],["XeF4","Xenon tetrafluoride","زنون تترافلوئورید","Xe",["F","F","F","F"],1,2],["H2S","Hydrogen sulfide","هیدروژن سولفید","S",["H","H"],1,2],["SO2","Sulfur dioxide","گوگرد دی‌اکسید","S",["O","O"],2,1],["SO3","Sulfur trioxide","گوگرد تری‌اکسید","S",["O","O","O"],2,0],["PH3","Phosphine","فسفین","P",["H","H","H"],1,1],["PCl3","Phosphorus trichloride","فسفر تری‌کلرید","P",["Cl","Cl","Cl"],1,1],["CCl4","Carbon tetrachloride","کربن تتراکلرید","C",["Cl","Cl","Cl","Cl"],1,0],["SiH4","Silane","سیلان","Si",["H","H","H","H"],1,0],["BeCl2","Beryllium chloride","بریلیم کلرید","Be",["Cl","Cl"],1,0],["N2","Nitrogen","نیتروژن","N",["N"],3,0],["O2","Oxygen","اکسیژن","O",["O"],2,0],["H2","Hydrogen","هیدروژن","H",["H"],1,0],["Cl2","Chlorine","کلر","Cl",["Cl"],1,0],["HF","Hydrogen fluoride","هیدروژن فلوئورید","F",["H"],1,0],["HCl","Hydrogen chloride","هیدروژن کلرید","Cl",["H"],1,0]];
 const C3={H:"#e5e7eb",C:"#4b5563",N:"#3b82f6",O:"#ef4444",F:"#22c55e",Cl:"#16a34a",B:"#f9a8a4",S:"#eab308",P:"#f97316",Xe:"#8b5cf6",Be:"#cbd5e1",Si:"#b8a07e",Br:"#9a3412",I:"#a78bfa"};let M3={k:0,ry:.6,rx:.35,auto:1,drag:null,run:0};
-const LPD={N:1,O:2,F:3,Cl:3,Br:3,I:3,S:2};
+const LPD={C:1,N:1,O:2,F:3,Cl:3,Br:3,I:3,S:2};
 function m3geo(m){const[,,,c,ls,o,lp]=m,n=ls.length,key=""+(n+lp)+lp,nz=u=>{const l=Math.hypot(...u);return u.map(x=>x/l)};
+if(n>1&&!VEC[key])return null;
 if(n==1){const L=[],ring=(x0,dir,k)=>{const sp=!k?[]:k==1?[[1,0,0]]:k==2?[[.6,.8,0],[.6,-.8,0]]:[[.55,.83,0],[.55,-.42,.72],[.55,-.42,-.72]];sp.forEach(u=>L.push([x0+dir*u[0]*.8,u[1]*.8,u[2]*.8]))};ring(-.55,-1,LPD[c]||0);ring(.55,1,LPD[ls[0]]||0);return{key,pos:[[-.55,0,0,c],[.55,0,0,ls[0]]],bonds:[[1,o]],lobes:L}}
 return{key,pos:[[0,0,0,c],...VEC[key].map((u,i)=>[...nz(u),ls[i]])],bonds:ls.map((_,i)=>[i+1,o]),lobes:(VEC[""+(n+lp)+"0"]||[]).slice(n).map(u=>nz(u).map(x=>x*.75))}}
 function m3dom(m){const n=m[4].length;if(n==1){const t=[m[3],m[4][0]].filter((x,i,a)=>LPD[x]&&a.indexOf(x)==i).map(x=>x+": "+LPD[x]).join(", ");return X("1 bond","۱ پیوند")+(t?" + "+X("lone pairs per atom","جفت ناپیوندی برای هر اتم")+" ("+t+")":"")}return `${n+m[6]} (${n} ${X("bonding","پیوندی")} + ${m[6]} ${X("lone pair(s)","جفت ناپیوندی")})`}
-function m3draw(){const cv=$("#m3");if(!cv)return;{const w=cv.clientWidth;if(w){const dp=Math.min(2,devicePixelRatio||1),nW=Math.round(w*dp),nH=Math.round(nW*.7692);if(cv.width!=nW||cv.height!=nH){cv.width=nW;cv.height=nH}}}const Kz=cv.width/520,g=cv.getContext("2d"),W=cv.width,H=cv.height,geo=m3geo(MOLS[M3.k]),cY=Math.cos(M3.ry),sY=Math.sin(M3.ry),cX=Math.cos(M3.rx),sX=Math.sin(M3.rx),S=95*Kz,tx=getComputedStyle(document.body).color,
-pr=([x,y,z])=>{const x1=x*cY+z*sY,z1=-x*sY+z*cY,y2=y*cX-z1*sX,z2=y*sX+z1*cX,f=5/(5-z2);return[W/2+x1*S*f,H/2-y2*S*f,z2,f]},P=geo.pos.map(pr),it=[];g.clearRect(0,0,W,H);
+function m3draw(){const cv=$("#m3");if(!cv)return;{const w=cv.clientWidth;if(w){const dp=Math.min(2,devicePixelRatio||1),nW=Math.round(w*dp),nH=Math.round(nW*.7692);if(cv.width!=nW||cv.height!=nH){cv.width=nW;cv.height=nH}}}const Kz=cv.width/520,g=cv.getContext("2d"),W=cv.width,H=cv.height,geo=MOLS[M3.k]?m3geo(MOLS[M3.k]):null,cY=Math.cos(M3.ry),sY=Math.sin(M3.ry),cX=Math.cos(M3.rx),sX=Math.sin(M3.rx),S=95*Kz,tx=getComputedStyle(document.body).color,
+pr=([x,y,z])=>{const x1=x*cY+z*sY,z1=-x*sY+z*cY,y2=y*cX-z1*sX,z2=y*sX+z1*cX,f=5/(5-z2);return[W/2+x1*S*f,H/2-y2*S*f,z2,f]},P=geo?geo.pos.map(pr):[],it=[];g.clearRect(0,0,W,H);
+if(!geo){g.fillStyle=tx;g.globalAlpha=.5;g.textAlign="center";g.textBaseline="middle";g.font=Math.round(14*Kz)+"px Inter,sans-serif";g.fillText(X("Geometry not supported for this entry.","هندسهٔ این ورودی پشتیبانی نمی‌شود."),W/2,H/2);g.globalAlpha=1;return}
 geo.bonds.forEach(([b,o])=>{const A=P[0],B=P[b];it.push([Math.min(A[2],B[2])-.01,()=>{const dx=B[0]-A[0],dy=B[1]-A[1],l=Math.hypot(dx,dy)||1;for(let k=0;k<o;k++){const f=(k-(o-1)/2)*8*Kz,nx=-dy/l*f,ny=dx/l*f;g.beginPath();g.moveTo(A[0]+nx,A[1]+ny);g.lineTo(B[0]+nx,B[1]+ny);g.lineWidth=5*Kz;g.strokeStyle=tx;g.globalAlpha=.75;g.stroke();g.globalAlpha=1}}])});
 geo.lobes.forEach(v=>{const Q=pr(v);it.push([Q[2],()=>{g.beginPath();g.arc(Q[0],Q[1],22*Kz*Q[3],0,7);g.fillStyle="rgba(14,165,164,.35)";g.fill();g.fillStyle="#0ea5a4";[-6,6].forEach(d=>{g.beginPath();g.arc(Q[0]+d*Kz,Q[1],3*Kz,0,7);g.fill()})}])});
 geo.pos.forEach((a,i)=>{const Z=P[i],sy=a[3],r=(sy=="H"?.22:i?.3:.34)*S*Z[3];it.push([Z[2],()=>{g.beginPath();g.arc(Z[0],Z[1],r,0,7);g.fillStyle=C3[sy]||"#888";g.fill();const gr=g.createRadialGradient(Z[0]-r/3,Z[1]-r/3,r/6,Z[0],Z[1],r);gr.addColorStop(0,"rgba(255,255,255,.55)");gr.addColorStop(1,"rgba(0,0,0,.35)");g.fillStyle=gr;g.fill();g.fillStyle=sy=="H"?"#111":"#fff";g.font="bold "+Math.round(r*.8)+"px Inter,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(sy,Z[0],Z[1])}])});
 it.sort((a,b)=>a[0]-b[0]).forEach(i=>i[1]())}
 function m3go(){if(M3.run)return;M3.run=1;(function step(){const p=$("#mol3d");if(!p||!p.offsetParent){M3.run=0;return}requestAnimationFrame(step);try{if(M3.auto&&!M3.drag&&!matchMedia("(prefers-reduced-motion:reduce)").matches)M3.ry+=.012;m3draw()}catch(e){console.error(e)}})()}
-function m3info(){const m=MOLS[M3.k],geo=m3geo(m),gx=GEO[geo.key]||GEO["10"],c=m[3];let d=[0,0,0];geo.pos.slice(1).forEach(p=>{const w=EN(p[3])-EN(c);d=d.map((x,j)=>x+w*p[j])});
+function m3info(){const m=MOLS[M3.k];let geo=null;try{geo=m3geo(m)}catch(e){}
+if(!m||!geo){if(m)$("#m3i").innerHTML=`<h3 style="margin:0 0 6px"><bdi class="f">${fm(m[0])}</bdi> — ${X(m[1],m[2])}</h3><p class="bad">${X("Geometry outside the supported VSEPR set.","هندسه خارج از مجموعهٔ پشتیبانی‌شدهٔ VSEPR است.")}</p>`;return}
+const gx=GEO[geo.key]||GEO["10"],c=m[3];let d=[0,0,0];geo.pos.slice(1).forEach(p=>{const w=EN(p[3])-EN(c);d=d.map((x,j)=>x+w*p[j])});
 $("#m3i").innerHTML=`<h3 style="margin:0 0 6px"><bdi class="f">${fm(m[0])}</bdi> — ${X(m[1],m[2])}</h3><table class="tb"><tr><th>${X("Shape","شکل")}</th><td>${lang=="fa"?(GF[gx[0]]||gx[0]):gx[0]}</td></tr><tr><th>${X("Bond angle","زاویهٔ پیوندی")}</th><td><bdi class="f">${gx[1]}</bdi></td></tr><tr><th>${X("Bond order","مرتبهٔ پیوند")}</th><td>${[""   ,X("single","یگانه"),X("double","دوگانه"),X("triple","سه‌گانه")][m[5]]||m[5]}</td></tr><tr><th>${X("Electron domains","حوزه‌های الکترونی")}</th><td>${m3dom(m)}</td></tr><tr><th>${X("Polarity","قطبیت")}</th><td>${Math.hypot(...d)>.15?X("Polar","قطبی"):X("Nonpolar","ناقطبی")}</td></tr></table><p style="color:var(--mu);font-size:13px">${X("The 3D structure is built automatically from VSEPR. Drag the molecule to rotate it; teal clouds are lone pairs.","ساختار سه‌بعدی به‌طور خودکار از VSEPR ساخته می‌شود. برای چرخاندن مولکول را بکشید؛ ابرهای سبزآبی جفت‌های ناپیوندی‌اند.")}</p>`}
 function bsel(i){M3.k=i;const inp=$("#bform");if(inp)inp.value=MOLS[i][0];const msg=$("#bmsg");if(msg)msg.innerHTML="";document.querySelectorAll('#m3b [data-m]:not([data-m="r"])').forEach(x=>x.setAttribute("aria-pressed",x.dataset.m==String(i)));m3info();m3draw()}
 function bformula(){const inp=$("#bform"),msg=$("#bmsg");const raw=(inp.value||"").trim();if(!raw)return;let key;try{key=HILL(parse(raw.replace(/\s+/g,"")))}catch(e){msg.innerHTML=`<p class="bad">${esc(e.message)}</p>`;return}
@@ -1723,9 +1866,25 @@ HI|Hydrogen iodide|هیدروژن یدید|I|H|1|0
 Br2|Bromine|برم|Br|Br|1|0
 I2|Iodine|ید|I|I|1|0
 F2|Fluorine|فلوئور|F|F|1|0
-ICl|Iodine monochloride|ید مونوکلرید|I|Cl|1|0`;
+ICl|Iodine monochloride|ید مونوکلرید|I|Cl|1|0
+CO|Carbon monoxide|کربن مونوکسید|C|O|3|1
+BrCl|Bromine monochloride|برم مونوکلرید|Br|Cl|1|0
+CH3F|Fluoromethane|فلوئورومتان|C|H*3,F|1|0
+CH3Br|Bromomethane|برمومتان|C|H*3,Br|1|0
+CH3I|Iodomethane|یدومتان|C|H*3,I|1|0
+CHF3|Trifluoromethane (fluoroform)|تری‌فلوئورومتان (فلوئوروفرم)|C|H,F*3|1|0
+CBr4|Carbon tetrabromide|کربن تترا برمید|C|Br*4|1|0
+CI4|Carbon tetraiodide|کربن تترا یدید|C|I*4|1|0
+SiBr4|Silicon tetrabromide|سیلیسیم تترا برمید|Si|Br*4|1|0
+SBr2|Sulfur dibromide|گوگرد دی‌برمید|S|Br*2|1|2
+SeCl2|Selenium dichloride|سلنیم دی‌کلرید|Se|Cl*2|1|2
+PI3|Phosphorus triiodide|فسفر تری‌یدید|P|I*3|1|1
+AsCl3|Arsenic trichloride|آرسنیک تری‌کلرید|As|Cl*3|1|1
+KrF2|Krypton difluoride|کریپتون دی‌فلوئورید|Kr|F*2|1|3
+TeCl4|Tellurium tetrachloride|تلوریم تتراکلرید|Te|Cl*4|1|1
+SF5Cl|Sulfur chloride pentafluoride|پنتافلوئورید کلرید گوگرد|S|F*5,Cl|1|0`;
 const have=new Set(MOLS.map(m=>HILL(parse(m[0]))));
-Object.assign(C3,{Se:"#ffa100",Al:"#bfa6a6",As:"#bd80e3",Sn:"#668080",Kr:"#5cb8d1",Ar:"#80d1e3"});
+Object.assign(C3,{Se:"#ffa100",Al:"#bfa6a6",As:"#bd80e3",Sn:"#668080",Kr:"#5cb8d1",Ar:"#80d1e3",Ge:"#758490",Te:"#d47a00"});
 MS.split("\n").forEach(l=>{const[f,en,fa,c,lg,o,lp]=l.split("|"),k=HILL(parse(f));if(have.has(k))return;have.add(k);
  MOLS.push([f,en,fa,c,lg.split(",").flatMap(t=>{const[a,n]=t.split("*");return Array(+(n||1)).fill(a)}),+o,+lp])});
 MOLS.forEach(m=>{const k=HILL(parse(m[0]));if(!DB[k])DB[k]=[m[0],m[1]];if(!FD[m[0]])FD[m[0]]=m[2]});
