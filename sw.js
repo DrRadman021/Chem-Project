@@ -1,7 +1,7 @@
 /* Rachem service worker — rv2
    Cache-first for same-origin assets, network-first for page navigations,
    stale-while-revalidate for Google Fonts. Bump RV2_SW_VER to ship updates. */
-const RV2_SW_VER = 'rv2-v1.1.0';
+const RV2_SW_VER = 'rv2-v1.9.0';
 const CORE = ['./', 'index.html', 'manifest.json', 'favicon.ico', '_fav.svg'];
 
 self.addEventListener('install', e => {
